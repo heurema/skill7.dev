@@ -4,6 +4,7 @@ import Breadcrumb from "../../components/Breadcrumb.astro";
 import CopyButton from "../../components/CopyButton.astro";
 import StatusBadge from "../../components/StatusBadge.astro";
 import TagList from "../../components/TagList.astro";
+import GitHubIcon from "../../components/icons/GitHubIcon.astro";
 import type { PluginMeta, Category } from "../../lib/types";
 import { getCategories, getPluginsByCategory } from "../../lib/data";
 
@@ -40,42 +41,49 @@ const author = plugin.homepage.split("github.com/")[1]?.split("/")[0] ?? "heurem
     { label: plugin.name },
   ]} />
 
-  <!-- Header -->
-  <div class="flex items-start gap-6">
-    <div class="flex h-16 w-16 items-center justify-center rounded-xl bg-brand-100 text-brand-700 font-bold text-lg shrink-0">
+  <!-- Plugin header -->
+  <div class="flex items-start gap-5">
+    <div class="flex h-16 w-16 items-center justify-center rounded-lg border border-dark-line bg-dark-raised text-acid font-mono font-medium text-lg shrink-0 shadow-glow-ring">
       {initials}
     </div>
-    <div>
+    <div class="min-w-0">
       <div class="flex items-center gap-3 flex-wrap">
-        <h1 class="text-3xl font-bold text-gray-900">{plugin.name}</h1>
+        <h1 class="font-heading font-bold tracking-tight text-dark-hi text-2xl sm:text-4xl">{plugin.name}</h1>
         <StatusBadge status={plugin.status} />
         {plugin.verified && (
           <span class="badge-verified" title="Reviewed by heurema for security and quality">verified</span>
         )}
       </div>
-      <p class="mt-1 text-sm text-gray-500">
-        by <a href={`https://github.com/${author}`} class="font-medium hover:underline">
+      <p class="mt-1.5 text-sm text-dark-lo font-mono">
+        by <a href={`https://github.com/${author}`} class="text-dark-lo hover:text-acid transition-colors" target="_blank" rel="noopener">
           {author}
         </a>
-        {plugin.version && <>&middot; v{plugin.version}</>}
-        {plugin.license && <>&middot; {plugin.license}</>}
+        {plugin.version && <span class="text-dark-dim mx-1.5">·</span>}
+        {plugin.version && <span>v{plugin.version}</span>}
+        {plugin.license && <span class="text-dark-dim mx-1.5">·</span>}
+        {plugin.license && <span>{plugin.license}</span>}
       </p>
     </div>
   </div>
 
   <!-- Description -->
-  <p class="mt-6 text-lg text-gray-700">{plugin.description}</p>
+  <p class="mt-6 text-lg text-dark-lo leading-relaxed max-w-2xl">{plugin.description}</p>
 
-  <!-- Install -->
-  <div class="mt-8">
-    <h2 class="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-500">Install</h2>
-    <div class="space-y-3">
+  <!-- Install steps -->
+  <div class="mt-10">
+    <h2 class="section-label mb-4">Install</h2>
+    <div class="space-y-4">
       <div>
-        <p class="mb-1.5 text-sm text-gray-600">Step 1 — Register the marketplace (once):</p>
+        <p class="mb-2 text-sm text-dark-dim font-mono">
+          <span class="text-acid">01</span> — Register the marketplace (once):
+        </p>
         <CopyButton text="claude plugin marketplace add heurema/emporium" />
+        <p class="mt-1 text-xs text-dark-dim font-mono">Skip if you already added the marketplace.</p>
       </div>
       <div>
-        <p class="mb-1.5 text-sm text-gray-600">Step 2 — Install the plugin:</p>
+        <p class="mb-2 text-sm text-dark-dim font-mono">
+          <span class="text-acid">02</span> — Install the plugin:
+        </p>
         <CopyButton text={`claude plugin install ${plugin.name}@emporium`} />
       </div>
     </div>
@@ -83,16 +91,21 @@ const author = plugin.homepage.split("github.com/")[1]?.split("/")[0] ?? "heurem
 
   <!-- Tags -->
   {plugin.tags.length > 0 && (
-    <div class="mt-8">
-      <h2 class="mb-2 text-sm font-semibold uppercase tracking-wide text-gray-500">Tags</h2>
+    <div class="mt-10">
+      <h2 class="section-label mb-3">Tags</h2>
       <TagList tags={plugin.tags} />
     </div>
   )}
 
   <!-- Links -->
-  <div class="mt-8 flex flex-wrap gap-4">
+  <div class="mt-10 pt-8 border-t border-dark-line flex flex-wrap gap-3">
     <a href={plugin.homepage} class="btn-primary" target="_blank" rel="noopener">
+      <GitHubIcon />
       View on GitHub
     </a>
+    <a href={`/${category.name}`} class="btn-ghost">
+      ← Back to {category.displayName}
+    </a>
   </div>
+
 </Base>

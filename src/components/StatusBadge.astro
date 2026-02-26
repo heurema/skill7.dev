@@ -5,10 +5,15 @@ interface Props {
 
 const { status } = Astro.props;
 const classes: Record<typeof status, string> = {
-  active: "badge-active",
-  beta: "badge-beta",
+  active:     "badge-active",
+  beta:       "badge-beta",
   deprecated: "badge-deprecated",
+};
+const titles: Record<typeof status, string> = {
+  active:     "Stable and actively maintained",
+  beta:       "Working but API may change",
+  deprecated: "No longer maintained",
 };
 ---
 
-<span class={classes[status]}>{status}</span>
+<span class={classes[status]} title={titles[status]}>{status}</span>

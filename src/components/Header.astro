@@ -1,39 +1,110 @@
 ---
+import GitHubIcon from "./icons/GitHubIcon.astro";
+
 const navItems = [
   { label: "Catalog", href: "/" },
   { label: "Getting Started", href: "/getting-started" },
 ];
+
+const pathname = Astro.url.pathname;
+
+function isActive(href: string): boolean {
+  if (href === "/") return pathname === "/";
+  return pathname.startsWith(href);
+}
 ---
 
-<header class="border-b border-gray-200 bg-white">
-  <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
-    <a href="/" class="text-xl font-bold text-brand-600">skill7</a>
+<header class="border-b border-dark-line bg-dark-bg/80 backdrop-blur-md sticky top-0 z-50">
+  <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3.5">
+    <a href="/" class="flex items-center gap-2 group">
+      <span class="font-heading font-bold text-lg tracking-tight text-gradient-acid">skill7</span>
+      <span class="text-dark-dim text-xs font-mono hidden sm:inline">.dev</span>
+    </a>
 
     <!-- Desktop nav -->
-    <div class="hidden sm:flex items-center gap-6">
+    <div class="hidden sm:flex items-center gap-1">
       {navItems.map(({ label, href }) => (
-        <a href={href} class="text-sm font-medium text-gray-600 hover:text-gray-900">
+        <a
+          href={href}
+          class={`px-3 py-1.5 rounded-md transition-colors duration-150 text-sm font-medium hover:bg-dark-raised ${isActive(href) ? "text-acid" : "text-dark-lo hover:text-dark-hi"}`}
+        >
           {label}
         </a>
       ))}
-      <a href="https://github.com/heurema/emporium" class="text-sm font-medium text-gray-500 hover:text-gray-700" target="_blank" rel="noopener">
+      <div class="w-px h-4 bg-dark-line mx-2" />
+      <a
+        href="https://github.com/heurema/emporium"
+        class="nav-link px-3 py-1.5 rounded-md hover:bg-dark-raised flex items-center gap-1.5"
+        target="_blank"
+        rel="noopener"
+      >
+        <GitHubIcon />
         GitHub
       </a>
     </div>
 
     <!-- Mobile nav -->
-    <details class="sm:hidden relative">
-      <summary class="cursor-pointer text-gray-600 list-none">
-        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <details class="sm:hidden relative" data-mobile-menu>
+      <summary class="cursor-pointer text-dark-lo list-none p-2.5 rounded hover:bg-dark-raised transition-colors" aria-label="Open navigation menu">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
       </summary>
-      <div class="absolute right-0 top-8 z-10 rounded-lg border border-gray-200 bg-white p-4 shadow-lg min-w-48">
-        {navItems.map(({ label, href }) => (
-          <a href={href} class="block py-2 text-sm font-medium text-gray-600 hover:text-gray-900">{label}</a>
-        ))}
-        <a href="https://github.com/heurema/emporium" class="block py-2 text-sm font-medium text-gray-500 hover:text-gray-700" target="_blank" rel="noopener">GitHub</a>
+      <div class="absolute right-0 top-full z-50 rounded-xl border border-dark-line bg-dark-base p-2 shadow-card min-w-44">
+        <nav>
+          {navItems.map(({ label, href }) => (
+            <a
+              href={href}
+              class={`block px-3 py-2 text-sm font-medium rounded-lg transition-colors ${isActive(href) ? "text-acid" : "text-dark-lo hover:text-dark-hi hover:bg-dark-raised"}`}
+            >
+              {label}
+            </a>
+          ))}
+        </nav>
+        <div class="my-1 border-t border-dark-line" />
+        <a
+          href="https://github.com/heurema/emporium"
+          class="block px-3 py-2 text-sm font-medium text-dark-lo hover:text-dark-hi hover:bg-dark-raised rounded-lg transition-colors"
+          target="_blank"
+          rel="noopener"
+        >
+          GitHub
+        </a>
       </div>
     </details>
   </nav>
 </header>
+
+<script>
+  const details = document.querySelector<HTMLDetailsElement>("[data-mobile-menu]");
+  const summary = details?.querySelector("summary");
+
+  if (details && summary) {
+    // Close on click outside
+    document.addEventListener("click", (e) => {
+      if (details.open && !details.contains(e.target as Node)) {
+        details.open = false;
+      }
+    });
+
+    // Close on Escape
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && details.open) {
+        details.open = false;
+        summary.focus();
+      }
+    });
+
+    // Toggle aria-label + focus first link
+    summary.addEventListener("click", () => {
+      requestAnimationFrame(() => {
+        summary.setAttribute("aria-label",
+          details.open ? "Close navigation menu" : "Open navigation menu"
+        );
+        if (details.open) {
+          details.querySelector<HTMLAnchorElement>("nav a")?.focus();
+        }
+      });
+    });
+  }
+</script>

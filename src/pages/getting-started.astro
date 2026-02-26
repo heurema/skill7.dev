@@ -1,57 +1,86 @@
 ---
 import Base from "../layouts/Base.astro";
 import CopyButton from "../components/CopyButton.astro";
+import Breadcrumb from "../components/Breadcrumb.astro";
 ---
 
 <Base title="Getting Started" description="How to install Claude Code plugins from skill7 marketplace">
-  <h1 class="text-3xl font-bold text-gray-900">Getting Started</h1>
-  <p class="mt-2 text-lg text-gray-600">Install Claude Code plugins in three steps.</p>
 
-  <!-- Prerequisites -->
-  <div class="mt-6 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
-    <strong>Prerequisite:</strong> Claude Code CLI must be installed.
-    <a href="https://docs.anthropic.com/en/docs/claude-code/overview" class="underline hover:text-amber-900" target="_blank" rel="noopener">
-      Install Claude Code
-    </a>
+  <div class="max-w-2xl">
+    <!-- Page header -->
+    <Breadcrumb items={[
+      { label: "Home", href: "/" },
+      { label: "Getting Started" },
+    ]} />
+    <h1 class="font-heading font-bold tracking-tight">Getting Started</h1>
+    <p class="mt-3 text-lg text-dark-lo leading-relaxed">
+      Install Claude Code plugins in two steps.
+    </p>
+
+    <!-- Prerequisite callout -->
+    <div class="callout-warn mt-8">
+      <strong class="font-semibold">Prerequisite:</strong>{" "}
+      Claude Code CLI must be installed.{" "}
+      <a
+        href="https://docs.anthropic.com/en/docs/claude-code/overview"
+        class="underline hover:text-warn transition-colors"
+        target="_blank"
+        rel="noopener"
+      >
+        Install Claude Code
+      </a>
+    </div>
+
+    <!-- Intro block (unnumbered) -->
+    <div class="mt-12">
+      <section>
+        <h2 class="heading-section text-2xl mb-4">What are Claude Code plugins?</h2>
+        <p class="text-dark-lo leading-relaxed">
+          Plugins add new commands, AI agents, and automations to Claude Code. They're open source and install via the CLI.
+        </p>
+      </section>
+    </div>
+
+    <!-- Steps -->
+    <div class="mt-10 space-y-10">
+
+      <section>
+        <div class="flex items-center gap-3 mb-4">
+          <span class="step-indicator">1</span>
+          <h2 class="heading-section text-2xl">Add the marketplace</h2>
+        </div>
+        <div class="pl-0 sm:pl-10">
+          <p class="text-dark-lo leading-relaxed mb-4">
+            Add the heurema emporium marketplace:
+          </p>
+          <CopyButton text="claude plugin marketplace add heurema/emporium" />
+          <p class="mt-3 text-sm text-dark-lo font-mono">
+            Run once. After that, all plugins in the catalog become installable.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <div class="flex items-center gap-3 mb-4">
+          <span class="step-indicator">2</span>
+          <h2 class="heading-section text-2xl">Install a plugin</h2>
+        </div>
+        <div class="pl-0 sm:pl-10">
+          <p class="text-dark-lo leading-relaxed mb-4">
+            Browse the catalog, pick a plugin, and install it:
+          </p>
+          <CopyButton text="claude plugin install sigil@emporium" />
+          <p class="mt-3 text-sm text-dark-lo font-mono">
+            The plugin is now active in your Claude Code sessions.
+          </p>
+        </div>
+      </section>
+
+    </div>
+
+    <div class="mt-12 pt-6 border-t border-dark-line">
+      <a href="/" class="btn-primary">Browse Plugins</a>
+    </div>
   </div>
 
-  <div class="mt-10 space-y-12">
-    <section>
-      <h2 class="text-xl font-semibold text-gray-900">1. What are Claude Code plugins?</h2>
-      <p class="mt-2 text-gray-700">
-        Plugins extend Claude Code with custom commands, specialized agents, domain skills, and lifecycle hooks.
-        They're open source, installable via CLI, and work with any project.
-      </p>
-    </section>
-
-    <section>
-      <h2 class="text-xl font-semibold text-gray-900">2. Add the marketplace</h2>
-      <p class="mt-2 text-gray-700">
-        Register the heurema emporium marketplace:
-      </p>
-      <div class="mt-4">
-        <CopyButton text="claude plugin marketplace add heurema/emporium" />
-      </div>
-      <p class="mt-2 text-sm text-gray-500">
-        Run once. After that, all plugins in the catalog become installable.
-      </p>
-    </section>
-
-    <section>
-      <h2 class="text-xl font-semibold text-gray-900">3. Install a plugin</h2>
-      <p class="mt-2 text-gray-700">
-        Browse the catalog, pick a plugin, and install it:
-      </p>
-      <div class="mt-4">
-        <CopyButton text="claude plugin install sigil@emporium" />
-      </div>
-      <p class="mt-2 text-sm text-gray-500">
-        The plugin is now active in your Claude Code sessions.
-      </p>
-    </section>
-  </div>
-
-  <div class="mt-12">
-    <a href="/" class="btn-primary">Browse Plugins</a>
-  </div>
 </Base>

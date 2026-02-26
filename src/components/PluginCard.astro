@@ -11,21 +11,27 @@ const { plugin } = Astro.props;
 const initials = plugin.name.slice(0, 2).toUpperCase();
 ---
 
-<a href={`/${plugin.category}/${plugin.name}`} class="card block group">
+<a href={`/${plugin.category}/${plugin.name}`} class="card-accent block group focus-visible:ring-2 focus-visible:ring-acid focus-visible:outline-none">
   <div class="flex items-start gap-4">
-    <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-brand-100 text-brand-700 font-bold text-sm shrink-0">
+    <div class="plugin-icon">
       {initials}
     </div>
     <div class="flex-1 min-w-0">
       <div class="flex items-center gap-2 flex-wrap">
-        <h3 class="font-semibold text-gray-900 group-hover:text-brand-600 transition-colors">{plugin.name}</h3>
+        <h3 class="font-heading font-semibold text-xl text-dark-hi group-hover:text-acid transition-colors">
+          {plugin.name}
+        </h3>
         <StatusBadge status={plugin.status} />
         {plugin.verified && (
-          <span class="badge-verified" title="Reviewed by heurema for security and quality">verified</span>
+          <span class="badge-verified" title="Reviewed by heurema for security and quality">
+            verified
+          </span>
         )}
       </div>
-      <p class="mt-1 text-sm text-gray-600 line-clamp-2">{plugin.description}</p>
-      <div class="mt-2">
+      <p class="mt-1.5 text-sm text-dark-lo line-clamp-2 leading-relaxed">
+        {plugin.description}
+      </p>
+      <div class="mt-2.5 pointer-events-none">
         <TagList tags={plugin.tags} limit={3} />
       </div>
     </div>

@@ -8,28 +8,53 @@ const { text, label = "Copy" } = Astro.props;
 const id = `copy-${Math.random().toString(36).slice(2, 8)}`;
 ---
 
-<div class="flex items-center gap-2 rounded-lg bg-gray-900 px-4 py-3 font-mono text-sm text-gray-100">
-  <code class="flex-1 overflow-x-auto whitespace-nowrap">{text}</code>
+<div class="copy-block">
+  <span class="text-dark-lo select-none mr-1">$</span>
+  <code class="flex-1 min-w-0 overflow-x-auto whitespace-nowrap text-dark-hi" tabindex="-1">{text}</code>
   <button
     id={id}
     data-copy={text}
-    class="shrink-0 rounded px-3 py-1 text-sm font-medium text-gray-200 bg-gray-700 hover:bg-gray-600 hover:text-white transition-colors"
+    class="copy-btn"
+    aria-label={`Copy command: ${text}`}
   >
     {label}
   </button>
+  <span id={`${id}-status`} class="sr-only" aria-live="polite"></span>
 </div>
 
-<script is:inline define:vars={{ id }}>
-  document.getElementById(id)?.addEventListener("click", (e) => {
-    const btn = /** @type {HTMLButtonElement} */ (e.currentTarget);
-    const text = btn.dataset.copy ?? "";
-    const label = btn.textContent;
-    navigator.clipboard.writeText(text).then(() => {
-      btn.textContent = "Copied!";
-      setTimeout(() => (btn.textContent = label), 2000);
-    }).catch(() => {
-      btn.textContent = "Failed";
-      setTimeout(() => (btn.textContent = label), 2000);
+<script>
+  document.querySelectorAll<HTMLButtonElement>("[data-copy]").forEach((btn) => {
+    const text = btn.dataset.copy!;
+    const original = btn.textContent;
+    const statusId = btn.id?.replace("copy-", "status-");
+    const status = statusId ? document.getElementById(statusId) : null;
+    let timer: ReturnType<typeof setTimeout> | null = null;
+
+    btn.addEventListener("click", () => {
+      if (timer) clearTimeout(timer);
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = "Copied!";
+        btn.style.color = "var(--color-acid)";
+        btn.style.borderColor = "var(--color-acid)";
+        if (status) status.textContent = "Copied to clipboard";
+        timer = setTimeout(() => {
+          btn.textContent = original;
+          btn.style.color = "";
+          btn.style.borderColor = "";
+          if (status) status.textContent = "";
+        }, 2000);
+      }).catch(() => {
+        btn.textContent = "Failed";
+        btn.style.color = "var(--color-err, #ef4444)";
+        btn.style.borderColor = "var(--color-err, #ef4444)";
+        if (status) status.textContent = "Failed to copy command";
+        timer = setTimeout(() => {
+          btn.textContent = original;
+          btn.style.color = "";
+          btn.style.borderColor = "";
+          if (status) status.textContent = "";
+        }, 2000);
+      });
     });
   });
 </script>
