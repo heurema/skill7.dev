@@ -19,13 +19,17 @@ const id = `copy-${Math.random().toString(36).slice(2, 8)}`;
   </button>
 </div>
 
-<script define:vars={{ id }}>
+<script is:inline define:vars={{ id }}>
   document.getElementById(id)?.addEventListener("click", (e) => {
     const btn = /** @type {HTMLButtonElement} */ (e.currentTarget);
     const text = btn.dataset.copy ?? "";
+    const label = btn.textContent;
     navigator.clipboard.writeText(text).then(() => {
       btn.textContent = "Copied!";
-      setTimeout(() => (btn.textContent = "Copy"), 2000);
+      setTimeout(() => (btn.textContent = label), 2000);
+    }).catch(() => {
+      btn.textContent = "Failed";
+      setTimeout(() => (btn.textContent = label), 2000);
     });
   });
 </script>
