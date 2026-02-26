@@ -1,0 +1,46 @@
+{
+  "categories": {
+    "development": {
+      "displayName": "Development Tools",
+      "description": "Plugins for code review, pipelines, testing, and implementation workflows"
+    },
+    "productivity": {
+      "displayName": "Productivity",
+      "description": "News, automation, scheduling, and workflow tools"
+    },
+    "documentation": {
+      "displayName": "Documentation",
+      "description": "Guides, references, and field guides"
+    }
+  },
+  "plugins": {
+    "sigil": {
+      "version": "1.0.0",
+      "license": "MIT",
+      "status": "active",
+      "tags": ["code-review", "pipeline", "multi-agent", "tdd"],
+      "verified": true
+    },
+    "herald": {
+      "version": "0.1.0",
+      "license": "MIT",
+      "status": "beta",
+      "tags": ["news", "digest", "rss", "productivity"],
+      "verified": true
+    },
+    "codex-partner": {
+      "version": "0.1.0",
+      "license": "MIT",
+      "status": "active",
+      "tags": ["codex", "review", "multi-ai", "verification"],
+      "verified": true
+    },
+    "teams-field-guide": {
+      "version": "0.1.0",
+      "license": "MIT",
+      "status": "active",
+      "tags": ["teams", "multi-agent", "guide", "patterns"],
+      "verified": true
+    }
+  }
+}
