@@ -1,0 +1,14 @@
+---
+interface Props {
+  status: "active" | "beta" | "deprecated";
+}
+
+const { status } = Astro.props;
+const classes: Record<typeof status, string> = {
+  active: "badge-active",
+  beta: "badge-beta",
+  deprecated: "badge-deprecated",
+};
+---
+
+<span class={classes[status]}>{status}</span>

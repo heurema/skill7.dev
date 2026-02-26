@@ -1,0 +1,15 @@
+---
+interface Props {
+  tags: string[];
+  limit?: number;
+}
+
+const { tags, limit } = Astro.props;
+const displayed = limit ? tags.slice(0, limit) : tags;
+---
+
+<div class="flex flex-wrap gap-1.5">
+  {displayed.map((tag) => (
+    <span class="rounded bg-gray-100 px-2 py-0.5 text-xs text-gray-600">{tag}</span>
+  ))}
+</div>

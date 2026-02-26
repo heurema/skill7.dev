@@ -1,0 +1,31 @@
+---
+interface Props {
+  text: string;
+  label?: string;
+}
+
+const { text, label = "Copy" } = Astro.props;
+const id = `copy-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<div class="flex items-center gap-2 rounded-lg bg-gray-900 px-4 py-3 font-mono text-sm text-gray-100">
+  <code class="flex-1 overflow-x-auto whitespace-nowrap">{text}</code>
+  <button
+    id={id}
+    data-copy={text}
+    class="shrink-0 rounded px-3 py-1 text-sm font-medium text-gray-200 bg-gray-700 hover:bg-gray-600 hover:text-white transition-colors"
+  >
+    {label}
+  </button>
+</div>
+
+<script define:vars={{ id }}>
+  document.getElementById(id)?.addEventListener("click", (e) => {
+    const btn = /** @type {HTMLButtonElement} */ (e.currentTarget);
+    const text = btn.dataset.copy ?? "";
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = "Copied!";
+      setTimeout(() => (btn.textContent = "Copy"), 2000);
+    });
+  });
+</script>
