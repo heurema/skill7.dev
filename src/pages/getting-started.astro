@@ -1,0 +1,57 @@
+---
+import Base from "../layouts/Base.astro";
+import CopyButton from "../components/CopyButton.astro";
+---
+
+<Base title="Getting Started" description="How to install Claude Code plugins from skill7 marketplace">
+  <h1 class="text-3xl font-bold text-gray-900">Getting Started</h1>
+  <p class="mt-2 text-lg text-gray-600">Install Claude Code plugins in three steps.</p>
+
+  <!-- Prerequisites -->
+  <div class="mt-6 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
+    <strong>Prerequisite:</strong> Claude Code CLI must be installed.
+    <a href="https://docs.anthropic.com/en/docs/claude-code/overview" class="underline hover:text-amber-900" target="_blank" rel="noopener">
+      Install Claude Code
+    </a>
+  </div>
+
+  <div class="mt-10 space-y-12">
+    <section>
+      <h2 class="text-xl font-semibold text-gray-900">1. What are Claude Code plugins?</h2>
+      <p class="mt-2 text-gray-700">
+        Plugins extend Claude Code with custom commands, specialized agents, domain skills, and lifecycle hooks.
+        They're open source, installable via CLI, and work with any project.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-semibold text-gray-900">2. Add the marketplace</h2>
+      <p class="mt-2 text-gray-700">
+        Register the heurema emporium marketplace:
+      </p>
+      <div class="mt-4">
+        <CopyButton text="claude plugin marketplace add heurema/emporium" />
+      </div>
+      <p class="mt-2 text-sm text-gray-500">
+        Run once. After that, all plugins in the catalog become installable.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-semibold text-gray-900">3. Install a plugin</h2>
+      <p class="mt-2 text-gray-700">
+        Browse the catalog, pick a plugin, and install it:
+      </p>
+      <div class="mt-4">
+        <CopyButton text="claude plugin install sigil@emporium" />
+      </div>
+      <p class="mt-2 text-sm text-gray-500">
+        The plugin is now active in your Claude Code sessions.
+      </p>
+    </section>
+  </div>
+
+  <div class="mt-12">
+    <a href="/" class="btn-primary">Browse Plugins</a>
+  </div>
+</Base>
