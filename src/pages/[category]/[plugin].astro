@@ -27,6 +27,7 @@ export function getStaticPaths() {
 
 const { category, plugin } = Astro.props;
 const initials = plugin.name.slice(0, 2).toUpperCase();
+const author = plugin.homepage.split("github.com/")[1]?.split("/")[0] ?? "heurema";
 ---
 
 <Base
@@ -53,8 +54,8 @@ const initials = plugin.name.slice(0, 2).toUpperCase();
         )}
       </div>
       <p class="mt-1 text-sm text-gray-500">
-        by <a href={`https://github.com/${plugin.homepage.split("github.com/")[1]?.split("/")[0] ?? "heurema"}`} class="font-medium hover:underline">
-          {plugin.homepage.split("github.com/")[1]?.split("/")[0] ?? "heurema"}
+        by <a href={`https://github.com/${author}`} class="font-medium hover:underline">
+          {author}
         </a>
         {plugin.version && <>&middot; v{plugin.version}</>}
         {plugin.license && <>&middot; {plugin.license}</>}

@@ -14,7 +14,7 @@ const { items } = Astro.props;
         {item.href ? (
           <a href={item.href} class="text-brand-600 hover:underline">{item.label}</a>
         ) : (
-          <span class="text-gray-900">{item.label}</span>
+          <span class="text-gray-900" aria-current="page">{item.label}</span>
         )}
       </li>
     ))}
