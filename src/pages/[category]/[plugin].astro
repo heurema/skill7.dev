@@ -1,0 +1,97 @@
+---
+import Base from "../../layouts/Base.astro";
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import CopyButton from "../../components/CopyButton.astro";
+import StatusBadge from "../../components/StatusBadge.astro";
+import TagList from "../../components/TagList.astro";
+import type { PluginMeta, Category } from "../../lib/types";
+import { getCategories, getPluginsByCategory } from "../../lib/data";
+
+interface PathEntry {
+  params: { category: string; plugin: string };
+  props: { category: Category; plugin: PluginMeta };
+}
+
+export function getStaticPaths() {
+  const paths: PathEntry[] = [];
+  for (const cat of getCategories()) {
+    for (const plugin of getPluginsByCategory(cat.name)) {
+      paths.push({
+        params: { category: cat.name, plugin: plugin.name },
+        props: { category: cat, plugin },
+      });
+    }
+  }
+  return paths;
+}
+
+const { category, plugin } = Astro.props;
+const initials = plugin.name.slice(0, 2).toUpperCase();
+---
+
+<Base
+  title={`${plugin.name} — ${category.displayName}`}
+  description={`${plugin.description} Claude Code plugin from skill7.`}
+>
+  <Breadcrumb items={[
+    { label: "Home", href: "/" },
+    { label: category.displayName, href: `/${category.name}` },
+    { label: plugin.name },
+  ]} />
+
+  <!-- Header -->
+  <div class="flex items-start gap-6">
+    <div class="flex h-16 w-16 items-center justify-center rounded-xl bg-brand-100 text-brand-700 font-bold text-lg shrink-0">
+      {initials}
+    </div>
+    <div>
+      <div class="flex items-center gap-3 flex-wrap">
+        <h1 class="text-3xl font-bold text-gray-900">{plugin.name}</h1>
+        <StatusBadge status={plugin.status} />
+        {plugin.verified && (
+          <span class="badge-verified" title="Reviewed by heurema for security and quality">verified</span>
+        )}
+      </div>
+      <p class="mt-1 text-sm text-gray-500">
+        by <a href={`https://github.com/${plugin.homepage.split("github.com/")[1]?.split("/")[0] ?? "heurema"}`} class="font-medium hover:underline">
+          {plugin.homepage.split("github.com/")[1]?.split("/")[0] ?? "heurema"}
+        </a>
+        {plugin.version && <>&middot; v{plugin.version}</>}
+        {plugin.license && <>&middot; {plugin.license}</>}
+      </p>
+    </div>
+  </div>
+
+  <!-- Description -->
+  <p class="mt-6 text-lg text-gray-700">{plugin.description}</p>
+
+  <!-- Install -->
+  <div class="mt-8">
+    <h2 class="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-500">Install</h2>
+    <div class="space-y-3">
+      <div>
+        <p class="mb-1.5 text-sm text-gray-600">Step 1 — Register the marketplace (once):</p>
+        <CopyButton text="claude plugin marketplace add heurema/emporium" />
+      </div>
+      <div>
+        <p class="mb-1.5 text-sm text-gray-600">Step 2 — Install the plugin:</p>
+        <CopyButton text={`claude plugin install ${plugin.name}@emporium`} />
+      </div>
+    </div>
+  </div>
+
+  <!-- Tags -->
+  {plugin.tags.length > 0 && (
+    <div class="mt-8">
+      <h2 class="mb-2 text-sm font-semibold uppercase tracking-wide text-gray-500">Tags</h2>
+      <TagList tags={plugin.tags} />
+    </div>
+  )}
+
+  <!-- Links -->
+  <div class="mt-8 flex flex-wrap gap-4">
+    <a href={plugin.homepage} class="btn-primary" target="_blank" rel="noopener">
+      View on GitHub
+    </a>
+  </div>
+</Base>

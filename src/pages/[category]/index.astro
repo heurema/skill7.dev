@@ -1,0 +1,47 @@
+---
+import Base from "../../layouts/Base.astro";
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import PluginCard from "../../components/PluginCard.astro";
+import CopyButton from "../../components/CopyButton.astro";
+import { getCategories, getPluginsByCategory } from "../../lib/data";
+
+export function getStaticPaths() {
+  return getCategories().map((cat) => ({
+    params: { category: cat.name },
+    props: { category: cat },
+  }));
+}
+
+const { category } = Astro.props;
+const plugins = getPluginsByCategory(category.name);
+---
+
+<Base
+  title={category.displayName}
+  description={`${category.description}. Claude Code plugins from skill7.`}
+>
+  <Breadcrumb items={[
+    { label: "Home", href: "/" },
+    { label: category.displayName },
+  ]} />
+
+  <h1 class="text-3xl font-bold text-gray-900">{category.displayName}</h1>
+  <p class="mt-2 text-lg text-gray-600">{category.description}</p>
+
+  <div class="mt-6">
+    <p class="mb-2 text-sm font-medium text-gray-700">
+      Register the marketplace (once), then install any plugin:
+    </p>
+    <CopyButton text="claude plugin marketplace add heurema/emporium" />
+  </div>
+
+  <div class="mt-10 grid gap-4 sm:grid-cols-2">
+    {plugins.map((plugin) => (
+      <PluginCard plugin={plugin} />
+    ))}
+  </div>
+
+  {plugins.length === 0 && (
+    <p class="mt-8 text-center text-gray-500">No plugins in this category yet.</p>
+  )}
+</Base>
