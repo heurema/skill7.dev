@@ -32,11 +32,11 @@
       "tags": ["news", "digest", "rss", "productivity"],
       "verified": true
     },
-    "codex-partner": {
+    "arbiter": {
       "version": "0.1.0",
       "license": "MIT",
       "status": "alpha",
-      "tags": ["codex", "review", "multi-ai", "verification"],
+      "tags": ["codex", "gemini", "multi-ai", "review", "orchestrator", "panel"],
       "verified": true
     },
     "teams-field-guide": {
