@@ -11,6 +11,10 @@
     "documentation": {
       "displayName": "Documentation",
       "description": "Guides, references, and field guides"
+    },
+    "trading": {
+      "displayName": "Trading",
+      "description": "Market data, sentiment analysis, and trading automation"
     }
   },
   "plugins": {
@@ -40,6 +44,13 @@
       "license": "MIT",
       "status": "alpha",
       "tags": ["teams", "multi-agent", "guide", "patterns"],
+      "verified": true
+    },
+    "sentinel": {
+      "version": "0.1.0",
+      "license": "MIT",
+      "status": "alpha",
+      "tags": ["trading", "sentiment", "crypto", "fear-greed"],
       "verified": true
     }
   }
