@@ -46,6 +46,13 @@
       "tags": ["teams", "multi-agent", "guide", "patterns"],
       "verified": true
     },
+    "anvil": {
+      "version": "0.1.0",
+      "license": "MIT",
+      "status": "alpha",
+      "tags": ["plugin-development", "testing", "validation", "scaffold", "heurema"],
+      "verified": true
+    },
     "sentinel": {
       "version": "0.1.0",
       "license": "MIT",
