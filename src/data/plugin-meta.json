@@ -53,6 +53,13 @@
       "tags": ["plugin-development", "testing", "validation", "scaffold", "heurema"],
       "verified": true
     },
+    "reporter": {
+      "version": "0.1.0",
+      "license": "MIT",
+      "status": "alpha",
+      "tags": ["issue-reporting", "feedback", "github", "productivity"],
+      "verified": true
+    },
     "sentinel": {
       "version": "0.1.0",
       "license": "MIT",
