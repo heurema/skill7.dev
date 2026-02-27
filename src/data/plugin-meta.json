@@ -66,6 +66,13 @@
       "status": "alpha",
       "tags": ["trading", "sentiment", "crypto", "fear-greed"],
       "verified": true
+    },
+    "genesis": {
+      "version": "0.1.0",
+      "license": "MIT",
+      "status": "alpha",
+      "tags": ["ideation", "startup", "memetic-algorithm", "brainstorming", "evolution"],
+      "verified": true
     }
   }
 }
