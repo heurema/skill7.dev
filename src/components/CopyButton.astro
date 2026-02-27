@@ -9,8 +9,8 @@ const id = `copy-${Math.random().toString(36).slice(2, 8)}`;
 ---
 
 <div class="copy-block">
-  <span class="text-dark-lo select-none mr-1">$</span>
-  <code class="flex-1 min-w-0 overflow-x-auto whitespace-nowrap text-dark-hi" tabindex="-1">{text}</code>
+  <span class="text-dark-dim select-none mr-2">$</span>
+  <code class="flex-1 min-w-0 overflow-x-auto whitespace-nowrap text-dark-hi">{text}</code>
   <button
     id={id}
     data-copy={text}
@@ -26,33 +26,31 @@ const id = `copy-${Math.random().toString(36).slice(2, 8)}`;
   document.querySelectorAll<HTMLButtonElement>("[data-copy]").forEach((btn) => {
     const text = btn.dataset.copy!;
     const original = btn.textContent;
-    const statusId = btn.id?.replace("copy-", "status-");
-    const status = statusId ? document.getElementById(statusId) : null;
+    const status = document.getElementById(btn.id + "-status");
     let timer: ReturnType<typeof setTimeout> | null = null;
 
     btn.addEventListener("click", () => {
       if (timer) clearTimeout(timer);
+      btn.disabled = true;
       navigator.clipboard.writeText(text).then(() => {
         btn.textContent = "Copied!";
-        btn.style.color = "var(--color-acid)";
-        btn.style.borderColor = "var(--color-acid)";
+        btn.classList.add("text-acid", "border-acid");
         if (status) status.textContent = "Copied to clipboard";
         timer = setTimeout(() => {
           btn.textContent = original;
-          btn.style.color = "";
-          btn.style.borderColor = "";
+          btn.classList.remove("text-acid", "border-acid");
           if (status) status.textContent = "";
+          btn.disabled = false;
         }, 2000);
       }).catch(() => {
         btn.textContent = "Failed";
-        btn.style.color = "var(--color-err, #ef4444)";
-        btn.style.borderColor = "var(--color-err, #ef4444)";
+        btn.classList.add("text-err", "border-err");
         if (status) status.textContent = "Failed to copy command";
         timer = setTimeout(() => {
           btn.textContent = original;
-          btn.style.color = "";
-          btn.style.borderColor = "";
+          btn.classList.remove("text-err", "border-err");
           if (status) status.textContent = "";
+          btn.disabled = false;
         }, 2000);
       });
     });

@@ -51,7 +51,7 @@ const author = plugin.homepage.split("github.com/")[1]?.split("/")[0] ?? "heurem
         <h1 class="font-heading font-bold tracking-tight text-dark-hi text-2xl sm:text-4xl">{plugin.name}</h1>
         <StatusBadge status={plugin.status} />
         {plugin.verified && (
-          <span class="badge-verified" title="Reviewed by heurema for security and quality">verified</span>
+          <span class="badge-verified" aria-label="Verified: reviewed by heurema for security and quality">verified</span>
         )}
       </div>
       <p class="mt-1.5 text-sm text-dark-lo font-mono">
@@ -67,7 +67,7 @@ const author = plugin.homepage.split("github.com/")[1]?.split("/")[0] ?? "heurem
   </div>
 
   <!-- Description -->
-  <p class="mt-6 text-lg text-dark-lo leading-relaxed max-w-2xl">{plugin.description}</p>
+  <p class="mt-8 text-lg text-dark-lo leading-relaxed max-w-2xl">{plugin.description}</p>
 
   <!-- Install steps -->
   <div class="mt-10">
@@ -75,14 +75,14 @@ const author = plugin.homepage.split("github.com/")[1]?.split("/")[0] ?? "heurem
     <div class="space-y-4">
       <div>
         <p class="mb-2 text-sm text-dark-dim font-mono">
-          <span class="text-acid">01</span> — Register the marketplace (once):
+          <span class="text-acid">1</span> — Register the marketplace (once):
         </p>
         <CopyButton text="claude plugin marketplace add heurema/emporium" />
-        <p class="mt-1 text-xs text-dark-dim font-mono">Skip if you already added the marketplace.</p>
+        <p class="mt-2.5 text-xs text-dark-dim">Skip if you already added the marketplace.</p>
       </div>
       <div>
         <p class="mb-2 text-sm text-dark-dim font-mono">
-          <span class="text-acid">02</span> — Install the plugin:
+          <span class="text-acid">2</span> — Install the plugin:
         </p>
         <CopyButton text={`claude plugin install ${plugin.name}@emporium`} />
       </div>

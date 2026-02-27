@@ -10,7 +10,7 @@ const { items } = Astro.props;
   <ol class="flex flex-wrap items-center gap-1.5 text-sm">
     {items.map((item, i) => (
       <li class="flex items-center gap-1.5">
-        {i > 0 && <span class="text-dark-dim">/</span>}
+        {i > 0 && <span class="text-dark-dim" aria-hidden="true">/</span>}
         {item.href ? (
           <a href={item.href} class="py-1 text-dark-lo hover:text-acid transition-colors">{item.label}</a>
         ) : (

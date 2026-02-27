@@ -17,28 +17,28 @@
     "sigil": {
       "version": "1.0.0",
       "license": "MIT",
-      "status": "active",
+      "status": "alpha",
       "tags": ["code-review", "pipeline", "multi-agent", "tdd"],
       "verified": true
     },
     "herald": {
       "version": "0.1.0",
       "license": "MIT",
-      "status": "beta",
+      "status": "alpha",
       "tags": ["news", "digest", "rss", "productivity"],
       "verified": true
     },
     "codex-partner": {
       "version": "0.1.0",
       "license": "MIT",
-      "status": "active",
+      "status": "alpha",
       "tags": ["codex", "review", "multi-ai", "verification"],
       "verified": true
     },
     "teams-field-guide": {
       "version": "0.1.0",
       "license": "MIT",
-      "status": "active",
+      "status": "alpha",
       "tags": ["teams", "multi-agent", "guide", "patterns"],
       "verified": true
     }

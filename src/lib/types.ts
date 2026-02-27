@@ -21,7 +21,7 @@ export interface PluginMeta {
   source: { source: string; url: string };
   version?: string;
   license?: string;
-  status: "active" | "beta" | "deprecated";
+  status: "active" | "alpha" | "beta" | "deprecated";
   tags: string[];
   verified: boolean;
 }

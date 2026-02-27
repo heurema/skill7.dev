@@ -109,7 +109,7 @@ export default defineConfig({
         edge:  "#2a3a5e",   // strong borders / emphasis
         hi:    "#e8edf8",   // primary text (high contrast)
         lo:    "#8b9cbf",   // secondary text
-        dim:   "#667a99",   // muted / placeholder / disabled
+        dim:   "#7a8faa",   // muted / placeholder / disabled (WCAG AA ≥4.5:1 on #060a14)
         code:  "#060a14",   // code block background
       },
 
@@ -249,8 +249,8 @@ export default defineConfig({
       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-acid",
 
     "btn-secondary":
-      "inline-flex items-center gap-2 px-4 py-2.5 rounded-lg " +
-      "border border-dark-edge text-dark-lo font-medium text-sm " +
+      "inline-flex items-center gap-2 px-5 py-2.5 rounded-lg " +
+      "border border-dark-edge text-dark-hi font-medium text-sm " +
       "hover:border-acid hover:text-acid hover:bg-acid-muted " +
       "transition-all duration-200 " +
       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-acid",
@@ -287,6 +287,9 @@ export default defineConfig({
     "badge-active":
       "badge bg-ok-bg text-ok border border-ok/30",
 
+    "badge-alpha":
+      "badge bg-warn-bg text-warn border border-warn/30",
+
     "badge-beta":
       "badge bg-warn-bg text-warn border border-warn/30",
 
@@ -319,9 +322,9 @@ export default defineConfig({
 
     // ── Copy command block ────────────────────────────────────────────────────
     "copy-block":
-      "flex items-center gap-3 rounded-lg " +
+      "flex items-center gap-4 rounded-lg " +
       "bg-dark-code border border-dark-line " +
-      "px-4 py-3 font-mono text-sm text-dark-hi " +
+      "px-4 py-3.5 font-mono text-sm text-dark-hi " +
       "shadow-inset-code",
 
     "copy-btn":
@@ -329,20 +332,23 @@ export default defineConfig({
       "min-w-16 text-center " +
       "text-dark-lo bg-dark-raised border border-dark-line " +
       "hover:text-acid hover:border-acid " +
-      "transition-all duration-150",
+      "transition-all duration-150 " +
+      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-acid " +
+      "disabled:opacity-60 disabled:cursor-wait",
 
     // ── Navigation ────────────────────────────────────────────────────────────
     "nav-link":
       "text-sm font-medium text-dark-lo " +
       "hover:text-dark-hi " +
-      "transition-colors duration-150",
+      "transition-colors duration-150 " +
+      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-acid focus-visible:rounded-md",
 
     "nav-link-active":
       "text-sm font-medium text-acid",
 
     // ── Section label ─────────────────────────────────────────────────────────
     "section-label":
-      "text-xs font-semibold uppercase tracking-widest text-dark-lo",
+      "text-xs font-semibold uppercase tracking-wider text-dark-lo",
 
     // ── Input ─────────────────────────────────────────────────────────────────
     "input":
@@ -354,8 +360,7 @@ export default defineConfig({
     // ── Tag / keyword chip ────────────────────────────────────────────────────
     "tag":
       "inline-block rounded-sm px-2 py-0.5 text-xs font-medium " +
-      "text-dark-lo bg-dark-raised border border-dark-line " +
-      "transition-colors duration-100",
+      "text-dark-lo bg-dark-raised border border-dark-line",
 
     // ── Callout / alert boxes ─────────────────────────────────────────────────
     "callout-warn":

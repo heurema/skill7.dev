@@ -11,7 +11,7 @@ interface Props {
 
 const { title, description = "Curated open-source plugin marketplace for Claude Code" } = Astro.props;
 const fullTitle = `${title} — Claude Code Plugins | skill7`;
-const canonicalUrl = Astro.url.href;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).href;
 ---
 
 <!doctype html>
@@ -70,7 +70,7 @@ const canonicalUrl = Astro.url.href;
     --color-border-2:   #2a3a5e;
     --color-text-1:     #e8edf8;
     --color-text-2:     #8b9cbf;
-    --color-text-muted: #4a5878;
+    --color-text-muted: #7a8faa;
     --color-code-bg:    #060a14;
 
     --color-acid:       #00e5a0;
@@ -144,7 +144,7 @@ const canonicalUrl = Astro.url.href;
     color: var(--color-text-1);
   }
 
-  h1 { font-size: 2.25rem; line-height: 1.1;    letter-spacing: -0.04em; }
+  h1 { font-size: 2.25rem; line-height: 1.15;    letter-spacing: -0.04em; }
   @media (min-width: 640px) { h1 { font-size: 3rem; } }
   h2 { font-size: 1.875rem; line-height: 1.2;   letter-spacing: -0.03em; }
   h3 { font-size: 1.25rem;  line-height: 1.4;   letter-spacing: -0.015em; }
@@ -172,6 +172,10 @@ const canonicalUrl = Astro.url.href;
     border-radius: 4px;
   }
   ::-webkit-scrollbar-thumb:hover { background: var(--color-text-muted); }
+
+  /* ── Hide scrollbar on inline code (copy-block) ───────────────────────── */
+  .copy-block code::-webkit-scrollbar { display: none; }
+  .copy-block code { scrollbar-width: none; }
 
   /* ── Focus ring ────────────────────────────────────────────────────────── */
   :focus-visible {

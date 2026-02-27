@@ -1,16 +1,18 @@
 ---
 interface Props {
-  status: "active" | "beta" | "deprecated";
+  status: "active" | "alpha" | "beta" | "deprecated";
 }
 
 const { status } = Astro.props;
 const classes: Record<typeof status, string> = {
   active:     "badge-active",
+  alpha:      "badge-alpha",
   beta:       "badge-beta",
   deprecated: "badge-deprecated",
 };
 const titles: Record<typeof status, string> = {
   active:     "Stable and actively maintained",
+  alpha:      "Early preview — expect breaking changes",
   beta:       "Working but API may change",
   deprecated: "No longer maintained",
 };

@@ -26,7 +26,7 @@ function isActive(href: string): boolean {
       {navItems.map(({ label, href }) => (
         <a
           href={href}
-          class={`px-3 py-1.5 rounded-md transition-colors duration-150 text-sm font-medium hover:bg-dark-raised ${isActive(href) ? "text-acid" : "text-dark-lo hover:text-dark-hi"}`}
+          class={`px-3 py-1.5 rounded-md transition-colors duration-150 text-sm font-medium hover:bg-dark-raised focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-acid ${isActive(href) ? "text-acid" : "text-dark-lo hover:text-dark-hi"}`}
         >
           {label}
         </a>
@@ -34,7 +34,7 @@ function isActive(href: string): boolean {
       <div class="w-px h-4 bg-dark-line mx-2" />
       <a
         href="https://github.com/heurema/emporium"
-        class="nav-link px-3 py-1.5 rounded-md hover:bg-dark-raised flex items-center gap-1.5"
+        class="nav-link px-3 py-1.5 rounded-md hover:bg-dark-raised focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-acid flex items-center gap-1.5"
         target="_blank"
         rel="noopener"
       >
