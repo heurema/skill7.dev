@@ -22,7 +22,7 @@
       "verified": true
     },
     "herald": {
-      "version": "0.1.0",
+      "version": "1.0.0",
       "license": "MIT",
       "status": "alpha",
       "tags": ["news", "digest", "rss", "productivity"],

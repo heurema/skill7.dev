@@ -1,0 +1,45 @@
+name: Doc Consistency
+
+on:
+  pull_request:
+    paths:
+      - "src/data/**"
+      - ".github/workflows/consistency.yml"
+  push:
+    branches: [main]
+    paths:
+      - "src/data/**"
+  schedule:
+    - cron: "0 6 * * 1" # Monday 06:00 UTC
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+
+  link-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --verbose
+            --no-progress
+            --exclude-path node_modules
+            --exclude-path dist
+            --timeout 30
+            README.md
+            src/data/marketplace.json
+          fail: true

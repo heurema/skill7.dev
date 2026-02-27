@@ -58,6 +58,6 @@ export function getPlugin(name: string): PluginMeta | undefined {
 
 export function getFeaturedPlugins(count = 4): PluginMeta[] {
   return getAllPlugins()
-    .filter((p) => p.verified && p.status === "active")
+    .filter((p) => p.verified)
     .slice(0, count);
 }
