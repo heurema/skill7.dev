@@ -29,12 +29,48 @@ export function getStaticPaths() {
 const { category, plugin } = Astro.props;
 const initials = plugin.name.slice(0, 2).toUpperCase();
 const author = plugin.homepage.split("github.com/")[1]?.split("/")[0] ?? "heurema";
+const pluginUrl = new URL(`/${category.name}/${plugin.name}`, Astro.site ?? Astro.url.origin).href;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: plugin.name,
+  description: plugin.description,
+  applicationCategory: "DeveloperApplication",
+  operatingSystem: "macOS, Linux",
+  url: pluginUrl,
+  downloadUrl: plugin.homepage,
+  softwareVersion: plugin.version ?? "0.1.0",
+  license: "https://opensource.org/licenses/MIT",
+  author: {
+    "@type": "Organization",
+    name: author,
+    url: `https://github.com/${author}`,
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "skill7",
+    url: "https://skill7.dev",
+  },
+};
+
+const breadcrumbLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: new URL("/", Astro.site ?? Astro.url.origin).href },
+    { "@type": "ListItem", position: 2, name: category.displayName, item: new URL(`/${category.name}`, Astro.site ?? Astro.url.origin).href },
+    { "@type": "ListItem", position: 3, name: plugin.name },
+  ],
+};
 ---
 
 <Base
-  title={`${plugin.name} — ${category.displayName}`}
-  description={`${plugin.description} Claude Code plugin from skill7.`}
+  title={`${plugin.name} — ${plugin.description.split('.')[0]} | Claude Code Plugin`}
+  description={`${plugin.description.slice(0, 155)}${plugin.description.length > 155 ? '...' : ''}`}
 >
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} slot="head" />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} slot="head" />
   <Breadcrumb items={[
     { label: "Home", href: "/" },
     { label: category.displayName, href: `/${category.name}` },

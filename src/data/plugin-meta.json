@@ -8,13 +8,13 @@
       "displayName": "Productivity",
       "description": "News, automation, scheduling, and workflow tools"
     },
-    "documentation": {
-      "displayName": "Documentation",
-      "description": "Guides, references, and field guides"
-    },
     "trading": {
       "displayName": "Trading",
-      "description": "Market data, sentiment analysis, and trading automation"
+      "description": "Market data, sentiment analysis, and trading signals for crypto"
+    },
+    "creative": {
+      "displayName": "Creative",
+      "description": "Ideation, brainstorming, and creative generation tools"
     }
   },
   "plugins": {
@@ -22,56 +22,56 @@
       "version": "1.0.0",
       "license": "MIT",
       "status": "alpha",
-      "tags": ["code-review", "pipeline", "multi-agent", "tdd"],
-      "verified": true
-    },
-    "herald": {
-      "version": "1.0.0",
-      "license": "MIT",
-      "status": "alpha",
-      "tags": ["news", "digest", "rss", "productivity"],
+      "tags": ["code-review", "adversarial-review", "multi-agent", "dev-pipeline", "risk-adaptive", "AI-code-review"],
       "verified": true
     },
     "arbiter": {
       "version": "0.1.0",
       "license": "MIT",
       "status": "alpha",
-      "tags": ["codex", "gemini", "multi-ai", "review", "orchestrator", "panel"],
+      "tags": ["multi-ai", "codex", "gemini", "code-review", "orchestrator", "panel", "quorum"],
       "verified": true
     },
-    "oracle": {
-      "version": "0.1.0",
+    "herald": {
+      "version": "1.0.0",
       "license": "MIT",
       "status": "alpha",
-      "tags": ["trading", "on-chain", "macro", "options", "volatility"],
+      "tags": ["news-digest", "rss", "automation", "local-first", "curated-news", "hacker-news"],
       "verified": true
     },
     "anvil": {
       "version": "0.1.0",
       "license": "MIT",
       "status": "alpha",
-      "tags": ["plugin-development", "testing", "validation", "scaffold", "heurema"],
+      "tags": ["plugin-development", "testing", "validation", "scaffold", "quality-assurance", "linting"],
       "verified": true
     },
     "reporter": {
       "version": "0.1.0",
       "license": "MIT",
       "status": "alpha",
-      "tags": ["issue-reporting", "feedback", "github", "productivity"],
+      "tags": ["issue-reporting", "bug-report", "feedback", "github", "developer-experience"],
+      "verified": true
+    },
+    "oracle": {
+      "version": "0.1.0",
+      "license": "MIT",
+      "status": "alpha",
+      "tags": ["options-volatility", "deribit", "crypto-signals", "implied-volatility", "risk-reversal", "derivatives"],
       "verified": true
     },
     "sentinel": {
       "version": "0.1.0",
       "license": "MIT",
       "status": "alpha",
-      "tags": ["trading", "sentiment", "crypto", "fear-greed"],
+      "tags": ["sentiment-analysis", "fear-greed", "crypto-news", "polymarket", "social-intelligence", "lunarcrush"],
       "verified": true
     },
     "genesis": {
       "version": "0.1.0",
       "license": "MIT",
       "status": "alpha",
-      "tags": ["ideation", "startup", "memetic-algorithm", "brainstorming", "evolution"],
+      "tags": ["ideation", "startup", "memetic-algorithm", "AI-brainstorming", "idea-evolution", "solo-founder"],
       "verified": true
     }
   }

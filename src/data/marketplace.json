@@ -2,7 +2,7 @@
   "plugins": [
     {
       "name": "sigil",
-      "description": "Risk-adaptive development pipeline with adversarial consensus code review. Four phases (scope, explore, design, build) that scale review rigor to match task complexity — from single reviewer for low-risk changes to blind parallel agents with Codex tiebreaker for high-risk work.",
+      "description": "One command for your entire feature workflow — scope, design, build, and review. Sigil scales review rigor to match risk automatically: quick single-reviewer pass for low-risk changes, multiple independent AI agents reviewing the same diff blind for high-risk work.",
       "category": "development",
       "source": {
         "source": "url",
@@ -11,18 +11,8 @@
       "homepage": "https://github.com/heurema/sigil"
     },
     {
-      "name": "herald",
-      "description": "Daily curated news digest for your domain. Fetches RSS feeds and Hacker News via public APIs, applies 3-layer deduplication and keyword filtering, scores and ranks the top 10 items as a grouped Markdown digest. Zero API keys, fully local.",
-      "category": "productivity",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/heurema/herald.git"
-      },
-      "homepage": "https://github.com/heurema/herald"
-    },
-    {
       "name": "arbiter",
-      "description": "Multi-AI orchestrator — dispatch to Codex CLI and Gemini CLI for review, ask, implement, and panel modes. Compare answers from multiple providers in a single command.",
+      "description": "Use multiple AI assistants from one interface. Arbiter orchestrates Codex CLI and Gemini CLI inside Claude Code — get parallel answers to the same question, take a majority vote on go/no-go decisions, or have different AIs cross-check the same code for maximum review rigor.",
       "category": "development",
       "source": {
         "source": "url",
@@ -31,18 +21,18 @@
       "homepage": "https://github.com/heurema/arbiter"
     },
     {
-      "name": "oracle",
-      "description": "On-chain and macro data signals for crypto trading — options volatility, exchange flows, prediction markets. Complements sentinel with derivatives and macro layer.",
-      "category": "trading",
+      "name": "herald",
+      "description": "Daily curated news digest for your technical domain. Herald fetches RSS, Hacker News, and optional Tavily results, scores by source weight and recency, deduplicates across three layers, and delivers the top 10 items — all running locally.",
+      "category": "productivity",
       "source": {
         "source": "url",
-        "url": "https://github.com/forgequant/oracle.git"
+        "url": "https://github.com/heurema/herald.git"
       },
-      "homepage": "https://github.com/forgequant/oracle"
+      "homepage": "https://github.com/heurema/herald"
     },
     {
       "name": "anvil",
-      "description": "Plugin dev/test toolkit for heurema. Scaffold new plugins from templates, validate structure and conventions with 5 deterministic Python validators, test hooks with fixture-driven runner, and review quality with a 20-item checklist agent.",
+      "description": "Scaffold, validate, and test Claude Code plugins in seconds. Three commands cover the full plugin lifecycle — from template generation to six deterministic validators that catch schema errors, unsafe hooks, and naming issues before publish.",
       "category": "development",
       "source": {
         "source": "url",
@@ -52,7 +42,7 @@
     },
     {
       "name": "reporter",
-      "description": "Report bugs, request features, and ask questions for any heurema product. Auto-detects repo from git remote, collects environment context (OS, shell, Claude Code version), previews the issue, and submits via gh CLI with clipboard fallback.",
+      "description": "Report bugs, request features, and ask questions for any heurema plugin — without leaving Claude Code. Auto-detects your repo from git remote, collects environment context, previews the issue, and submits via gh CLI with clipboard fallback.",
       "category": "productivity",
       "source": {
         "source": "url",
@@ -61,8 +51,18 @@
       "homepage": "https://github.com/heurema/reporter"
     },
     {
+      "name": "oracle",
+      "description": "Anticipate crypto volatility with institutional-grade options analysis. Oracle queries Deribit's public API to compute implied volatility skew, put/call ratio, and term structure — then delivers structured signals with confidence scores. No API keys required.",
+      "category": "trading",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/forgequant/oracle.git"
+      },
+      "homepage": "https://github.com/forgequant/oracle"
+    },
+    {
       "name": "sentinel",
-      "description": "Core sentiment stack for crypto trading — Fear & Greed Index, news scanning with sentiment scoring, social intelligence via LunarCrush, and prediction market odds from Polymarket. Unified SignalOutput v1 format. Three skills work free, one requires API key.",
+      "description": "Get a complete pulse of crypto market sentiment from four independent sources. Sentinel fuses Fear & Greed analytics, news sentiment scoring, LunarCrush social intelligence, and Polymarket prediction odds — all composable as structured JSON signals.",
       "category": "trading",
       "source": {
         "source": "url",
@@ -72,8 +72,8 @@
     },
     {
       "name": "genesis",
-      "description": "Evolve startup ideas through AI-powered natural selection. 3 agent personas — Generator, Critic, Refiner — compete in a memetic algorithm with 8-dimension scoring, constraint enforcement, and actionable execution blueprints.",
-      "category": "productivity",
+      "description": "Evolve startup ideas through AI-powered natural selection. Three specialized agents run generate-critique-select-refine loops, scoring across 8 dimensions with strategy weights, to surface winners with ICP, monetization model, and week-1 execution plans.",
+      "category": "creative",
       "source": {
         "source": "url",
         "url": "https://github.com/heurema/genesis.git"
