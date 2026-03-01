@@ -31,14 +31,14 @@
       "homepage": "https://github.com/heurema/arbiter"
     },
     {
-      "name": "teams-field-guide",
-      "description": "Comprehensive field guide for Claude Code multi-agent systems. Covers Subagents and Agent Teams, custom agent configuration, 7 orchestration patterns, cost optimization with model distribution, known bugs with workarounds, and 26 ecosystem projects.",
-      "category": "development",
+      "name": "oracle",
+      "description": "On-chain and macro data signals for crypto trading — options volatility, exchange flows, prediction markets. Complements sentinel with derivatives and macro layer.",
+      "category": "trading",
       "source": {
         "source": "url",
-        "url": "https://github.com/heurema/teams-field-guide.git"
+        "url": "https://github.com/forgequant/oracle.git"
       },
-      "homepage": "https://github.com/heurema/teams-field-guide"
+      "homepage": "https://github.com/forgequant/oracle"
     },
     {
       "name": "anvil",

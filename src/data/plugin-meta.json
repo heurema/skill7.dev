@@ -39,11 +39,11 @@
       "tags": ["codex", "gemini", "multi-ai", "review", "orchestrator", "panel"],
       "verified": true
     },
-    "teams-field-guide": {
+    "oracle": {
       "version": "0.1.0",
       "license": "MIT",
       "status": "alpha",
-      "tags": ["teams", "multi-agent", "guide", "patterns"],
+      "tags": ["trading", "on-chain", "macro", "options", "volatility"],
       "verified": true
     },
     "anvil": {
