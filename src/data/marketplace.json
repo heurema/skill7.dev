@@ -1,14 +1,14 @@
 {
   "plugins": [
     {
-      "name": "sigil",
-      "description": "One command for your entire feature workflow — scope, design, build, and review. Sigil scales both build and review to match risk: standard implementation for simple changes, diverge mode with 3 independent AI solutions for complex work, and adversarial multi-agent review.",
+      "name": "anvil",
+      "description": "Scaffold, validate, and test Claude Code plugins in seconds. Three commands cover the full plugin lifecycle — from template generation to six deterministic validators that catch schema errors, unsafe hooks, and naming issues before publish.",
       "category": "development",
       "source": {
         "source": "url",
-        "url": "https://github.com/heurema/sigil.git"
+        "url": "https://github.com/heurema/anvil.git"
       },
-      "homepage": "https://github.com/heurema/sigil"
+      "homepage": "https://github.com/heurema/anvil"
     },
     {
       "name": "arbiter",
@@ -21,54 +21,24 @@
       "homepage": "https://github.com/heurema/arbiter"
     },
     {
-      "name": "herald",
-      "description": "Daily curated news digest for your technical domain. Herald fetches RSS, Hacker News, and optional Tavily results, scores by source weight and recency, deduplicates across three layers, and delivers the top 10 items — all running locally.",
-      "category": "productivity",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/heurema/herald.git"
-      },
-      "homepage": "https://github.com/heurema/herald"
-    },
-    {
-      "name": "anvil",
-      "description": "Scaffold, validate, and test Claude Code plugins in seconds. Three commands cover the full plugin lifecycle — from template generation to six deterministic validators that catch schema errors, unsafe hooks, and naming issues before publish.",
+      "name": "forge",
+      "description": "Plugin lifecycle manager for heurema org. Scaffold, verify, register, and manage the full plugin lifecycle with automated quality gates.",
       "category": "development",
       "source": {
         "source": "url",
-        "url": "https://github.com/heurema/anvil.git"
+        "url": "https://github.com/heurema/forge.git"
       },
-      "homepage": "https://github.com/heurema/anvil"
+      "homepage": "https://github.com/heurema/forge"
     },
     {
-      "name": "reporter",
-      "description": "Report bugs, request features, and ask questions for any heurema plugin — without leaving Claude Code. Auto-detects your repo from git remote, collects environment context, previews the issue, and submits via gh CLI with clipboard fallback.",
-      "category": "productivity",
+      "name": "genesis",
+      "description": "Evolve startup ideas through AI-powered natural selection. Three specialized agents run generate-critique-select-refine loops, scoring across 8 dimensions with strategy weights, to surface winners with ICP, monetization model, and week-1 execution plans.",
+      "category": "creative",
       "source": {
         "source": "url",
-        "url": "https://github.com/heurema/reporter.git"
+        "url": "https://github.com/heurema/genesis.git"
       },
-      "homepage": "https://github.com/heurema/reporter"
-    },
-    {
-      "name": "oracle",
-      "description": "Anticipate crypto volatility with institutional-grade options analysis. Oracle queries Deribit's public API to compute implied volatility skew, put/call ratio, and term structure — then delivers structured signals with confidence scores. No API keys required.",
-      "category": "trading",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/forgequant/oracle.git"
-      },
-      "homepage": "https://github.com/forgequant/oracle"
-    },
-    {
-      "name": "sentinel",
-      "description": "Get a complete pulse of crypto market sentiment from four independent sources. Sentinel fuses Fear & Greed analytics, news sentiment scoring, LunarCrush social intelligence, and Polymarket prediction odds — all composable as structured JSON signals.",
-      "category": "trading",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/forgequant/sentinel.git"
-      },
-      "homepage": "https://github.com/forgequant/sentinel"
+      "homepage": "https://github.com/heurema/genesis"
     },
     {
       "name": "glyph",
@@ -81,14 +51,54 @@
       "homepage": "https://github.com/heurema/glyph"
     },
     {
-      "name": "genesis",
-      "description": "Evolve startup ideas through AI-powered natural selection. Three specialized agents run generate-critique-select-refine loops, scoring across 8 dimensions with strategy weights, to surface winners with ICP, monetization model, and week-1 execution plans.",
-      "category": "creative",
+      "name": "herald",
+      "description": "Daily curated news digest for your technical domain. Herald fetches RSS, Hacker News, and optional Tavily results, scores by source weight and recency, deduplicates across three layers, and delivers the top 10 items — all running locally.",
+      "category": "productivity",
       "source": {
         "source": "url",
-        "url": "https://github.com/heurema/genesis.git"
+        "url": "https://github.com/heurema/herald.git"
       },
-      "homepage": "https://github.com/heurema/genesis"
+      "homepage": "https://github.com/heurema/herald"
+    },
+    {
+      "name": "oracle",
+      "description": "Anticipate crypto volatility with institutional-grade options analysis. Oracle queries Deribit's public API to compute implied volatility skew, put/call ratio, and term structure — then delivers structured signals with confidence scores. No API keys required.",
+      "category": "trading",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/forgequant/oracle.git"
+      },
+      "homepage": "https://github.com/forgequant/oracle"
+    },
+    {
+      "name": "reporter",
+      "description": "Report bugs, request features, and ask questions for any heurema plugin — without leaving Claude Code. Auto-detects your repo from git remote, collects environment context, previews the issue, and submits via gh CLI with clipboard fallback.",
+      "category": "productivity",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/heurema/reporter.git"
+      },
+      "homepage": "https://github.com/heurema/reporter"
+    },
+    {
+      "name": "sentinel",
+      "description": "Get a complete pulse of crypto market sentiment from four independent sources. Sentinel fuses Fear & Greed analytics, news sentiment scoring, LunarCrush social intelligence, and Polymarket prediction odds — all composable as structured JSON signals.",
+      "category": "trading",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/forgequant/sentinel.git"
+      },
+      "homepage": "https://github.com/forgequant/sentinel"
+    },
+    {
+      "name": "sigil",
+      "description": "One command for your entire feature workflow — scope, design, build, and review. Sigil scales both build and review to match risk: standard implementation for simple changes, diverge mode with 3 independent AI solutions for complex work, and adversarial multi-agent review.",
+      "category": "development",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/heurema/sigil.git"
+      },
+      "homepage": "https://github.com/heurema/sigil"
     }
   ]
 }
