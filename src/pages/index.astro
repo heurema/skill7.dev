@@ -84,6 +84,130 @@ const totalPlugins = allPlugins.length;
     </div>
   </section>
 
+  <!-- Packs ----------------------------------------------------------------->
+  <section class="py-16 border-t border-dark-line" id="packs">
+    <div class="text-center mb-12">
+      <h2 class="font-heading font-bold text-3xl text-dark-hi tracking-tight">Start in 2 Minutes</h2>
+      <p class="mt-3 text-dark-lo text-lg">
+        Choose your pack. All plugins install from one marketplace.
+      </p>
+    </div>
+
+    <div class="grid gap-6 lg:grid-cols-3">
+
+      <!-- Starter Pack (highlighted) -->
+      <div class="rounded-xl p-6 flex flex-col gap-5 border-gradient-acid shadow-glow-sm relative">
+        <!-- "Recommended" badge -->
+        <div class="absolute -top-3 left-6">
+          <span class="badge bg-acid text-dark-bg border-0 font-semibold px-3 py-1 text-xs tracking-wide">
+            Recommended
+          </span>
+        </div>
+
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-xs font-mono font-semibold uppercase tracking-widest text-acid">Starter Pack</span>
+          </div>
+          <p class="text-dark-lo text-sm leading-relaxed">Zero external dependencies. Instant value.</p>
+        </div>
+
+        <ul class="flex flex-col gap-2">
+          <li class="flex flex-col gap-0.5">
+            <span class="text-sm font-semibold text-dark-hi font-mono">herald</span>
+            <span class="text-xs text-dark-lo">Daily curated news digest — zero API keys, fully local.</span>
+          </li>
+          <li class="flex flex-col gap-0.5">
+            <span class="text-sm font-semibold text-dark-hi font-mono">anvil</span>
+            <span class="text-xs text-dark-lo">Plugin dev/test toolkit — scaffold, validate, test, review.</span>
+          </li>
+          <li class="flex flex-col gap-0.5">
+            <span class="text-sm font-semibold text-dark-hi font-mono">reporter</span>
+            <span class="text-xs text-dark-lo">Report bugs and request features for any heurema product.</span>
+          </li>
+        </ul>
+
+        <div class="flex flex-col gap-2">
+          <CopyButton text="claude plugin marketplace add heurema/emporium" />
+          <CopyButton text="claude plugin install herald@emporium" />
+          <CopyButton text="claude plugin install anvil@emporium" />
+          <CopyButton text="claude plugin install reporter@emporium" />
+        </div>
+
+        <div class="callout-tip text-xs">
+          Try in 2 minutes — no accounts, no API keys required.
+        </div>
+      </div>
+
+      <!-- Pro Pack -->
+      <div class="card flex flex-col gap-5">
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-xs font-mono font-semibold uppercase tracking-widest text-cyan">Pro Pack</span>
+          </div>
+          <p class="text-dark-lo text-sm leading-relaxed">Multi-AI code review and risk-adaptive development.</p>
+        </div>
+
+        <ul class="flex flex-col gap-2">
+          <li class="flex flex-col gap-0.5">
+            <span class="text-sm font-semibold text-dark-hi font-mono">sigil</span>
+            <span class="text-xs text-dark-lo">Risk-adaptive dev pipeline with adversarial consensus code review.</span>
+          </li>
+          <li class="flex flex-col gap-0.5">
+            <span class="text-sm font-semibold text-dark-hi font-mono">arbiter</span>
+            <span class="text-xs text-dark-lo">Multi-AI orchestrator — Codex CLI + Gemini CLI for review and implementation.</span>
+          </li>
+        </ul>
+
+        <div class="flex flex-col gap-2">
+          <CopyButton text="claude plugin install sigil@emporium" />
+          <CopyButton text="claude plugin install arbiter@emporium" />
+        </div>
+
+        <div class="callout-info text-xs">
+          Requires Codex CLI and/or Gemini CLI to be available in your PATH.
+        </div>
+      </div>
+
+      <!-- Trading Pack -->
+      <div class="card flex flex-col gap-5">
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-xs font-mono font-semibold uppercase tracking-widest text-warn">Trading Pack</span>
+          </div>
+          <p class="text-dark-lo text-sm leading-relaxed">Crypto sentiment and volatility signals.</p>
+        </div>
+
+        <ul class="flex flex-col gap-2">
+          <li class="flex flex-col gap-0.5">
+            <span class="text-sm font-semibold text-dark-hi font-mono">oracle</span>
+            <span class="text-xs text-dark-lo">On-chain and macro signals — options volatility, exchange flows.</span>
+          </li>
+          <li class="flex flex-col gap-0.5">
+            <span class="text-sm font-semibold text-dark-hi font-mono">sentinel</span>
+            <span class="text-xs text-dark-lo">Crypto sentiment stack — Fear & Greed, news, social intelligence.</span>
+          </li>
+        </ul>
+
+        <div class="flex flex-col gap-2">
+          <CopyButton text="claude plugin install oracle@emporium" />
+          <CopyButton text="claude plugin install sentinel@emporium" />
+        </div>
+
+        <div class="callout-warn text-xs">
+          Not financial advice. Signals are informational only.
+        </div>
+      </div>
+
+    </div>
+
+    <p class="mt-8 text-center text-xs text-dark-dim">
+      Questions about data usage?
+      <a href="/trust" class="text-dark-lo hover:text-acid transition-colors underline underline-offset-2">
+        Trust &amp; Privacy
+      </a>
+    </p>
+  </section>
+
   <!-- Categories ----------------------------------------------------------->
   <section class="py-16 border-t border-dark-line">
     <div class="flex items-center gap-3 mb-8">
