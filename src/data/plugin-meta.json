@@ -19,17 +19,17 @@
   },
   "plugins": {
     "sigil": {
-      "version": "1.0.0",
+      "version": "1.1.0",
       "license": "MIT",
       "status": "alpha",
-      "tags": ["code-review", "adversarial-review", "multi-agent", "dev-pipeline", "risk-adaptive", "AI-code-review"],
+      "tags": ["code-review", "adversarial-review", "multi-agent", "dev-pipeline", "risk-adaptive", "AI-code-review", "diverge"],
       "verified": true
     },
     "arbiter": {
-      "version": "0.1.0",
+      "version": "0.2.0",
       "license": "MIT",
       "status": "alpha",
-      "tags": ["multi-ai", "codex", "gemini", "code-review", "orchestrator", "panel", "quorum"],
+      "tags": ["multi-ai", "codex", "gemini", "code-review", "orchestrator", "panel", "quorum", "diverge", "parallel-implementation"],
       "verified": true
     },
     "herald": {

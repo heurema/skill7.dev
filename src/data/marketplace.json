@@ -2,7 +2,7 @@
   "plugins": [
     {
       "name": "sigil",
-      "description": "One command for your entire feature workflow — scope, design, build, and review. Sigil scales review rigor to match risk automatically: quick single-reviewer pass for low-risk changes, multiple independent AI agents reviewing the same diff blind for high-risk work.",
+      "description": "One command for your entire feature workflow — scope, design, build, and review. Sigil scales both build and review to match risk: standard implementation for simple changes, diverge mode with 3 independent AI solutions for complex work, and adversarial multi-agent review.",
       "category": "development",
       "source": {
         "source": "url",
@@ -12,7 +12,7 @@
     },
     {
       "name": "arbiter",
-      "description": "Use multiple AI assistants from one interface. Arbiter orchestrates Codex CLI and Gemini CLI inside Claude Code — get parallel answers to the same question, take a majority vote on go/no-go decisions, or have different AIs cross-check the same code for maximum review rigor.",
+      "description": "Use multiple AI assistants from one interface. Arbiter orchestrates Codex CLI and Gemini CLI inside Claude Code — get parallel answers, take majority votes on decisions, cross-check code, or run 3 independent implementations in parallel and pick the best one.",
       "category": "development",
       "source": {
         "source": "url",
