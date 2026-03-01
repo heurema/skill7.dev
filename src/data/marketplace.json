@@ -71,6 +71,16 @@
       "homepage": "https://github.com/forgequant/sentinel"
     },
     {
+      "name": "glyph",
+      "description": "Generate polished terminal demo GIFs from a natural language description. Glyph synthesizes asciicast recordings with realistic typing, configurable themes, and built-in PII auditing — no real shell commands are executed.",
+      "category": "development",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/heurema/glyph.git"
+      },
+      "homepage": "https://github.com/heurema/glyph"
+    },
+    {
       "name": "genesis",
       "description": "Evolve startup ideas through AI-powered natural selection. Three specialized agents run generate-critique-select-refine loops, scoring across 8 dimensions with strategy weights, to surface winners with ICP, monetization model, and week-1 execution plans.",
       "category": "creative",

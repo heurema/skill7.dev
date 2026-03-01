@@ -67,6 +67,13 @@
       "tags": ["sentiment-analysis", "fear-greed", "crypto-news", "polymarket", "social-intelligence", "lunarcrush"],
       "verified": true
     },
+    "glyph": {
+      "version": "0.1.0",
+      "license": "MIT",
+      "status": "alpha",
+      "tags": ["terminalcast", "gif", "demo", "asciicast", "recording", "pii-safe"],
+      "verified": true
+    },
     "genesis": {
       "version": "0.1.0",
       "license": "MIT",
