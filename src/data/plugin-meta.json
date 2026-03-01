@@ -18,67 +18,146 @@
     }
   },
   "plugins": {
-    "sigil": {
-      "version": "1.1.0",
+    "anvil": {
+      "version": "0.1.0",
       "license": "MIT",
       "status": "alpha",
-      "tags": ["code-review", "adversarial-review", "multi-agent", "dev-pipeline", "risk-adaptive", "AI-code-review", "diverge"],
+      "tags": [
+        "plugin-development",
+        "testing",
+        "validation",
+        "scaffold",
+        "quality-assurance",
+        "linting"
+      ],
       "verified": true
     },
     "arbiter": {
       "version": "0.2.0",
       "license": "MIT",
       "status": "alpha",
-      "tags": ["multi-ai", "codex", "gemini", "code-review", "orchestrator", "panel", "quorum", "diverge", "parallel-implementation"],
+      "tags": [
+        "multi-ai",
+        "codex",
+        "gemini",
+        "code-review",
+        "orchestrator",
+        "panel",
+        "quorum",
+        "diverge",
+        "parallel-implementation"
+      ],
       "verified": true
     },
-    "herald": {
-      "version": "1.0.0",
-      "license": "MIT",
-      "status": "alpha",
-      "tags": ["news-digest", "rss", "automation", "local-first", "curated-news", "hacker-news"],
-      "verified": true
-    },
-    "anvil": {
+    "forge": {
       "version": "0.1.0",
       "license": "MIT",
       "status": "alpha",
-      "tags": ["plugin-development", "testing", "validation", "scaffold", "quality-assurance", "linting"],
-      "verified": true
+      "tags": [
+        "plugin-lifecycle",
+        "scaffold",
+        "registry",
+        "automation",
+        "quality-gates"
+      ],
+      "verified": false
     },
-    "reporter": {
+    "genesis": {
       "version": "0.1.0",
       "license": "MIT",
       "status": "alpha",
-      "tags": ["issue-reporting", "bug-report", "feedback", "github", "developer-experience"],
-      "verified": true
-    },
-    "oracle": {
-      "version": "0.1.0",
-      "license": "MIT",
-      "status": "alpha",
-      "tags": ["options-volatility", "deribit", "crypto-signals", "implied-volatility", "risk-reversal", "derivatives"],
-      "verified": true
-    },
-    "sentinel": {
-      "version": "0.1.0",
-      "license": "MIT",
-      "status": "alpha",
-      "tags": ["sentiment-analysis", "fear-greed", "crypto-news", "polymarket", "social-intelligence", "lunarcrush"],
+      "tags": [
+        "ideation",
+        "startup",
+        "memetic-algorithm",
+        "AI-brainstorming",
+        "idea-evolution",
+        "solo-founder"
+      ],
       "verified": true
     },
     "glyph": {
       "version": "0.1.0",
       "license": "MIT",
       "status": "alpha",
-      "tags": ["terminalcast", "gif", "demo", "asciicast", "recording", "pii-safe"],
+      "tags": [
+        "terminalcast",
+        "gif",
+        "demo",
+        "asciicast",
+        "recording",
+        "pii-safe"
+      ],
       "verified": true
     },
-    "genesis": {
+    "herald": {
+      "version": "1.0.0",
+      "license": "MIT",
+      "status": "alpha",
+      "tags": [
+        "news-digest",
+        "rss",
+        "automation",
+        "local-first",
+        "curated-news",
+        "hacker-news"
+      ],
+      "verified": true
+    },
+    "oracle": {
       "version": "0.1.0",
       "license": "MIT",
       "status": "alpha",
-      "tags": ["ideation", "startup", "memetic-algorithm", "AI-brainstorming", "idea-evolution", "solo-founder"],
+      "tags": [
+        "options-volatility",
+        "deribit",
+        "crypto-signals",
+        "implied-volatility",
+        "risk-reversal",
+        "derivatives"
+      ],
+      "verified": true
+    },
+    "reporter": {
+      "version": "0.1.0",
+      "license": "MIT",
+      "status": "alpha",
+      "tags": [
+        "issue-reporting",
+        "bug-report",
+        "feedback",
+        "github",
+        "developer-experience"
+      ],
+      "verified": true
+    },
+    "sentinel": {
+      "version": "0.1.0",
+      "license": "MIT",
+      "status": "alpha",
+      "tags": [
+        "sentiment-analysis",
+        "fear-greed",
+        "crypto-news",
+        "polymarket",
+        "social-intelligence",
+        "lunarcrush"
+      ],
+      "verified": true
+    },
+    "sigil": {
+      "version": "1.1.0",
+      "license": "MIT",
+      "status": "alpha",
+      "tags": [
+        "code-review",
+        "adversarial-review",
+        "multi-agent",
+        "dev-pipeline",
+        "risk-adaptive",
+        "AI-code-review",
+        "diverge"
+      ],
       "verified": true
     }
   }
