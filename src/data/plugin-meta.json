@@ -146,17 +146,16 @@
       "verified": true
     },
     "sigil": {
-      "version": "1.1.0",
+      "version": "2.0.0",
       "license": "MIT",
-      "status": "alpha",
+      "status": "active",
       "tags": [
-        "code-review",
-        "adversarial-review",
-        "multi-agent",
+        "multi-model-review",
+        "evidence-driven",
         "dev-pipeline",
-        "risk-adaptive",
-        "AI-code-review",
-        "diverge"
+        "proofpack",
+        "contract-first",
+        "code-review"
       ],
       "verified": true
     }
