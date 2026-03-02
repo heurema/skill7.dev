@@ -145,8 +145,8 @@
       ],
       "verified": true
     },
-    "sigil": {
-      "version": "2.0.0",
+    "signum": {
+      "version": "2.0.1",
       "license": "MIT",
       "status": "active",
       "tags": [
