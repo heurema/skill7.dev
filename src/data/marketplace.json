@@ -92,7 +92,7 @@
     },
     {
       "name": "signum",
-      "description": "One command for your entire feature workflow — scope, design, build, and review. Signum scales both build and review to match risk: standard implementation for simple changes, diverge mode with 3 independent AI solutions for complex work, and adversarial multi-agent review.",
+      "description": "The code is the easy part. Signum is a contract-first AI development pipeline for Claude Code: spec quality gate (A–F) that blocks weak specs before implementation starts, holdout scenarios the Engineer never sees for blind testing, multi-model audit (Claude + Codex + Gemini in parallel), execution policy enforcement, repo-level invariant contracts, and a tamper-evident proofpack artifact the AI couldn't game.",
       "category": "development",
       "source": {
         "source": "url",

@@ -146,16 +146,18 @@
       "verified": true
     },
     "signum": {
-      "version": "2.0.1",
+      "version": "3.0.0",
       "license": "MIT",
       "status": "active",
       "tags": [
-        "multi-model-review",
-        "evidence-driven",
-        "dev-pipeline",
-        "proofpack",
         "contract-first",
-        "code-review"
+        "holdout-testing",
+        "spec-quality-gate",
+        "multi-model-audit",
+        "proofpack",
+        "audit-chain",
+        "dev-pipeline",
+        "ai-verification"
       ],
       "verified": true
     }
