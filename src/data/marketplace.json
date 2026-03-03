@@ -1,18 +1,8 @@
 {
   "plugins": [
     {
-      "name": "content-ops",
-      "description": "Publish technical articles to dev.to, Hashnode, Twitter/X, and Hacker News without leaving your editor. Includes a deterministic linter that catches em-dashes, tag format errors, and description length before publishing — plus 10 skills for creating, QA-ing, and distributing content from your existing artifacts.",
-      "category": "publishing",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/heurema/content-ops.git"
-      },
-      "homepage": "https://github.com/heurema/content-ops"
-    },
-    {
       "name": "anvil",
-      "description": "Scaffold, validate, and test Claude Code plugins in seconds. Three commands cover the full plugin lifecycle — from template generation to six deterministic validators that catch schema errors, unsafe hooks, and naming issues before publish.",
+      "description": "Scaffold, validate, and test Claude Code plugins in seconds. Three commands cover the full plugin lifecycle \u2014 from template generation to six deterministic validators that catch schema errors, unsafe hooks, and naming issues before publish.",
       "category": "development",
       "source": {
         "source": "url",
@@ -22,13 +12,23 @@
     },
     {
       "name": "arbiter",
-      "description": "Use multiple AI assistants from one interface. Arbiter orchestrates Codex CLI and Gemini CLI inside Claude Code — get parallel answers, take majority votes on decisions, cross-check code, or run 3 independent implementations in parallel and pick the best one.",
+      "description": "Use multiple AI assistants from one interface. Arbiter orchestrates Codex CLI and Gemini CLI inside Claude Code \u2014 get parallel answers, take majority votes on decisions, cross-check code, or run 3 independent implementations in parallel and pick the best one.",
       "category": "development",
       "source": {
         "source": "url",
         "url": "https://github.com/heurema/arbiter.git"
       },
       "homepage": "https://github.com/heurema/arbiter"
+    },
+    {
+      "name": "content-ops",
+      "description": "Publish technical articles to dev.to, Hashnode, Twitter/X, and Hacker News without leaving your editor. Includes a deterministic linter that catches em-dashes, tag format errors, and description length before publishing \u2014 plus 10 skills for creating, QA-ing, and distributing content from your existing artifacts.",
+      "category": "publishing",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/heurema/content-ops.git"
+      },
+      "homepage": "https://github.com/heurema/content-ops"
     },
     {
       "name": "forge",
@@ -52,7 +52,7 @@
     },
     {
       "name": "glyph",
-      "description": "Generate polished terminal demo GIFs from a natural language description. Glyph synthesizes asciicast recordings with realistic typing, configurable themes, and built-in PII auditing — no real shell commands are executed.",
+      "description": "Generate polished terminal demo GIFs from a natural language description. Glyph synthesizes asciicast recordings with realistic typing, configurable themes, and built-in PII auditing \u2014 no real shell commands are executed.",
       "category": "development",
       "source": {
         "source": "url",
@@ -62,7 +62,7 @@
     },
     {
       "name": "herald",
-      "description": "Daily curated news digest for your technical domain. Herald fetches RSS, Hacker News, and optional Tavily results, scores by source weight and recency, deduplicates across three layers, and delivers the top 10 items — all running locally.",
+      "description": "Daily curated news digest for your technical domain. Herald fetches RSS, Hacker News, and optional Tavily results, scores by source weight and recency, deduplicates across three layers, and delivers the top 10 items \u2014 all running locally.",
       "category": "productivity",
       "source": {
         "source": "url",
@@ -72,7 +72,7 @@
     },
     {
       "name": "oracle",
-      "description": "Anticipate crypto volatility with institutional-grade options analysis. Oracle queries Deribit's public API to compute implied volatility skew, put/call ratio, and term structure — then delivers structured signals with confidence scores. No API keys required.",
+      "description": "Anticipate crypto volatility with institutional-grade options analysis. Oracle queries Deribit's public API to compute implied volatility skew, put/call ratio, and term structure \u2014 then delivers structured signals with confidence scores. No API keys required.",
       "category": "trading",
       "source": {
         "source": "url",
@@ -82,7 +82,7 @@
     },
     {
       "name": "reporter",
-      "description": "Report bugs, request features, and ask questions for any heurema plugin — without leaving Claude Code. Auto-detects your repo from git remote, collects environment context, previews the issue, and submits via gh CLI with clipboard fallback.",
+      "description": "Report bugs, request features, and ask questions for any heurema plugin \u2014 without leaving Claude Code. Auto-detects your repo from git remote, collects environment context, previews the issue, and submits via gh CLI with clipboard fallback.",
       "category": "productivity",
       "source": {
         "source": "url",
@@ -92,7 +92,7 @@
     },
     {
       "name": "sentinel",
-      "description": "Get a complete pulse of crypto market sentiment from four independent sources. Sentinel fuses Fear & Greed analytics, news sentiment scoring, LunarCrush social intelligence, and Polymarket prediction odds — all composable as structured JSON signals.",
+      "description": "Get a complete pulse of crypto market sentiment from four independent sources. Sentinel fuses Fear & Greed analytics, news sentiment scoring, LunarCrush social intelligence, and Polymarket prediction odds \u2014 all composable as structured JSON signals.",
       "category": "trading",
       "source": {
         "source": "url",
@@ -102,7 +102,7 @@
     },
     {
       "name": "signum",
-      "description": "The code is the easy part. Signum is a contract-first AI development pipeline for Claude Code: spec quality gate (A–F) that blocks weak specs before implementation starts, holdout scenarios the Engineer never sees for blind testing, multi-model audit (Claude + Codex + Gemini in parallel), execution policy enforcement, repo-level invariant contracts, and a tamper-evident proofpack artifact the AI couldn't game.",
+      "description": "The code is the easy part. Signum is a contract-first AI development pipeline for Claude Code: spec quality gate (A\u2013F) that blocks weak specs before implementation starts, holdout scenarios the Engineer never sees for blind testing, multi-model audit (Claude + Codex + Gemini in parallel), execution policy enforcement, repo-level invariant contracts, and a tamper-evident proofpack artifact the AI couldn't game.",
       "category": "development",
       "source": {
         "source": "url",

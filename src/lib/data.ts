@@ -8,15 +8,22 @@ const categoryMeta = meta.categories as Record<
 >;
 const pluginMeta = meta.plugins as Record<
   string,
-  { version?: string; license?: string; status: string; tags: string[]; verified: boolean }
+  { category: string; version?: string; license?: string; status: string; tags: string[]; verified: boolean }
 >;
 
+// Build-time assertion: every plugin in marketplace must have a plugin-meta entry
+const missing = marketplace.plugins
+  .filter((p) => !(p.name in pluginMeta))
+  .map((p) => p.name);
+if (missing.length > 0) {
+  throw new Error(
+    `plugin-meta.json is missing entries for: ${missing.join(", ")}. ` +
+    `Run scripts/update-registry.py to sync, then add entries to plugin-meta.json.`
+  );
+}
+
 function enrichPlugin(raw: (typeof marketplace.plugins)[number]): PluginMeta {
-  const extra = pluginMeta[raw.name] ?? {
-    status: "active",
-    tags: [],
-    verified: false,
-  };
+  const extra = pluginMeta[raw.name];
   return {
     ...raw,
     version: extra.version,

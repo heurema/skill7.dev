@@ -23,6 +23,8 @@
   },
   "plugins": {
     "content-ops": {
+      "category": "publishing",
+      "description": "Publish technical articles to dev.to, Hashnode, Twitter/X, and Hacker News without leaving your editor. Includes a deterministic linter that catches em-dashes, tag format errors, and description length before publishing — plus 10 skills for creating, QA-ing, and distributing content from your existing artifacts.",
       "version": "0.1.0",
       "license": "MIT",
       "status": "alpha",
@@ -40,6 +42,8 @@
       "verified": true
     },
     "anvil": {
+      "category": "development",
+      "description": "Scaffold, validate, and test Claude Code plugins in seconds. Three commands cover the full plugin lifecycle — from template generation to six deterministic validators that catch schema errors, unsafe hooks, and naming issues before publish.",
       "version": "0.1.0",
       "license": "MIT",
       "status": "alpha",
@@ -54,6 +58,8 @@
       "verified": true
     },
     "arbiter": {
+      "category": "development",
+      "description": "Use multiple AI assistants from one interface. Arbiter orchestrates Codex CLI and Gemini CLI inside Claude Code — get parallel answers, take majority votes on decisions, cross-check code, or run 3 independent implementations in parallel and pick the best one.",
       "version": "0.2.0",
       "license": "MIT",
       "status": "alpha",
@@ -71,6 +77,8 @@
       "verified": true
     },
     "forge": {
+      "category": "development",
+      "description": "Plugin lifecycle manager for heurema org. Scaffold, verify, register, and manage the full plugin lifecycle with automated quality gates.",
       "version": "0.1.0",
       "license": "MIT",
       "status": "alpha",
@@ -84,6 +92,8 @@
       "verified": false
     },
     "genesis": {
+      "category": "creative",
+      "description": "Evolve startup ideas through AI-powered natural selection. Three specialized agents run generate-critique-select-refine loops, scoring across 8 dimensions with strategy weights, to surface winners with ICP, monetization model, and week-1 execution plans.",
       "version": "0.1.0",
       "license": "MIT",
       "status": "alpha",
@@ -98,6 +108,8 @@
       "verified": true
     },
     "glyph": {
+      "category": "development",
+      "description": "Generate polished terminal demo GIFs from a natural language description. Glyph synthesizes asciicast recordings with realistic typing, configurable themes, and built-in PII auditing — no real shell commands are executed.",
       "version": "0.1.0",
       "license": "MIT",
       "status": "alpha",
@@ -112,6 +124,8 @@
       "verified": true
     },
     "herald": {
+      "category": "productivity",
+      "description": "Daily curated news digest for your technical domain. Herald fetches RSS, Hacker News, and optional Tavily results, scores by source weight and recency, deduplicates across three layers, and delivers the top 10 items — all running locally.",
       "version": "1.0.0",
       "license": "MIT",
       "status": "alpha",
@@ -126,6 +140,8 @@
       "verified": true
     },
     "oracle": {
+      "category": "trading",
+      "description": "Anticipate crypto volatility with institutional-grade options analysis. Oracle queries Deribit's public API to compute implied volatility skew, put/call ratio, and term structure — then delivers structured signals with confidence scores. No API keys required.",
       "version": "0.1.0",
       "license": "MIT",
       "status": "alpha",
@@ -140,6 +156,8 @@
       "verified": true
     },
     "reporter": {
+      "category": "productivity",
+      "description": "Report bugs, request features, and ask questions for any heurema plugin — without leaving Claude Code. Auto-detects your repo from git remote, collects environment context, previews the issue, and submits via gh CLI with clipboard fallback.",
       "version": "0.1.0",
       "license": "MIT",
       "status": "alpha",
@@ -153,6 +171,8 @@
       "verified": true
     },
     "sentinel": {
+      "category": "trading",
+      "description": "Get a complete pulse of crypto market sentiment from four independent sources. Sentinel fuses Fear & Greed analytics, news sentiment scoring, LunarCrush social intelligence, and Polymarket prediction odds — all composable as structured JSON signals.",
       "version": "0.1.0",
       "license": "MIT",
       "status": "alpha",
@@ -167,6 +187,8 @@
       "verified": true
     },
     "signum": {
+      "category": "development",
+      "description": "The code is the easy part. Signum is a contract-first AI development pipeline for Claude Code: spec quality gate (A–F) that blocks weak specs before implementation starts, holdout scenarios the Engineer never sees for blind testing, multi-model audit (Claude + Codex + Gemini in parallel), execution policy enforcement, repo-level invariant contracts, and a tamper-evident proofpack artifact the AI couldn't game.",
       "version": "3.0.0",
       "license": "MIT",
       "status": "active",
