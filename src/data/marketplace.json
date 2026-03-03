@@ -1,6 +1,16 @@
 {
   "plugins": [
     {
+      "name": "content-ops",
+      "description": "Publish technical articles to dev.to, Hashnode, Twitter/X, and Hacker News without leaving your editor. Includes a deterministic linter that catches em-dashes, tag format errors, and description length before publishing — plus 10 skills for creating, QA-ing, and distributing content from your existing artifacts.",
+      "category": "publishing",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/heurema/content-ops.git"
+      },
+      "homepage": "https://github.com/heurema/content-ops"
+    },
+    {
       "name": "anvil",
       "description": "Scaffold, validate, and test Claude Code plugins in seconds. Three commands cover the full plugin lifecycle — from template generation to six deterministic validators that catch schema errors, unsafe hooks, and naming issues before publish.",
       "category": "development",
