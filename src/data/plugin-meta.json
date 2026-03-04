@@ -121,17 +121,19 @@
     },
     "herald": {
       "category": "productivity",
-      "description": "Daily curated news digest for your technical domain. Herald fetches RSS, Hacker News, and optional Tavily results, scores by source weight and recency, deduplicates across three layers, and delivers the top 10 items — all running locally.",
-      "version": "1.0.0",
+      "description": "Local-first news intelligence for AI agents. Herald collects RSS and Hacker News articles, clusters related stories by title similarity, scores by source weight and recency, and generates ranked Markdown briefs — all locally with zero API keys.",
+      "version": "2.0.0",
       "license": "MIT",
-      "status": "alpha",
+      "status": "active",
       "tags": [
         "news-digest",
         "rss",
-        "automation",
         "local-first",
-        "curated-news",
-        "hacker-news"
+        "story-clustering",
+        "hacker-news",
+        "sqlite",
+        "markdown-brief",
+        "scoring"
       ],
       "verified": true
     },

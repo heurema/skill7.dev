@@ -62,7 +62,7 @@
     },
     {
       "name": "herald",
-      "description": "Daily curated news digest for your technical domain. Herald fetches RSS, Hacker News, and optional Tavily results, scores by source weight and recency, deduplicates across three layers, and delivers the top 10 items \u2014 all running locally.",
+      "description": "Local-first news intelligence for AI agents. Herald collects RSS and Hacker News articles, clusters related stories by title similarity, scores by source weight and recency, and generates ranked Markdown briefs \u2014 all locally with zero API keys.",
       "category": "productivity",
       "source": {
         "source": "url",
