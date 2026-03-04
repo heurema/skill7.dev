@@ -71,16 +71,6 @@
       "homepage": "https://github.com/heurema/herald"
     },
     {
-      "name": "oracle",
-      "description": "Anticipate crypto volatility with institutional-grade options analysis. Oracle queries Deribit's public API to compute implied volatility skew, put/call ratio, and term structure \u2014 then delivers structured signals with confidence scores. No API keys required.",
-      "category": "trading",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/forgequant/oracle.git"
-      },
-      "homepage": "https://github.com/forgequant/oracle"
-    },
-    {
       "name": "reporter",
       "description": "Report bugs, request features, and ask questions for any heurema plugin \u2014 without leaving Claude Code. Auto-detects your repo from git remote, collects environment context, previews the issue, and submits via gh CLI with clipboard fallback.",
       "category": "productivity",
@@ -89,16 +79,6 @@
         "url": "https://github.com/heurema/reporter.git"
       },
       "homepage": "https://github.com/heurema/reporter"
-    },
-    {
-      "name": "sentinel",
-      "description": "Get a complete pulse of crypto market sentiment from four independent sources. Sentinel fuses Fear & Greed analytics, news sentiment scoring, LunarCrush social intelligence, and Polymarket prediction odds \u2014 all composable as structured JSON signals.",
-      "category": "trading",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/forgequant/sentinel.git"
-      },
-      "homepage": "https://github.com/forgequant/sentinel"
     },
     {
       "name": "signum",

@@ -12,10 +12,6 @@
       "displayName": "Publishing",
       "description": "Create, QA, and distribute technical content to dev.to, Hashnode, and beyond"
     },
-    "trading": {
-      "displayName": "Trading",
-      "description": "Market data, sentiment analysis, and trading signals for crypto"
-    },
     "creative": {
       "displayName": "Creative",
       "description": "Ideation, brainstorming, and creative generation tools"
@@ -139,22 +135,6 @@
       ],
       "verified": true
     },
-    "oracle": {
-      "category": "trading",
-      "description": "Anticipate crypto volatility with institutional-grade options analysis. Oracle queries Deribit's public API to compute implied volatility skew, put/call ratio, and term structure — then delivers structured signals with confidence scores. No API keys required.",
-      "version": "0.1.0",
-      "license": "MIT",
-      "status": "alpha",
-      "tags": [
-        "options-volatility",
-        "deribit",
-        "crypto-signals",
-        "implied-volatility",
-        "risk-reversal",
-        "derivatives"
-      ],
-      "verified": true
-    },
     "reporter": {
       "category": "productivity",
       "description": "Report bugs, request features, and ask questions for any heurema plugin — without leaving Claude Code. Auto-detects your repo from git remote, collects environment context, previews the issue, and submits via gh CLI with clipboard fallback.",
@@ -167,22 +147,6 @@
         "feedback",
         "github",
         "developer-experience"
-      ],
-      "verified": true
-    },
-    "sentinel": {
-      "category": "trading",
-      "description": "Get a complete pulse of crypto market sentiment from four independent sources. Sentinel fuses Fear & Greed analytics, news sentiment scoring, LunarCrush social intelligence, and Polymarket prediction odds — all composable as structured JSON signals.",
-      "version": "0.1.0",
-      "license": "MIT",
-      "status": "alpha",
-      "tags": [
-        "sentiment-analysis",
-        "fear-greed",
-        "crypto-news",
-        "polymarket",
-        "social-intelligence",
-        "lunarcrush"
       ],
       "verified": true
     },
