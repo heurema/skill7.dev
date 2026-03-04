@@ -82,7 +82,7 @@
     },
     {
       "name": "signum",
-      "description": "The code is the easy part. Signum is a contract-first AI development pipeline for Claude Code: spec quality gate (A\u2013F) that blocks weak specs before implementation starts, holdout scenarios the Engineer never sees for blind testing, multi-model audit (Claude + Codex + Gemini in parallel), execution policy enforcement, repo-level invariant contracts, and a tamper-evident proofpack artifact the AI couldn't game.",
+      "description": "The code is the easy part. Signum is a contract-first AI development pipeline for Claude Code: spec quality gate (A\u2013F) that blocks weak specs before implementation starts, holdout scenarios the Engineer never sees for blind testing, multi-model audit (Claude + Codex + Gemini in parallel), execution policy enforcement, repo-level invariant contracts, and a self-contained tamper-evident proofpack artifact the AI couldn't game.",
       "category": "development",
       "source": {
         "source": "url",
