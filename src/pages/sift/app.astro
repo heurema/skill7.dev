@@ -4,38 +4,640 @@ import Breadcrumb from "../../components/Breadcrumb.astro";
 ---
 
 <Base
-  title="Sift App"
-  description="Authenticated Sift browser shell on skill7.dev. Sign in through Zitadel and keep a browser session separate from the plugin marketplace."
+  title="Sift Workspace"
+  description="Live browser workspace for Sift on skill7.dev. Read the latest crypto digest, watch event updates, and keep auth separate from the marketplace."
 >
-  <div class="mx-auto max-w-4xl">
+  <div class="mx-auto max-w-6xl">
     <Breadcrumb
       items={[
         { label: "Home", href: "/" },
         { label: "Sift", href: "/sift" },
-        { label: "App" },
+        { label: "Workspace" },
       ]}
     />
 
-    <div class="mb-8">
-      <h1 class="font-heading font-bold tracking-tight text-dark-hi">Sift app</h1>
-      <p class="mt-3 max-w-2xl text-lg leading-relaxed text-dark-lo">
-        This page is the browser entrypoint for Sift sessions on skill7.dev. It is intentionally separate from the plugin marketplace.
+    <div class="mb-8 max-w-3xl">
+      <div class="inline-flex items-center gap-2 rounded-full border border-acid/40 bg-acid-muted px-3 py-1">
+        <span class="h-1.5 w-1.5 rounded-full bg-acid animate-pulse"></span>
+        <span class="text-xs font-mono font-medium text-acid">Live hosted workspace</span>
+      </div>
+      <h1 class="mt-8 font-heading font-bold tracking-tight text-dark-hi">Sift workspace</h1>
+      <p class="mt-3 text-lg leading-relaxed text-dark-lo">
+        This browser client reads the hosted Sift feed directly from <code>api.skill7.dev</code>. Authentication stays separate from the marketplace, and the page refreshes when the backend emits digest or event updates.
       </p>
     </div>
 
-    <div id="sift-app-shell" class="card">
-      <p class="text-sm text-dark-lo">Checking browser session…</p>
+    <div id="sift-app-shell" class="space-y-6">
+      <section id="sift-loading" class="card">
+        <p class="text-xs font-mono uppercase tracking-widest text-acid">Session check</p>
+        <h2 class="mt-3 font-heading text-3xl font-semibold text-dark-hi">Checking browser session</h2>
+        <p class="mt-3 max-w-2xl text-sm leading-relaxed text-dark-lo">
+          Loading your browser token, digest metadata, and the latest crypto event slice.
+        </p>
+      </section>
+
+      <section id="sift-signed-out" class="card hidden">
+        <p class="text-xs font-mono uppercase tracking-widest text-warn">No active session</p>
+        <h2 class="mt-3 font-heading text-3xl font-semibold text-dark-hi">Sign in to open Sift</h2>
+        <p id="sift-signed-out-copy" class="mt-3 max-w-2xl text-sm leading-relaxed text-dark-lo">
+          Browser registration and sign-in start here, through Zitadel hosted auth. Marketplace registration does not apply to Sift.
+        </p>
+        <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+          <a href="/auth/login?return_to=%2Fsift%2Fapp" class="btn-primary justify-center sm:w-auto">
+            Create account / sign in
+          </a>
+          <a href="/sift" class="btn-secondary justify-center sm:w-auto">Back to Sift page</a>
+        </div>
+      </section>
+
+      <section id="sift-dashboard" class="hidden space-y-6">
+        <div class="grid gap-6 xl:grid-cols-[minmax(0,1.55fr)_minmax(320px,0.95fr)]">
+          <div class="card border-gradient-acid">
+            <div class="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+              <div>
+                <p class="text-xs font-mono uppercase tracking-widest text-acid">Digest window</p>
+                <h2 class="mt-3 font-heading text-3xl font-semibold text-dark-hi">Crypto 24h pulse</h2>
+                <p id="sift-digest-copy" class="mt-3 max-w-2xl text-sm leading-relaxed text-dark-lo">
+                  Loading digest metadata from the hosted Sift runtime.
+                </p>
+              </div>
+              <div
+                id="sift-transport-pill"
+                class="inline-flex items-center gap-2 self-start rounded-full border border-dark-line bg-dark-code px-3 py-1.5 text-xs font-mono uppercase tracking-widest text-dark-lo"
+              >
+                <span id="sift-transport-dot" class="h-2 w-2 rounded-full bg-warn"></span>
+                <span id="sift-transport-label">Connecting</span>
+              </div>
+            </div>
+
+            <div class="mt-6 grid gap-4 sm:grid-cols-3">
+              <div class="rounded-xl border border-dark-line bg-dark-code px-4 py-4">
+                <dt class="text-xs font-mono uppercase tracking-widest text-dark-dim">Window</dt>
+                <dd id="sift-digest-window" class="mt-2 text-sm text-dark-hi">24h</dd>
+              </div>
+              <div class="rounded-xl border border-dark-line bg-dark-code px-4 py-4">
+                <dt class="text-xs font-mono uppercase tracking-widest text-dark-dim">Events in digest</dt>
+                <dd id="sift-digest-count" class="mt-2 text-sm text-dark-hi">Loading…</dd>
+              </div>
+              <div class="rounded-xl border border-dark-line bg-dark-code px-4 py-4">
+                <dt class="text-xs font-mono uppercase tracking-widest text-dark-dim">Generated</dt>
+                <dd id="sift-digest-generated" class="mt-2 text-sm text-dark-hi">Loading…</dd>
+              </div>
+            </div>
+
+            <div id="sift-digest-error" class="mt-5 hidden rounded-xl border border-err/30 bg-err-bg px-4 py-3 text-sm text-dark-hi"></div>
+
+            <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+              <a
+                id="sift-digest-link"
+                href="#"
+                target="_blank"
+                rel="noopener"
+                class="btn-primary hidden justify-center sm:w-auto"
+              >
+                Open markdown digest
+              </a>
+              <button id="sift-refresh" class="btn-secondary justify-center sm:w-auto">Refresh now</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <p class="text-xs font-mono uppercase tracking-widest text-dark-dim">Session boundary</p>
+            <h2 id="sift-session-label" class="mt-3 font-heading text-3xl font-semibold text-dark-hi">Loading…</h2>
+            <p class="mt-3 text-sm leading-relaxed text-dark-lo">
+              This browser session is scoped to Sift only. Marketplace installation state is intentionally separate.
+            </p>
+
+            <dl class="mt-6 grid gap-4">
+              <div class="rounded-xl border border-dark-line bg-dark-code px-4 py-4">
+                <dt class="text-xs font-mono uppercase tracking-widest text-dark-dim">Email</dt>
+                <dd id="sift-session-email" class="mt-2 text-sm text-dark-hi">Loading…</dd>
+              </div>
+              <div class="rounded-xl border border-dark-line bg-dark-code px-4 py-4">
+                <dt class="text-xs font-mono uppercase tracking-widest text-dark-dim">Session expires</dt>
+                <dd id="sift-session-expires" class="mt-2 text-sm text-dark-hi">Loading…</dd>
+              </div>
+              <div class="rounded-xl border border-dark-line bg-dark-code px-4 py-4">
+                <dt class="text-xs font-mono uppercase tracking-widest text-dark-dim">Last advisory signal</dt>
+                <dd id="sift-last-signal" class="mt-2 text-sm text-dark-hi">Waiting for stream…</dd>
+              </div>
+            </dl>
+
+            <p id="sift-transport-copy" class="mt-5 text-sm leading-relaxed text-dark-lo">
+              Opening realtime updates stream.
+            </p>
+
+            <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+              <a href="/sift" class="btn-ghost justify-center sm:w-auto">Back to Sift</a>
+              <button id="clear-sift-session" class="btn-secondary justify-center sm:w-auto">Clear local session</button>
+            </div>
+          </div>
+        </div>
+
+        <section class="card">
+          <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+            <div>
+              <p class="text-xs font-mono uppercase tracking-widest text-acid">Latest crypto events</p>
+              <h2 class="mt-3 font-heading text-3xl font-semibold text-dark-hi">Signal feed</h2>
+              <p id="sift-events-copy" class="mt-3 max-w-2xl text-sm leading-relaxed text-dark-lo">
+                Loading the latest event slice from the hosted runtime.
+              </p>
+            </div>
+            <div class="rounded-xl border border-dark-line bg-dark-code px-4 py-3">
+              <p class="text-xs font-mono uppercase tracking-widest text-dark-dim">Source</p>
+              <p class="mt-2 text-sm text-dark-hi"><code>api.skill7.dev/v1/events</code></p>
+            </div>
+          </div>
+
+          <div id="sift-events-error" class="mt-5 hidden rounded-xl border border-err/30 bg-err-bg px-4 py-3 text-sm text-dark-hi"></div>
+          <div
+            id="sift-events-empty"
+            class="mt-6 hidden rounded-xl border border-dark-line bg-dark-code px-4 py-6 text-sm text-dark-lo"
+          >
+            No events are available yet for this slice.
+          </div>
+          <ol id="sift-events-list" class="mt-6 space-y-4"></ol>
+        </section>
+      </section>
     </div>
   </div>
 
   <script>
+    import type { SiftAuthSession } from "../../lib/auth";
     import { clearSession, getDisplayIdentity, getSession, isSessionValid } from "../../lib/auth";
+    import {
+      SIFT_API_BASE,
+      SiftAPIError,
+      getSiftDigest,
+      listSiftEvents,
+      openSiftUpdatesSocket,
+      resolveSiftAssetURL,
+    } from "../../lib/sift-api";
 
-    const shell = document.getElementById("sift-app-shell");
-
-    if (!shell) {
-      throw new Error("missing Sift app shell");
+    function mustHTMLElement(id: string): HTMLElement {
+      const element = document.getElementById(id);
+      if (!(element instanceof HTMLElement)) {
+        throw new Error(`missing element #${id}`);
+      }
+      return element;
     }
+
+    function mustHTMLAnchorElement(id: string): HTMLAnchorElement {
+      const element = document.getElementById(id);
+      if (!(element instanceof HTMLAnchorElement)) {
+        throw new Error(`missing anchor #${id}`);
+      }
+      return element;
+    }
+
+    function mustHTMLButtonElement(id: string): HTMLButtonElement {
+      const element = document.getElementById(id);
+      if (!(element instanceof HTMLButtonElement)) {
+        throw new Error(`missing button #${id}`);
+      }
+      return element;
+    }
+
+    function mustHTMLOListElement(id: string): HTMLOListElement {
+      const element = document.getElementById(id);
+      if (!(element instanceof HTMLOListElement)) {
+        throw new Error(`missing list #${id}`);
+      }
+      return element;
+    }
+
+    const loadingSection = mustHTMLElement("sift-loading");
+    const signedOutSection = mustHTMLElement("sift-signed-out");
+    const signedOutCopy = mustHTMLElement("sift-signed-out-copy");
+    const dashboardSection = mustHTMLElement("sift-dashboard");
+    const sessionLabel = mustHTMLElement("sift-session-label");
+    const sessionEmail = mustHTMLElement("sift-session-email");
+    const sessionExpires = mustHTMLElement("sift-session-expires");
+    const lastSignal = mustHTMLElement("sift-last-signal");
+    const digestCopy = mustHTMLElement("sift-digest-copy");
+    const digestWindow = mustHTMLElement("sift-digest-window");
+    const digestCount = mustHTMLElement("sift-digest-count");
+    const digestGenerated = mustHTMLElement("sift-digest-generated");
+    const digestError = mustHTMLElement("sift-digest-error");
+    const digestLink = mustHTMLAnchorElement("sift-digest-link");
+    const transportPill = mustHTMLElement("sift-transport-pill");
+    const transportDot = mustHTMLElement("sift-transport-dot");
+    const transportLabel = mustHTMLElement("sift-transport-label");
+    const transportCopy = mustHTMLElement("sift-transport-copy");
+    const eventsCopy = mustHTMLElement("sift-events-copy");
+    const eventsError = mustHTMLElement("sift-events-error");
+    const eventsEmpty = mustHTMLElement("sift-events-empty");
+    const eventsList = mustHTMLOListElement("sift-events-list");
+    const refreshButton = mustHTMLButtonElement("sift-refresh");
+    const clearSessionButton = mustHTMLButtonElement("clear-sift-session");
+
+    const apiHost = new URL(SIFT_API_BASE).host;
+    let activeSession: SiftAuthSession | null = null;
+    let socket: WebSocket | null = null;
+    let reconnectTimer: number | null = null;
+    let refreshTimer: number | null = null;
+    let latestRefreshToken = 0;
+    let reconnectAttempts = 0;
+    let stopped = false;
+    let closingSocket = false;
+
+    function setVisible(element: HTMLElement, visible: boolean): void {
+      element.classList.toggle("hidden", !visible);
+    }
+
+    function formatDateTime(value: number | string): string {
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) {
+        return "Unavailable";
+      }
+      return date.toLocaleString("en-US", {
+        dateStyle: "medium",
+        timeStyle: "short",
+      });
+    }
+
+    function formatRelativeMoment(value: string): string {
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) {
+        return "Unavailable";
+      }
+
+      const diffMinutes = Math.round((date.getTime() - Date.now()) / 60_000);
+      if (Math.abs(diffMinutes) < 1) {
+        return "just now";
+      }
+
+      const rtf = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
+      if (Math.abs(diffMinutes) < 60) {
+        return rtf.format(diffMinutes, "minute");
+      }
+
+      const diffHours = Math.round(diffMinutes / 60);
+      if (Math.abs(diffHours) < 24) {
+        return rtf.format(diffHours, "hour");
+      }
+
+      const diffDays = Math.round(diffHours / 24);
+      return rtf.format(diffDays, "day");
+    }
+
+    function formatScore(value: number): string {
+      if (Number.isNaN(value)) {
+        return "n/a";
+      }
+      return `${Math.round(value * 100)}%`;
+    }
+
+    function resetErrors(): void {
+      digestError.textContent = "";
+      eventsError.textContent = "";
+      setVisible(digestError, false);
+      setVisible(eventsError, false);
+    }
+
+    function nextReconnectDelay(): number {
+      const cappedAttempt = Math.min(reconnectAttempts, 4);
+      return Math.min(2000 * 2 ** cappedAttempt, 30000);
+    }
+
+    function showSignedOut(message?: string): void {
+      setVisible(loadingSection, false);
+      setVisible(dashboardSection, false);
+      setVisible(signedOutSection, true);
+      signedOutCopy.textContent =
+        message ??
+        "Browser registration and sign-in start here, through Zitadel hosted auth. Marketplace registration does not apply to Sift.";
+    }
+
+    function showDashboard(session: SiftAuthSession): void {
+      setVisible(loadingSection, false);
+      setVisible(signedOutSection, false);
+      setVisible(dashboardSection, true);
+
+      const identity = getDisplayIdentity(session);
+      sessionLabel.textContent = identity?.label ?? "Sift session ready";
+      sessionEmail.textContent = identity?.email ?? "not present in token";
+      sessionExpires.textContent = formatDateTime(session.expiresAt);
+      lastSignal.textContent = "Waiting for stream…";
+    }
+
+    function setTransportState(
+      state: "connecting" | "live" | "reconnecting" | "offline",
+      message: string,
+    ): void {
+      transportPill.className =
+        "inline-flex items-center gap-2 self-start rounded-full border px-3 py-1.5 text-xs font-mono uppercase tracking-widest";
+
+      if (state === "live") {
+        transportPill.classList.add("border-acid/40", "bg-acid-muted", "text-acid");
+      } else if (state === "reconnecting") {
+        transportPill.classList.add("border-warn/40", "bg-warn-bg", "text-warn");
+      } else if (state === "offline") {
+        transportPill.classList.add("border-err/40", "bg-err-bg", "text-err");
+      } else {
+        transportPill.classList.add("border-dark-line", "bg-dark-code", "text-dark-lo");
+      }
+
+      transportDot.className =
+        state === "live"
+          ? "h-2 w-2 rounded-full bg-acid"
+          : state === "reconnecting"
+            ? "h-2 w-2 rounded-full bg-warn"
+            : state === "offline"
+              ? "h-2 w-2 rounded-full bg-err"
+              : "h-2 w-2 rounded-full bg-warn";
+
+      transportLabel.textContent =
+        state === "live"
+          ? "Live"
+          : state === "reconnecting"
+            ? "Reconnecting"
+            : state === "offline"
+              ? "Offline"
+              : "Connecting";
+
+      transportCopy.textContent = message;
+    }
+
+    function renderDigest(data: {
+      scope: string;
+      window: string;
+      markdown_url: string;
+      event_count: number;
+      generated_at: string;
+    }): void {
+      digestWindow.textContent = `${data.scope} / ${data.window}`;
+      digestCount.textContent = `${data.event_count} linked event${data.event_count === 1 ? "" : "s"}`;
+      digestGenerated.textContent = `${formatDateTime(data.generated_at)} (${formatRelativeMoment(data.generated_at)})`;
+      digestCopy.textContent = `The hosted digest was generated on ${formatDateTime(data.generated_at)} and currently spans ${data.event_count} crypto events in the ${data.window} window.`;
+      const digestURL = resolveSiftAssetURL(data.markdown_url);
+
+      if (digestURL) {
+        digestLink.href = digestURL;
+        setVisible(digestLink, true);
+      } else {
+        digestLink.removeAttribute("href");
+        setVisible(digestLink, false);
+        digestError.textContent = "Digest link is temporarily unavailable because the API returned an unsupported asset URL.";
+        setVisible(digestError, true);
+      }
+    }
+
+    function createBadge(text: string, tone: "neutral" | "accent" = "neutral"): HTMLSpanElement {
+      const badge = document.createElement("span");
+      badge.className =
+        tone === "accent"
+          ? "inline-flex items-center rounded-full border border-acid/40 bg-acid-muted px-2.5 py-1 text-xs font-mono uppercase tracking-widest text-acid"
+          : "inline-flex items-center rounded-full border border-dark-line bg-dark-code px-2.5 py-1 text-xs font-mono uppercase tracking-widest text-dark-lo";
+      badge.textContent = text;
+      return badge;
+    }
+
+    function createMetricCard(label: string, value: string): HTMLDivElement {
+      const wrapper = document.createElement("div");
+      wrapper.className = "rounded-xl border border-dark-line bg-dark-code px-4 py-3";
+
+      const title = document.createElement("dt");
+      title.className = "text-xs font-mono uppercase tracking-widest text-dark-dim";
+      title.textContent = label;
+
+      const description = document.createElement("dd");
+      description.className = "mt-2 text-dark-hi";
+      description.textContent = value;
+
+      wrapper.appendChild(title);
+      wrapper.appendChild(description);
+      return wrapper;
+    }
+
+    function renderEvents(
+      events: Array<{
+        title: string;
+        summary_1l: string;
+        event_type: string;
+        status: string;
+        assets?: string[];
+        topics?: string[];
+        published_at: string;
+        source_cluster_size: number;
+        confidence_score: number;
+      }>,
+    ): void {
+      eventsList.textContent = "";
+
+      if (events.length === 0) {
+        setVisible(eventsEmpty, true);
+        return;
+      }
+
+      setVisible(eventsEmpty, false);
+
+      for (const event of events) {
+        const item = document.createElement("li");
+        item.className = "rounded-2xl border border-dark-line bg-dark-base/70 px-5 py-5";
+
+        const metaRow = document.createElement("div");
+        metaRow.className = "flex flex-wrap items-center gap-2";
+        metaRow.appendChild(createBadge(event.event_type, "accent"));
+        metaRow.appendChild(createBadge(event.status));
+
+        for (const asset of event.assets?.slice(0, 2) ?? []) {
+          metaRow.appendChild(createBadge(asset));
+        }
+
+        const title = document.createElement("h3");
+        title.className = "mt-4 font-heading text-2xl font-semibold text-dark-hi";
+        title.textContent = event.title;
+
+        const summary = document.createElement("p");
+        summary.className = "mt-3 text-sm leading-relaxed text-dark-lo";
+        summary.textContent = event.summary_1l;
+
+        const metrics = document.createElement("dl");
+        metrics.className = "mt-5 grid gap-3 text-sm sm:grid-cols-3";
+
+        metrics.appendChild(
+          createMetricCard(
+            "Published",
+            `${formatDateTime(event.published_at)} (${formatRelativeMoment(event.published_at)})`,
+          ),
+        );
+        metrics.appendChild(createMetricCard("Confidence", formatScore(event.confidence_score)));
+        metrics.appendChild(createMetricCard("Supporting sources", String(event.source_cluster_size)));
+
+        item.appendChild(metaRow);
+        item.appendChild(title);
+        item.appendChild(summary);
+
+        if (event.topics && event.topics.length > 0) {
+          const topics = document.createElement("p");
+          topics.className = "mt-4 text-xs font-mono uppercase tracking-widest text-dark-dim";
+          topics.textContent = `Topics: ${event.topics.slice(0, 4).join(" · ")}`;
+          item.appendChild(topics);
+        }
+
+        item.appendChild(metrics);
+        eventsList.appendChild(item);
+      }
+    }
+
+    function handleAuthFailure(message: string): void {
+      cleanupRuntime();
+      clearSession();
+      activeSession = null;
+      showSignedOut(message);
+    }
+
+    async function refreshWorkspace(reason: string): Promise<void> {
+      if (!activeSession) {
+        return;
+      }
+
+      const refreshToken = ++latestRefreshToken;
+      resetErrors();
+      eventsCopy.textContent = `Refreshing event slice (${reason}) from ${apiHost}.`;
+
+      try {
+        const [digest, events] = await Promise.all([
+          getSiftDigest(activeSession, "crypto", "24h"),
+          listSiftEvents(activeSession, { category: "crypto", limit: 8 }),
+        ]);
+
+        if (refreshToken !== latestRefreshToken) {
+          return;
+        }
+
+        renderDigest(digest);
+        renderEvents(events);
+        eventsCopy.textContent = `Showing ${events.length} latest crypto events from ${apiHost}.`;
+      } catch (error) {
+        if (refreshToken !== latestRefreshToken) {
+          return;
+        }
+
+        if (error instanceof SiftAPIError && error.status === 401) {
+          handleAuthFailure("Your Sift browser session expired. Sign in again to reopen the workspace.");
+          return;
+        }
+
+        const message = error instanceof Error ? error.message : String(error);
+        digestError.textContent = message;
+        eventsError.textContent = message;
+        setVisible(digestError, true);
+        setVisible(eventsError, true);
+        eventsCopy.textContent = `The hosted API did not return a valid response during ${reason}.`;
+      }
+    }
+
+    function scheduleRefresh(reason: string): void {
+      if (refreshTimer !== null) {
+        window.clearTimeout(refreshTimer);
+      }
+
+      refreshTimer = window.setTimeout(() => {
+        refreshTimer = null;
+        void refreshWorkspace(reason);
+      }, 400);
+    }
+
+    function connectUpdates(): void {
+      if (!activeSession || stopped) {
+        return;
+      }
+
+      if (!isSessionValid(activeSession)) {
+        handleAuthFailure("Your Sift browser session expired. Sign in again to reopen the workspace.");
+        return;
+      }
+
+      setTransportState("connecting", `Opening realtime updates stream to ${apiHost}.`);
+      socket = openSiftUpdatesSocket(activeSession);
+
+      socket.addEventListener("open", () => {
+        reconnectAttempts = 0;
+        setTransportState("live", `Realtime updates are live from ${apiHost}.`);
+      });
+
+      socket.addEventListener("message", (messageEvent) => {
+        try {
+          const payload = JSON.parse(messageEvent.data) as {
+            type?: string;
+            generated_at?: string;
+            payload?: Record<string, unknown>;
+          };
+
+          if (payload.type === "connected") {
+            lastSignal.textContent = `Stream connected at ${formatDateTime(payload.generated_at ?? new Date().toISOString())}`;
+            return;
+          }
+
+          if (payload.type === "digest.updated" || payload.type === "event.upserted") {
+            const generatedAt = payload.generated_at ?? new Date().toISOString();
+            lastSignal.textContent = `${payload.type} at ${formatDateTime(generatedAt)}`;
+            scheduleRefresh(payload.type);
+          }
+        } catch {
+          lastSignal.textContent = "Received a non-JSON advisory message.";
+        }
+      });
+
+      socket.addEventListener("close", () => {
+        socket = null;
+        if (stopped || closingSocket) {
+          closingSocket = false;
+          return;
+        }
+
+        const delay = nextReconnectDelay();
+        reconnectAttempts += 1;
+        setTransportState(
+          "reconnecting",
+          `Updates stream dropped. Reconnecting to ${apiHost} in ${Math.round(delay / 1000)}s.`,
+        );
+        reconnectTimer = window.setTimeout(() => {
+          reconnectTimer = null;
+          connectUpdates();
+        }, delay);
+      });
+
+      socket.addEventListener("error", () => {
+        setTransportState("offline", `The updates stream reported an error. Retrying against ${apiHost}.`);
+      });
+    }
+
+    function cleanupRuntime(): void {
+      if (reconnectTimer !== null) {
+        window.clearTimeout(reconnectTimer);
+        reconnectTimer = null;
+      }
+      if (refreshTimer !== null) {
+        window.clearTimeout(refreshTimer);
+        refreshTimer = null;
+      }
+      reconnectAttempts = 0;
+      if (socket) {
+        closingSocket = true;
+        socket.close();
+        socket = null;
+      }
+      setTransportState("offline", "Realtime updates are stopped for this browser session.");
+    }
+
+    refreshButton.addEventListener("click", () => {
+      void refreshWorkspace("manual refresh");
+    });
+
+    clearSessionButton.addEventListener("click", () => {
+      stopped = true;
+      cleanupRuntime();
+      clearSession();
+      window.location.reload();
+    });
+
+    window.addEventListener("beforeunload", () => {
+      stopped = true;
+      cleanupRuntime();
+    });
 
     const session = getSession();
 
@@ -43,82 +645,13 @@ import Breadcrumb from "../../components/Breadcrumb.astro";
       if (session) {
         clearSession();
       }
-
-      shell.innerHTML = `
-        <div class="space-y-6">
-          <div>
-            <p class="text-xs font-mono uppercase tracking-widest text-warn">No active session</p>
-            <h2 class="mt-3 font-heading text-3xl font-semibold text-dark-hi">Sign in to open Sift</h2>
-            <p class="mt-3 max-w-2xl text-sm leading-relaxed text-dark-lo">
-              Browser registration and sign-in now start here, through Zitadel hosted auth. Marketplace registration does not apply to Sift.
-            </p>
-          </div>
-          <div class="flex flex-col gap-3 sm:flex-row">
-            <a href="/auth/login?return_to=%2Fsift%2Fapp" class="btn-primary justify-center sm:w-auto">Create account / sign in</a>
-            <a href="/sift" class="btn-secondary justify-center sm:w-auto">Back to Sift page</a>
-          </div>
-        </div>
-      `;
+      showSignedOut();
     } else {
-      const activeSession = session;
-      const identity = getDisplayIdentity(activeSession);
-      const expiresAt = new Date(activeSession.expiresAt).toLocaleString("en-US", {
-        dateStyle: "medium",
-        timeStyle: "short",
-      });
-      const sessionLabel = identity?.label ?? "Sift session ready";
-      const sessionEmail = identity?.email ?? "not present in token";
-
-      shell.innerHTML = `
-        <div class="space-y-6">
-          <div>
-            <p class="text-xs font-mono uppercase tracking-widest text-acid">Authenticated session</p>
-            <h2 id="sift-session-label" class="mt-3 font-heading text-3xl font-semibold text-dark-hi"></h2>
-            <p class="mt-3 max-w-2xl text-sm leading-relaxed text-dark-lo">
-              Your browser auth is active. This slice establishes the account boundary and session flow for Sift on skill7.dev.
-            </p>
-          </div>
-          <dl class="grid gap-4 sm:grid-cols-2">
-            <div class="rounded-xl border border-dark-line bg-dark-code px-4 py-4">
-              <dt class="text-xs font-mono uppercase tracking-widest text-dark-dim">Email</dt>
-              <dd id="sift-session-email" class="mt-2 text-sm text-dark-hi"></dd>
-            </div>
-            <div class="rounded-xl border border-dark-line bg-dark-code px-4 py-4">
-              <dt class="text-xs font-mono uppercase tracking-widest text-dark-dim">Session expires</dt>
-              <dd id="sift-session-expires" class="mt-2 text-sm text-dark-hi"></dd>
-            </div>
-          </dl>
-          <div class="rounded-xl border border-dark-line bg-dark-raised px-4 py-4">
-            <p class="text-sm leading-relaxed text-dark-lo">
-              The browser session is now separate from marketplace flows. Wiring the full Sift workspace UI to the hosted API is the next implementation slice.
-            </p>
-          </div>
-          <div class="flex flex-col gap-3 sm:flex-row">
-            <a href="/sift" class="btn-secondary justify-center sm:w-auto">Back to Sift</a>
-            <button id="clear-sift-session" class="btn-ghost justify-center sm:w-auto">Clear local session</button>
-          </div>
-        </div>
-      `;
-
-      const labelElement = shell.querySelector<HTMLElement>("#sift-session-label");
-      if (labelElement) {
-        labelElement.textContent = sessionLabel;
-      }
-
-      const emailElement = shell.querySelector<HTMLElement>("#sift-session-email");
-      if (emailElement) {
-        emailElement.textContent = sessionEmail;
-      }
-
-      const expiresElement = shell.querySelector<HTMLElement>("#sift-session-expires");
-      if (expiresElement) {
-        expiresElement.textContent = expiresAt;
-      }
-
-      shell.querySelector<HTMLButtonElement>("#clear-sift-session")?.addEventListener("click", () => {
-        clearSession();
-        window.location.reload();
-      });
+      activeSession = session;
+      stopped = false;
+      showDashboard(activeSession);
+      void refreshWorkspace("initial load");
+      connectUpdates();
     }
   </script>
 </Base>
