@@ -27,6 +27,13 @@ import Base from "../../layouts/Base.astro";
     const params = new URLSearchParams(window.location.search);
     const returnTo = normalizeReturnTo(params.get("return_to") ?? "/sift/app");
 
+    function getErrorMessage(error: unknown): string {
+      if (error instanceof Error) {
+        return error.message;
+      }
+      return String(error);
+    }
+
     beginSiftLogin(returnTo)
       .then((url) => {
         if (link instanceof HTMLAnchorElement) {
@@ -39,12 +46,17 @@ import Base from "../../layouts/Base.astro";
         shell.innerHTML = `
           <p class="text-xs font-mono uppercase tracking-widest text-err">Auth setup failed</p>
           <h1 class="mt-3 font-heading text-4xl font-bold tracking-tight text-dark-hi">Could not start Sift sign-in</h1>
-          <p class="mt-4 max-w-2xl text-sm leading-relaxed text-dark-lo">${String(error)}</p>
+          <p id="auth-login-error" class="mt-4 max-w-2xl text-sm leading-relaxed text-dark-lo"></p>
           <div class="mt-6 flex flex-col gap-3 sm:flex-row">
             <a href="/sift" class="btn-secondary justify-center sm:w-auto">Back to Sift</a>
             <a href="/" class="btn-ghost justify-center sm:w-auto">Back home</a>
           </div>
         `;
+
+        const errorDetails = shell.querySelector<HTMLParagraphElement>("#auth-login-error");
+        if (errorDetails) {
+          errorDetails.textContent = getErrorMessage(error);
+        }
       });
   </script>
 </Base>
