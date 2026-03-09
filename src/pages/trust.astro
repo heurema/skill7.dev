@@ -1,0 +1,49 @@
+---
+import Base from "../layouts/Base.astro";
+import Breadcrumb from "../components/Breadcrumb.astro";
+---
+
+<Base
+  title="Trust & Privacy"
+  description="Trust boundary summary for skill7.dev: public marketplace pages stay public, while hosted product access for Sift uses account-based browser auth."
+>
+  <div class="mx-auto max-w-4xl">
+    <Breadcrumb items={[
+      { label: "Home", href: "/" },
+      { label: "Marketplace", href: "/marketplace" },
+      { label: "Trust & Privacy" },
+    ]} />
+
+    <div class="mb-10">
+      <h1 class="font-heading font-bold tracking-tight text-dark-hi">Trust &amp; Privacy</h1>
+      <p class="mt-3 max-w-2xl text-lg leading-relaxed text-dark-lo">
+        skill7.dev now has two different UX models, and they should not be mixed: public plugin install docs, and hosted product access for Sift.
+      </p>
+    </div>
+
+    <div class="grid gap-6 lg:grid-cols-2">
+      <div class="card-sm">
+        <p class="text-xs font-mono uppercase tracking-widest text-acid">Marketplace</p>
+        <h2 class="mt-3 font-heading text-2xl font-semibold text-dark-hi">Public by default</h2>
+        <p class="mt-3 text-sm leading-relaxed text-dark-lo">
+          Marketplace pages are public catalog pages. They show install commands and plugin metadata. Browsing the catalog does not require a hosted account.
+        </p>
+      </div>
+
+      <div class="card-sm">
+        <p class="text-xs font-mono uppercase tracking-widest text-cyan">Sift</p>
+        <h2 class="mt-3 font-heading text-2xl font-semibold text-dark-hi">Account-based browser access</h2>
+        <p class="mt-3 text-sm leading-relaxed text-dark-lo">
+          Sift uses browser auth on skill7.dev via Zitadel. That access flow is intentionally separate from plugin marketplace registration and install commands.
+        </p>
+      </div>
+
+      <div class="card-sm lg:col-span-2">
+        <p class="text-xs font-mono uppercase tracking-widest text-acid">Design rule</p>
+        <p class="mt-3 text-sm leading-relaxed text-dark-lo">
+          If something is a hosted product, it gets its own page and its own auth boundary. If something is a plugin, it stays in the marketplace and keeps the lowest-friction possible install path.
+        </p>
+      </div>
+    </div>
+  </div>
+</Base>

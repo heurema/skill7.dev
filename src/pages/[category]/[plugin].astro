@@ -69,10 +69,11 @@ const breadcrumbLd = {
   title={`${plugin.name} — ${plugin.description.split('.')[0]} | Claude Code Plugin`}
   description={`${plugin.description.slice(0, 155)}${plugin.description.length > 155 ? '...' : ''}`}
 >
-  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} slot="head" />
-  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} slot="head" />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} slot="head" />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} slot="head" />
   <Breadcrumb items={[
     { label: "Home", href: "/" },
+    { label: "Marketplace", href: "/marketplace" },
     { label: category.displayName, href: `/${category.name}` },
     { label: plugin.name },
   ]} />
@@ -111,7 +112,7 @@ const breadcrumbLd = {
     <div class="space-y-4">
       <div>
         <p class="mb-2 text-sm text-dark-dim font-mono">
-          <span class="text-acid">1</span> — Register the marketplace (once):
+          <span class="text-acid">1</span> — Register the marketplace once:
         </p>
         <CopyButton text="claude plugin marketplace add heurema/emporium" />
         <p class="mt-2.5 text-xs text-dark-dim">Skip if you already added the marketplace.</p>
@@ -138,6 +139,9 @@ const breadcrumbLd = {
     <a href={plugin.homepage} class="btn-primary" target="_blank" rel="noopener">
       <GitHubIcon />
       View on GitHub
+    </a>
+    <a href="/marketplace" class="btn-secondary">
+      Back to Marketplace
     </a>
     <a href={`/${category.name}`} class="btn-ghost">
       ← Back to {category.displayName}

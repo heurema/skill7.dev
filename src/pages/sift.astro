@@ -1,0 +1,99 @@
+---
+import Base from "../layouts/Base.astro";
+import Breadcrumb from "../components/Breadcrumb.astro";
+---
+
+<Base
+  title="Sift"
+  description="Sift is the hosted news intelligence product on skill7.dev. Create an account, sign in through Zitadel, and use a dedicated product flow outside the plugin marketplace."
+>
+  <div class="mx-auto max-w-6xl">
+    <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Sift" }]} />
+
+    <section class="relative overflow-hidden rounded-3xl border border-dark-line bg-dark-base px-6 py-16 shadow-panel sm:px-10">
+      <div
+        class="absolute inset-0 pointer-events-none"
+        style="background:
+          radial-gradient(circle at 15% 20%, rgba(0,229,160,0.10) 0%, transparent 35%),
+          radial-gradient(circle at 85% 10%, rgba(0,180,216,0.10) 0%, transparent 30%);"
+      />
+
+      <div class="relative grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
+        <div>
+          <div class="inline-flex items-center gap-2 rounded-full border border-acid/40 bg-acid-muted px-3 py-1">
+            <span class="h-1.5 w-1.5 rounded-full bg-acid animate-pulse"></span>
+            <span class="text-xs font-mono font-medium text-acid">Hosted product</span>
+          </div>
+
+          <h1 class="mt-8 font-heading text-5xl font-bold tracking-tight text-dark-hi sm:text-6xl">
+            News intelligence
+            <br />
+            <span class="text-gradient-hero">for agents, in the browser</span>
+          </h1>
+
+          <p class="mt-8 max-w-2xl text-lg leading-relaxed text-dark-lo">
+            Sift is not another plugin card in the marketplace. It is a hosted product with its own access flow,
+            browser session, and product surface. Registration lives here, not inside plugin install docs.
+          </p>
+
+          <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+            <a href="/auth/login?return_to=%2Fsift%2Fapp" class="btn-primary justify-center sm:w-auto">
+              Create account / sign in
+            </a>
+            <a href="/sift/app" class="btn-secondary justify-center sm:w-auto">
+              Open Sift app
+            </a>
+            <a href="/marketplace" class="btn-ghost justify-center sm:w-auto">
+              Browse plugins instead
+            </a>
+          </div>
+        </div>
+
+        <div class="grid gap-4">
+          <div class="card-sm border-gradient-acid">
+            <p class="text-xs font-mono uppercase tracking-widest text-acid">What changes now</p>
+            <ul class="mt-4 space-y-3 text-sm leading-relaxed text-dark-lo">
+              <li>Browser account entry via Zitadel hosted auth</li>
+              <li>Dedicated Sift route, separate from emporium onboarding</li>
+              <li>Clean split between hosted product UX and plugin catalog UX</li>
+            </ul>
+          </div>
+
+          <div class="card-sm">
+            <p class="text-xs font-mono uppercase tracking-widest text-cyan">Why the split matters</p>
+            <p class="mt-4 text-sm leading-relaxed text-dark-lo">
+              Marketplace users want zero-friction copy-paste install docs. Sift users need accounts, browser sessions,
+              and a product page. Keeping those flows separate makes both sides clearer.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid gap-6 py-16 lg:grid-cols-3">
+      <div class="card-sm">
+        <p class="text-xs font-mono uppercase tracking-widest text-acid">1</p>
+        <h2 class="mt-3 font-heading text-2xl font-semibold text-dark-hi">Create access</h2>
+        <p class="mt-3 text-sm leading-relaxed text-dark-lo">
+          Use the hosted auth flow on this site. No need to touch plugin marketplace registration for Sift access.
+        </p>
+      </div>
+
+      <div class="card-sm">
+        <p class="text-xs font-mono uppercase tracking-widest text-acid">2</p>
+        <h2 class="mt-3 font-heading text-2xl font-semibold text-dark-hi">Enter the product</h2>
+        <p class="mt-3 text-sm leading-relaxed text-dark-lo">
+          After auth, the browser session lands on the Sift app shell instead of bouncing users back into generic marketplace pages.
+        </p>
+      </div>
+
+      <div class="card-sm">
+        <p class="text-xs font-mono uppercase tracking-widest text-acid">3</p>
+        <h2 class="mt-3 font-heading text-2xl font-semibold text-dark-hi">Keep the models clean</h2>
+        <p class="mt-3 text-sm leading-relaxed text-dark-lo">
+          Plugins remain public install docs. Hosted products get real account boundaries, navigation, and onboarding.
+        </p>
+      </div>
+    </section>
+  </div>
+</Base>
