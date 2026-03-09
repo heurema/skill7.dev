@@ -149,6 +149,21 @@ export function openSiftUpdatesSocket(session: SiftAuthSession): WebSocket {
   ]);
 }
 
-export function resolveSiftAssetURL(pathname: string): string {
-  return new URL(pathname, SIFT_API_BASE).toString();
+export function resolveSiftAssetURL(pathname: string): string | null {
+  try {
+    const baseURL = new URL(SIFT_API_BASE);
+    const resolved = new URL(pathname, baseURL);
+
+    if (resolved.protocol !== "https:" && resolved.protocol !== "http:") {
+      return null;
+    }
+
+    if (resolved.origin !== baseURL.origin) {
+      return null;
+    }
+
+    return resolved.toString();
+  } catch {
+    return null;
+  }
 }

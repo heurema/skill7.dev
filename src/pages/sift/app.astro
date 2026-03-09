@@ -237,6 +237,7 @@ import Breadcrumb from "../../components/Breadcrumb.astro";
     let reconnectTimer: number | null = null;
     let refreshTimer: number | null = null;
     let latestRefreshToken = 0;
+    let reconnectAttempts = 0;
     let stopped = false;
     let closingSocket = false;
 
@@ -292,6 +293,11 @@ import Breadcrumb from "../../components/Breadcrumb.astro";
       eventsError.textContent = "";
       setVisible(digestError, false);
       setVisible(eventsError, false);
+    }
+
+    function nextReconnectDelay(): number {
+      const cappedAttempt = Math.min(reconnectAttempts, 4);
+      return Math.min(2000 * 2 ** cappedAttempt, 30000);
     }
 
     function showSignedOut(message?: string): void {
@@ -364,10 +370,16 @@ import Breadcrumb from "../../components/Breadcrumb.astro";
       digestCount.textContent = `${data.event_count} linked event${data.event_count === 1 ? "" : "s"}`;
       digestGenerated.textContent = `${formatDateTime(data.generated_at)} (${formatRelativeMoment(data.generated_at)})`;
       digestCopy.textContent = `The hosted digest was generated on ${formatDateTime(data.generated_at)} and currently spans ${data.event_count} crypto events in the ${data.window} window.`;
+      const digestURL = resolveSiftAssetURL(data.markdown_url);
 
-      if (digestLink instanceof HTMLAnchorElement) {
-        digestLink.href = resolveSiftAssetURL(data.markdown_url);
+      if (digestURL) {
+        digestLink.href = digestURL;
         setVisible(digestLink, true);
+      } else {
+        digestLink.removeAttribute("href");
+        setVisible(digestLink, false);
+        digestError.textContent = "Digest link is temporarily unavailable because the API returned an unsupported asset URL.";
+        setVisible(digestError, true);
       }
     }
 
@@ -542,6 +554,7 @@ import Breadcrumb from "../../components/Breadcrumb.astro";
       socket = openSiftUpdatesSocket(activeSession);
 
       socket.addEventListener("open", () => {
+        reconnectAttempts = 0;
         setTransportState("live", `Realtime updates are live from ${apiHost}.`);
       });
 
@@ -575,11 +588,16 @@ import Breadcrumb from "../../components/Breadcrumb.astro";
           return;
         }
 
-        setTransportState("reconnecting", `Updates stream dropped. Reconnecting to ${apiHost}.`);
+        const delay = nextReconnectDelay();
+        reconnectAttempts += 1;
+        setTransportState(
+          "reconnecting",
+          `Updates stream dropped. Reconnecting to ${apiHost} in ${Math.round(delay / 1000)}s.`,
+        );
         reconnectTimer = window.setTimeout(() => {
           reconnectTimer = null;
           connectUpdates();
-        }, 2000);
+        }, delay);
       });
 
       socket.addEventListener("error", () => {
@@ -596,6 +614,7 @@ import Breadcrumb from "../../components/Breadcrumb.astro";
         window.clearTimeout(refreshTimer);
         refreshTimer = null;
       }
+      reconnectAttempts = 0;
       if (socket) {
         closingSocket = true;
         socket.close();
