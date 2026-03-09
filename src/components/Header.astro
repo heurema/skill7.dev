@@ -53,7 +53,26 @@ function isActive(href: string): boolean {
         <GitHubIcon />
         GitHub
       </a>
+      <span
+        id="desktop-auth-identity"
+        class="ml-3 hidden text-xs font-mono uppercase tracking-widest text-dark-dim"
+      ></span>
       <a
+        id="desktop-auth-workspace"
+        href="/sift/app"
+        class="btn-secondary ml-2 hidden"
+      >
+        Open workspace
+      </a>
+      <button
+        id="desktop-auth-signout"
+        type="button"
+        class="btn-ghost ml-2 hidden"
+      >
+        Sign out
+      </button>
+      <a
+        id="desktop-auth-signin"
         href="/auth/login?return_to=%2Fsift%2Fapp"
         class="btn-secondary ml-2"
       >
@@ -89,6 +108,25 @@ function isActive(href: string): boolean {
           GitHub
         </a>
         <a
+          id="mobile-auth-workspace"
+          href="/sift/app"
+          class="hidden px-3 py-2 text-sm font-medium text-dark-lo hover:text-dark-hi hover:bg-dark-raised rounded-lg transition-colors"
+        >
+          Open workspace
+        </a>
+        <button
+          id="mobile-auth-signout"
+          type="button"
+          class="hidden w-full px-3 py-2 text-left text-sm font-medium text-dark-lo hover:text-dark-hi hover:bg-dark-raised rounded-lg transition-colors"
+        >
+          Sign out
+        </button>
+        <div
+          id="mobile-auth-identity"
+          class="hidden px-3 py-2 text-xs font-mono uppercase tracking-widest text-dark-dim"
+        ></div>
+        <a
+          id="mobile-auth-signin"
           href="/auth/login?return_to=%2Fsift%2Fapp"
           class="block px-3 py-2 text-sm font-medium text-dark-lo hover:text-dark-hi hover:bg-dark-raised rounded-lg transition-colors"
         >
@@ -100,8 +138,72 @@ function isActive(href: string): boolean {
 </header>
 
 <script>
+  import {
+    SIFT_AUTH_EVENT_NAME,
+    clearSession,
+    getDisplayIdentity,
+    getSession,
+    isSessionValid,
+  } from "../lib/auth";
+
   const details = document.querySelector<HTMLDetailsElement>("[data-mobile-menu]");
   const summary = details?.querySelector("summary");
+  const desktopAuthIdentity = document.getElementById("desktop-auth-identity");
+  const desktopAuthWorkspace = document.getElementById("desktop-auth-workspace");
+  const desktopAuthSignOut = document.getElementById("desktop-auth-signout");
+  const desktopAuthSignIn = document.getElementById("desktop-auth-signin");
+  const mobileAuthIdentity = document.getElementById("mobile-auth-identity");
+  const mobileAuthWorkspace = document.getElementById("mobile-auth-workspace");
+  const mobileAuthSignOut = document.getElementById("mobile-auth-signout");
+  const mobileAuthSignIn = document.getElementById("mobile-auth-signin");
+
+  function setVisible(element: HTMLElement | null, visible: boolean): void {
+    if (!element) return;
+    element.classList.toggle("hidden", !visible);
+  }
+
+  function renderAuthState(): void {
+    const session = getSession();
+    if (!isSessionValid(session)) {
+      if (session) {
+        clearSession();
+      }
+      setVisible(desktopAuthIdentity, false);
+      setVisible(desktopAuthWorkspace, false);
+      setVisible(desktopAuthSignOut, false);
+      setVisible(desktopAuthSignIn, true);
+      setVisible(mobileAuthIdentity, false);
+      setVisible(mobileAuthWorkspace, false);
+      setVisible(mobileAuthSignOut, false);
+      setVisible(mobileAuthSignIn, true);
+      return;
+    }
+
+    const identity = getDisplayIdentity(session);
+    if (desktopAuthIdentity) {
+      desktopAuthIdentity.textContent = identity?.label ?? "Authenticated";
+    }
+    if (mobileAuthIdentity) {
+      mobileAuthIdentity.textContent = identity?.label ?? "Authenticated";
+    }
+
+    setVisible(desktopAuthIdentity, true);
+    setVisible(desktopAuthWorkspace, true);
+    setVisible(desktopAuthSignOut, true);
+    setVisible(desktopAuthSignIn, false);
+    setVisible(mobileAuthIdentity, true);
+    setVisible(mobileAuthWorkspace, true);
+    setVisible(mobileAuthSignOut, true);
+    setVisible(mobileAuthSignIn, false);
+  }
+
+  function signOutFromHeader(): void {
+    clearSession();
+    renderAuthState();
+    details?.removeAttribute("open");
+    const nextURL = window.location.pathname.startsWith("/sift") ? "/sift/app" : window.location.pathname;
+    window.location.assign(nextURL);
+  }
 
   if (details && summary) {
     // Close on click outside
@@ -131,4 +233,10 @@ function isActive(href: string): boolean {
       });
     });
   }
+
+  desktopAuthSignOut?.addEventListener("click", signOutFromHeader);
+  mobileAuthSignOut?.addEventListener("click", signOutFromHeader);
+  window.addEventListener("storage", renderAuthState);
+  window.addEventListener(SIFT_AUTH_EVENT_NAME, renderAuthState);
+  renderAuthState();
 </script>

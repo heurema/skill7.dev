@@ -136,11 +136,15 @@ export async function listSiftEvents(
   params: {
     category?: string;
     limit?: number;
+    asset?: string;
+    topic?: string;
   } = {},
 ): Promise<SiftEvent[]> {
   const payload = await requestJSON<SiftEventListResponse>("/v1/events", session, {
     category: params.category ?? "crypto",
     limit: params.limit ?? 8,
+    asset: params.asset,
+    topic: params.topic,
   });
 
   return payload.items;
