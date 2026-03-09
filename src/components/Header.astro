@@ -2,14 +2,26 @@
 import GitHubIcon from "./icons/GitHubIcon.astro";
 
 const navItems = [
-  { label: "Catalog", href: "/" },
+  { label: "Sift", href: "/sift" },
+  { label: "Marketplace", href: "/marketplace" },
   { label: "Getting Started", href: "/getting-started" },
 ];
 
 const pathname = Astro.url.pathname;
 
 function isActive(href: string): boolean {
-  if (href === "/") return pathname === "/";
+  if (href === "/sift") {
+    return pathname === "/sift" || pathname.startsWith("/sift/") || pathname.startsWith("/auth/");
+  }
+  if (href === "/marketplace") {
+    return (
+      pathname === "/marketplace" ||
+      /^\/(development|publishing|creative|productivity)(\/|$)/.test(pathname)
+    );
+  }
+  if (href === "/getting-started") {
+    return pathname === "/getting-started" || pathname === "/trust";
+  }
   return pathname.startsWith(href);
 }
 ---
@@ -22,24 +34,30 @@ function isActive(href: string): boolean {
     </a>
 
     <!-- Desktop nav -->
-    <div class="hidden sm:flex items-center gap-1">
-      {navItems.map(({ label, href }) => (
-        <a
-          href={href}
-          class={`px-3 py-1.5 rounded-md transition-colors duration-150 text-sm font-medium hover:bg-dark-raised focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-acid ${isActive(href) ? "text-acid" : "text-dark-lo hover:text-dark-hi"}`}
+      <div class="hidden sm:flex items-center gap-1">
+        {navItems.map(({ label, href }) => (
+          <a
+            href={href}
+            class={`px-3 py-1.5 rounded-md transition-colors duration-150 text-sm font-medium hover:bg-dark-raised focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-acid ${isActive(href) ? "text-acid" : "text-dark-lo hover:text-dark-hi"}`}
         >
           {label}
         </a>
       ))}
       <div class="w-px h-4 bg-dark-line mx-2" />
       <a
-        href="https://github.com/heurema/emporium"
+        href="https://github.com/heurema"
         class="nav-link px-3 py-1.5 rounded-md hover:bg-dark-raised focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-acid flex items-center gap-1.5"
         target="_blank"
         rel="noopener"
       >
         <GitHubIcon />
         GitHub
+      </a>
+      <a
+        href="/auth/login?return_to=%2Fsift%2Fapp"
+        class="btn-secondary ml-2"
+      >
+        Sign in / Sign up
       </a>
     </div>
 
@@ -63,12 +81,18 @@ function isActive(href: string): boolean {
         </nav>
         <div class="my-1 border-t border-dark-line" />
         <a
-          href="https://github.com/heurema/emporium"
+          href="https://github.com/heurema"
           class="block px-3 py-2 text-sm font-medium text-dark-lo hover:text-dark-hi hover:bg-dark-raised rounded-lg transition-colors"
           target="_blank"
           rel="noopener"
         >
           GitHub
+        </a>
+        <a
+          href="/auth/login?return_to=%2Fsift%2Fapp"
+          class="block px-3 py-2 text-sm font-medium text-dark-lo hover:text-dark-hi hover:bg-dark-raised rounded-lg transition-colors"
+        >
+          Sign in / Sign up
         </a>
       </div>
     </details>

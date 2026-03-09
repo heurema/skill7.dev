@@ -22,6 +22,7 @@ const plugins = getPluginsByCategory(category.name);
 >
   <Breadcrumb items={[
     { label: "Home", href: "/" },
+    { label: "Marketplace", href: "/marketplace" },
     { label: category.displayName },
   ]} />
 
@@ -32,7 +33,7 @@ const plugins = getPluginsByCategory(category.name);
 
   <div class="card-sm mb-8">
     <p class="mb-3 text-sm text-dark-lo font-mono">
-      Register the marketplace (once):
+      Register the marketplace once:
     </p>
     <CopyButton text="claude plugin marketplace add heurema/emporium" />
   </div>
@@ -46,7 +47,7 @@ const plugins = getPluginsByCategory(category.name);
   {plugins.length === 0 && (
     <div class="mt-12 text-center py-16">
       <p class="text-dark-dim font-mono text-sm">No plugins in this category yet.</p>
-      <a href="/" class="mt-6 inline-block btn-secondary">Browse all plugins</a>
+      <a href="/marketplace" class="mt-6 inline-block btn-secondary">Browse all plugins</a>
     </div>
   )}
 </Base>

@@ -1,211 +1,120 @@
 ---
 import Base from "../layouts/Base.astro";
-import PluginCard from "../components/PluginCard.astro";
-import CopyButton from "../components/CopyButton.astro";
 import GitHubIcon from "../components/icons/GitHubIcon.astro";
-import { getCategories, getAllPlugins } from "../lib/data";
-
-const categories = getCategories();
-const allPlugins = getAllPlugins();
-const totalPlugins = allPlugins.length;
 ---
 
-<Base title="Marketplace" description="Curated open-source plugin marketplace for Claude Code. Browse by category, install in two commands.">
-
-  <!-- Hero ------------------------------------------------------------------>
-  <section class="relative py-24 sm:py-28 text-center overflow-hidden">
-    <!-- Dot grid background -->
+<Base
+  title="Home"
+  description="skill7 is the front door for hosted agent tools and the heurema plugin marketplace. Open Sift in the browser or browse the marketplace separately."
+>
+  <section class="relative overflow-hidden py-24 sm:py-28">
     <div class="absolute inset-0 bg-dots opacity-60 pointer-events-none" />
+    <div
+      class="absolute top-0 right-0 h-80 w-80 rounded-full blur-3xl pointer-events-none"
+      style="background: radial-gradient(circle, rgba(0,229,160,0.10) 0%, transparent 70%);"
+    />
+    <div
+      class="absolute bottom-0 left-0 h-96 w-96 rounded-full blur-3xl pointer-events-none"
+      style="background: radial-gradient(circle, rgba(0,180,216,0.08) 0%, transparent 70%);"
+    />
 
-    <!-- Glow orbs -->
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full pointer-events-none"
-         style="background: radial-gradient(circle, rgba(0,229,160,0.06) 0%, transparent 70%);"></div>
-    <div class="absolute top-1/3 left-1/3 w-64 h-64 rounded-full pointer-events-none"
-         style="background: radial-gradient(circle, rgba(0,180,216,0.04) 0%, transparent 70%);"></div>
-
-    <div class="relative">
-      <!-- Eyebrow -->
-      <div class="cursor-default inline-flex items-center gap-2 px-3 py-1 rounded-full border border-acid/50 bg-acid-muted mb-8">
-        <span class="w-1.5 h-1.5 rounded-full bg-acid animate-pulse"></span>
-        <span class="text-xs font-mono font-medium text-acid">Claude Code Plugin Marketplace</span>
+    <div class="relative mx-auto max-w-6xl">
+      <div class="inline-flex items-center gap-2 rounded-full border border-acid/40 bg-acid-muted px-3 py-1">
+        <span class="h-1.5 w-1.5 rounded-full bg-acid animate-pulse"></span>
+        <span class="text-xs font-mono font-medium text-acid">Hosted products + plugin marketplace</span>
       </div>
 
-      <h1 class="font-heading font-bold tracking-tight">
-        <span class="text-gradient-hero">Extend Claude Code</span>
-        <br />
-        <span class="text-dark-hi">in Two Commands</span>
-      </h1>
-
-      <p class="mx-auto mt-8 max-w-xl text-lg text-dark-lo leading-relaxed">
-        Curated open-source plugins. Browse by category, install instantly.
-        Built by the <a href="https://github.com/heurema" class="text-acid hover:text-acid-glow transition-colors">heurema</a> collective.
-      </p>
-
-      <p class="mt-5 text-sm text-dark-lo font-mono">
-        <span class="whitespace-nowrap">{totalPlugins} plugins</span>{" "}
-        <span class="whitespace-nowrap">&nbsp;·&nbsp; {categories.length} {categories.length === 1 ? "category" : "categories"}</span>{" "}
-        <span class="whitespace-nowrap">&nbsp;·&nbsp; all open source</span>
-      </p>
-
-      <div class="mx-auto mt-10 max-w-lg">
+      <div class="mt-8 grid gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
         <div>
-          <p class="mb-2 text-xs text-dark-lo font-mono">
-            <span class="text-acid">1</span> — Register once
+          <h1 class="font-heading text-5xl font-bold tracking-tight sm:text-6xl">
+            <span class="text-gradient-hero">skill7</span>
+            <br />
+            <span class="text-dark-hi">for products, not just plugins</span>
+          </h1>
+          <p class="mt-8 max-w-2xl text-lg leading-relaxed text-dark-lo">
+            Use <span class="text-dark-hi font-medium">Sift</span> as a browser product with account-based access,
+            or browse the <span class="text-dark-hi font-medium">Marketplace</span> for installable heurema plugins.
+            The public site is now split on purpose: hosted apps live on their own pages, and plugin install docs stay friction-free.
           </p>
-          <CopyButton text="claude plugin marketplace add heurema/emporium" />
-        </div>
 
-        <div class="my-5 flex items-center gap-3">
-          <div class="flex-1 h-px bg-dark-line"></div>
-          <span class="text-xs text-dark-dim font-mono">then</span>
-          <div class="flex-1 h-px bg-dark-line"></div>
-        </div>
-
-        <div>
-          <p class="mb-2 text-xs text-dark-lo font-mono">
-            <span class="text-acid">2</span> — Install any plugin
-          </p>
-          <CopyButton text="claude plugin install sigil@emporium" />
-        </div>
-      </div>
-
-      <div class="mt-10 flex flex-col sm:flex-row justify-center gap-3">
-        <a href="/getting-started" class="btn-primary w-full sm:w-auto justify-center">Get Started</a>
-        <a
-          href="https://github.com/heurema/emporium"
-          class="btn-secondary w-full sm:w-auto justify-center"
-          target="_blank"
-          rel="noopener"
-        >
-          <GitHubIcon />
-          View on GitHub
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Packs ----------------------------------------------------------------->
-  <section class="py-16 border-t border-dark-line" id="packs">
-    <div class="text-center mb-12">
-      <h2 class="font-heading font-bold text-3xl text-dark-hi tracking-tight">Start in 2 Minutes</h2>
-      <p class="mt-3 text-dark-lo text-lg">
-        Choose your pack. All plugins install from one marketplace.
-      </p>
-    </div>
-
-    <div class="grid gap-6 lg:grid-cols-2 max-w-3xl mx-auto">
-
-      <!-- Starter Pack (highlighted) -->
-      <div class="rounded-xl p-6 flex flex-col gap-5 border-gradient-acid shadow-glow-sm relative">
-        <!-- "Recommended" badge -->
-        <div class="absolute -top-3 left-6">
-          <span class="badge bg-acid text-dark-bg border-0 font-semibold px-3 py-1 text-xs tracking-wide">
-            Recommended
-          </span>
-        </div>
-
-        <div>
-          <div class="flex items-center gap-2 mb-1">
-            <span class="text-xs font-mono font-semibold uppercase tracking-widest text-acid">Starter Pack</span>
+          <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+            <a href="/sift" class="btn-primary justify-center sm:w-auto">
+              Open Sift
+            </a>
+            <a href="/marketplace" class="btn-secondary justify-center sm:w-auto">
+              Browse Marketplace
+            </a>
+            <a href="/auth/login?return_to=%2Fsift%2Fapp" class="btn-ghost justify-center sm:w-auto">
+              Create account / sign in
+            </a>
           </div>
-          <p class="text-dark-lo text-sm leading-relaxed">Zero external dependencies. Instant value.</p>
         </div>
 
-        <ul class="flex flex-col gap-2">
-          <li class="flex flex-col gap-0.5">
-            <span class="text-sm font-semibold text-dark-hi font-mono">herald</span>
-            <span class="text-xs text-dark-lo">News intelligence with story clustering — zero API keys, fully local.</span>
-          </li>
-          <li class="flex flex-col gap-0.5">
-            <span class="text-sm font-semibold text-dark-hi font-mono">anvil</span>
-            <span class="text-xs text-dark-lo">Plugin dev/test toolkit — scaffold, validate, test, review.</span>
-          </li>
-          <li class="flex flex-col gap-0.5">
-            <span class="text-sm font-semibold text-dark-hi font-mono">reporter</span>
-            <span class="text-xs text-dark-lo">Report bugs and request features for any heurema product.</span>
-          </li>
-        </ul>
-
-        <div class="flex flex-col gap-2">
-          <CopyButton text="claude plugin marketplace add heurema/emporium" />
-          <CopyButton text="claude plugin install herald@emporium" />
-          <CopyButton text="claude plugin install anvil@emporium" />
-          <CopyButton text="claude plugin install reporter@emporium" />
-        </div>
-
-        <div class="callout-tip text-xs">
-          Try in 2 minutes — no accounts, no API keys required.
-        </div>
-      </div>
-
-      <!-- Pro Pack -->
-      <div class="card flex flex-col gap-5">
-        <div>
-          <div class="flex items-center gap-2 mb-1">
-            <span class="text-xs font-mono font-semibold uppercase tracking-widest text-cyan">Pro Pack</span>
+        <div class="grid gap-4">
+          <div class="card border-gradient-acid">
+            <div class="flex items-center justify-between gap-3">
+              <div>
+                <p class="text-xs font-mono font-semibold uppercase tracking-widest text-acid">Hosted product</p>
+                <h2 class="mt-2 font-heading text-2xl font-bold text-dark-hi">Sift</h2>
+              </div>
+              <span class="badge bg-acid-muted text-acid border-acid/40">new flow</span>
+            </div>
+            <p class="mt-4 text-sm leading-relaxed text-dark-lo">
+              Browser access, account entry, and a dedicated product page. No more hiding Sift inside plugin marketplace copy.
+            </p>
+            <ul class="mt-5 space-y-2 text-sm text-dark-lo">
+              <li>Hosted news intelligence for agents</li>
+              <li>Session-based browser access</li>
+              <li>Separate product navigation and onboarding</li>
+            </ul>
+            <a href="/sift" class="btn-primary mt-6 w-full justify-center">Go to Sift</a>
           </div>
-          <p class="text-dark-lo text-sm leading-relaxed">Multi-AI code review and risk-adaptive development.</p>
-        </div>
 
-        <ul class="flex flex-col gap-2">
-          <li class="flex flex-col gap-0.5">
-            <span class="text-sm font-semibold text-dark-hi font-mono">sigil</span>
-            <span class="text-xs text-dark-lo">Risk-adaptive dev pipeline with adversarial consensus code review.</span>
-          </li>
-          <li class="flex flex-col gap-0.5">
-            <span class="text-sm font-semibold text-dark-hi font-mono">arbiter</span>
-            <span class="text-xs text-dark-lo">Multi-AI orchestrator — Codex CLI + Gemini CLI for review and implementation.</span>
-          </li>
-        </ul>
-
-        <div class="flex flex-col gap-2">
-          <CopyButton text="claude plugin install sigil@emporium" />
-          <CopyButton text="claude plugin install arbiter@emporium" />
-        </div>
-
-        <div class="callout-info text-xs">
-          Requires Codex CLI and/or Gemini CLI to be available in your PATH.
+          <div class="card">
+            <div class="flex items-center justify-between gap-3">
+              <div>
+                <p class="text-xs font-mono font-semibold uppercase tracking-widest text-cyan">Registry</p>
+                <h2 class="mt-2 font-heading text-2xl font-bold text-dark-hi">Marketplace</h2>
+              </div>
+              <GitHubIcon />
+            </div>
+            <p class="mt-4 text-sm leading-relaxed text-dark-lo">
+              Same plugin catalog, same CLI install flow, but clearly separated from hosted product UX.
+            </p>
+            <div class="mt-5 rounded-xl border border-dark-line bg-dark-code px-4 py-3 font-mono text-sm text-dark-hi">
+              <span class="text-acid">$</span> claude plugin marketplace add heurema/emporium
+            </div>
+            <a href="/marketplace" class="btn-secondary mt-6 w-full justify-center">Open Marketplace</a>
+          </div>
         </div>
       </div>
-
-
-    </div>
-
-    <p class="mt-8 text-center text-xs text-dark-dim">
-      Questions about data usage?
-      <a href="/trust" class="text-dark-lo hover:text-acid transition-colors underline underline-offset-2">
-        Trust &amp; Privacy
-      </a>
-    </p>
-  </section>
-
-  <!-- Categories ----------------------------------------------------------->
-  <section class="py-16 border-t border-dark-line">
-    <div class="flex items-center gap-3 mb-8">
-      <h2 class="heading-section text-2xl">Categories</h2>
-    </div>
-    <div class="grid gap-4 sm:grid-cols-2">
-      {categories.map((cat) => (
-        <a href={`/${cat.name}`} class="card block group">
-          <h3 class="heading-section text-xl group-hover:text-acid transition-colors">
-            {cat.displayName}
-          </h3>
-          <p class="mt-2 text-sm text-dark-lo leading-relaxed">{cat.description}</p>
-        </a>
-      ))}
     </div>
   </section>
 
-  <!-- All Plugins ---------------------------------------------------------->
-  <section class="py-16 border-t border-dark-line">
-    <div class="flex items-center gap-3 mb-8">
-      <h2 class="heading-section text-2xl">All Plugins</h2>
-    </div>
-    <div class="grid gap-4 sm:grid-cols-2">
-      {allPlugins.map((plugin) => (
-        <PluginCard plugin={plugin} />
-      ))}
+  <section class="border-t border-dark-line py-16">
+    <div class="mx-auto grid max-w-6xl gap-6 lg:grid-cols-3">
+      <div class="card-sm">
+        <p class="text-xs font-mono uppercase tracking-widest text-acid">1</p>
+        <h2 class="mt-3 font-heading text-2xl font-semibold text-dark-hi">Pick the right mode</h2>
+        <p class="mt-3 text-sm leading-relaxed text-dark-lo">
+          Use <a href="/sift" class="text-acid hover:text-acid-glow transition-colors">Sift</a> for hosted product access,
+          or <a href="/marketplace" class="text-acid hover:text-acid-glow transition-colors">Marketplace</a> for local plugin installs.
+        </p>
+      </div>
+      <div class="card-sm">
+        <p class="text-xs font-mono uppercase tracking-widest text-acid">2</p>
+        <h2 class="mt-3 font-heading text-2xl font-semibold text-dark-hi">Authenticate only where it matters</h2>
+        <p class="mt-3 text-sm leading-relaxed text-dark-lo">
+          Marketplace pages stay public. Account entry appears only on the hosted Sift path, so the plugin catalog keeps its zero-friction install flow.
+        </p>
+      </div>
+      <div class="card-sm">
+        <p class="text-xs font-mono uppercase tracking-widest text-acid">3</p>
+        <h2 class="mt-3 font-heading text-2xl font-semibold text-dark-hi">Grow without mixing models</h2>
+        <p class="mt-3 text-sm leading-relaxed text-dark-lo">
+          Products can get their own landing pages and auth flows. Plugins stay installable docs. That split scales much better than making everything look like `emporium`.
+        </p>
+      </div>
     </div>
   </section>
-
 </Base>

@@ -1,0 +1,124 @@
+---
+import Base from "../../layouts/Base.astro";
+import Breadcrumb from "../../components/Breadcrumb.astro";
+---
+
+<Base
+  title="Sift App"
+  description="Authenticated Sift browser shell on skill7.dev. Sign in through Zitadel and keep a browser session separate from the plugin marketplace."
+>
+  <div class="mx-auto max-w-4xl">
+    <Breadcrumb
+      items={[
+        { label: "Home", href: "/" },
+        { label: "Sift", href: "/sift" },
+        { label: "App" },
+      ]}
+    />
+
+    <div class="mb-8">
+      <h1 class="font-heading font-bold tracking-tight text-dark-hi">Sift app</h1>
+      <p class="mt-3 max-w-2xl text-lg leading-relaxed text-dark-lo">
+        This page is the browser entrypoint for Sift sessions on skill7.dev. It is intentionally separate from the plugin marketplace.
+      </p>
+    </div>
+
+    <div id="sift-app-shell" class="card">
+      <p class="text-sm text-dark-lo">Checking browser session…</p>
+    </div>
+  </div>
+
+  <script>
+    import { clearSession, getDisplayIdentity, getSession, isSessionValid } from "../../lib/auth";
+
+    const shell = document.getElementById("sift-app-shell");
+
+    if (!shell) {
+      throw new Error("missing Sift app shell");
+    }
+
+    const session = getSession();
+
+    if (!isSessionValid(session)) {
+      if (session) {
+        clearSession();
+      }
+
+      shell.innerHTML = `
+        <div class="space-y-6">
+          <div>
+            <p class="text-xs font-mono uppercase tracking-widest text-warn">No active session</p>
+            <h2 class="mt-3 font-heading text-3xl font-semibold text-dark-hi">Sign in to open Sift</h2>
+            <p class="mt-3 max-w-2xl text-sm leading-relaxed text-dark-lo">
+              Browser registration and sign-in now start here, through Zitadel hosted auth. Marketplace registration does not apply to Sift.
+            </p>
+          </div>
+          <div class="flex flex-col gap-3 sm:flex-row">
+            <a href="/auth/login?return_to=%2Fsift%2Fapp" class="btn-primary justify-center sm:w-auto">Create account / sign in</a>
+            <a href="/sift" class="btn-secondary justify-center sm:w-auto">Back to Sift page</a>
+          </div>
+        </div>
+      `;
+    } else {
+      const activeSession = session;
+      const identity = getDisplayIdentity(activeSession);
+      const expiresAt = new Date(activeSession.expiresAt).toLocaleString("en-US", {
+        dateStyle: "medium",
+        timeStyle: "short",
+      });
+      const sessionLabel = identity?.label ?? "Sift session ready";
+      const sessionEmail = identity?.email ?? "not present in token";
+
+      shell.innerHTML = `
+        <div class="space-y-6">
+          <div>
+            <p class="text-xs font-mono uppercase tracking-widest text-acid">Authenticated session</p>
+            <h2 id="sift-session-label" class="mt-3 font-heading text-3xl font-semibold text-dark-hi"></h2>
+            <p class="mt-3 max-w-2xl text-sm leading-relaxed text-dark-lo">
+              Your browser auth is active. This slice establishes the account boundary and session flow for Sift on skill7.dev.
+            </p>
+          </div>
+          <dl class="grid gap-4 sm:grid-cols-2">
+            <div class="rounded-xl border border-dark-line bg-dark-code px-4 py-4">
+              <dt class="text-xs font-mono uppercase tracking-widest text-dark-dim">Email</dt>
+              <dd id="sift-session-email" class="mt-2 text-sm text-dark-hi"></dd>
+            </div>
+            <div class="rounded-xl border border-dark-line bg-dark-code px-4 py-4">
+              <dt class="text-xs font-mono uppercase tracking-widest text-dark-dim">Session expires</dt>
+              <dd id="sift-session-expires" class="mt-2 text-sm text-dark-hi"></dd>
+            </div>
+          </dl>
+          <div class="rounded-xl border border-dark-line bg-dark-raised px-4 py-4">
+            <p class="text-sm leading-relaxed text-dark-lo">
+              The browser session is now separate from marketplace flows. Wiring the full Sift workspace UI to the hosted API is the next implementation slice.
+            </p>
+          </div>
+          <div class="flex flex-col gap-3 sm:flex-row">
+            <a href="/sift" class="btn-secondary justify-center sm:w-auto">Back to Sift</a>
+            <button id="clear-sift-session" class="btn-ghost justify-center sm:w-auto">Clear local session</button>
+          </div>
+        </div>
+      `;
+
+      const labelElement = shell.querySelector<HTMLElement>("#sift-session-label");
+      if (labelElement) {
+        labelElement.textContent = sessionLabel;
+      }
+
+      const emailElement = shell.querySelector<HTMLElement>("#sift-session-email");
+      if (emailElement) {
+        emailElement.textContent = sessionEmail;
+      }
+
+      const expiresElement = shell.querySelector<HTMLElement>("#sift-session-expires");
+      if (expiresElement) {
+        expiresElement.textContent = expiresAt;
+      }
+
+      shell.querySelector<HTMLButtonElement>("#clear-sift-session")?.addEventListener("click", () => {
+        clearSession();
+        window.location.reload();
+      });
+    }
+  </script>
+</Base>

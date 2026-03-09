@@ -1,0 +1,196 @@
+---
+import Base from "../layouts/Base.astro";
+import PluginCard from "../components/PluginCard.astro";
+import CopyButton from "../components/CopyButton.astro";
+import GitHubIcon from "../components/icons/GitHubIcon.astro";
+import { getCategories, getAllPlugins } from "../lib/data";
+
+const categories = getCategories();
+const allPlugins = getAllPlugins();
+const totalPlugins = allPlugins.length;
+---
+
+<Base
+  title="Marketplace"
+  description="Curated open-source plugin marketplace for Claude Code. Browse by category, install in two commands, and keep hosted products separate from local plugin flows."
+>
+  <section class="relative overflow-hidden py-24 sm:py-28 text-center">
+    <div class="absolute inset-0 bg-dots opacity-60 pointer-events-none" />
+    <div
+      class="absolute top-1/2 left-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none"
+      style="background: radial-gradient(circle, rgba(0,229,160,0.06) 0%, transparent 70%);"
+    />
+
+    <div class="relative">
+      <div class="inline-flex cursor-default items-center gap-2 rounded-full border border-acid/50 bg-acid-muted px-3 py-1">
+        <span class="h-1.5 w-1.5 rounded-full bg-acid animate-pulse"></span>
+        <span class="text-xs font-mono font-medium text-acid">heurema emporium</span>
+      </div>
+
+      <h1 class="mt-8 font-heading font-bold tracking-tight">
+        <span class="text-gradient-hero">Install Claude Code plugins</span>
+        <br />
+        <span class="text-dark-hi">without leaving the catalog</span>
+      </h1>
+
+      <p class="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-dark-lo">
+        The Marketplace stays focused on installable plugins. Hosted products like
+        <a href="/sift" class="ml-1 text-acid hover:text-acid-glow transition-colors">Sift</a>
+        now live on their own pages.
+      </p>
+
+      <p class="mt-5 text-sm font-mono text-dark-lo">
+        <span class="whitespace-nowrap">{totalPlugins} plugins</span>
+        <span class="whitespace-nowrap">&nbsp;·&nbsp; {categories.length} categories</span>
+        <span class="whitespace-nowrap">&nbsp;·&nbsp; all open source</span>
+      </p>
+
+      <div class="mx-auto mt-10 max-w-lg">
+        <div>
+          <p class="mb-2 text-xs font-mono text-dark-lo">
+            <span class="text-acid">1</span> — Register the marketplace once
+          </p>
+          <CopyButton text="claude plugin marketplace add heurema/emporium" />
+        </div>
+
+        <div class="my-5 flex items-center gap-3">
+          <div class="h-px flex-1 bg-dark-line"></div>
+          <span class="text-xs font-mono text-dark-dim">then</span>
+          <div class="h-px flex-1 bg-dark-line"></div>
+        </div>
+
+        <div>
+          <p class="mb-2 text-xs font-mono text-dark-lo">
+            <span class="text-acid">2</span> — Install any plugin
+          </p>
+          <CopyButton text="claude plugin install signum@emporium" />
+        </div>
+      </div>
+
+      <div class="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
+        <a href="/getting-started" class="btn-primary w-full justify-center sm:w-auto">Marketplace Docs</a>
+        <a href="/sift" class="btn-secondary w-full justify-center sm:w-auto">Open Sift</a>
+        <a
+          href="https://github.com/heurema/emporium"
+          class="btn-ghost w-full justify-center sm:w-auto"
+          target="_blank"
+          rel="noopener"
+        >
+          <GitHubIcon />
+          Registry on GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-t border-dark-line py-16" id="packs">
+    <div class="mb-12 text-center">
+      <h2 class="font-heading text-3xl font-bold tracking-tight text-dark-hi">Start in 2 Minutes</h2>
+      <p class="mt-3 text-lg text-dark-lo">
+        Choose your pack. All plugins install from one marketplace registration.
+      </p>
+    </div>
+
+    <div class="mx-auto grid max-w-3xl gap-6 lg:grid-cols-2">
+      <div class="relative flex flex-col gap-5 rounded-xl p-6 border-gradient-acid shadow-glow-sm">
+        <div class="absolute -top-3 left-6">
+          <span class="badge border-0 bg-acid px-3 py-1 text-xs font-semibold tracking-wide text-dark-bg">
+            Recommended
+          </span>
+        </div>
+
+        <div>
+          <div class="mb-1 flex items-center gap-2">
+            <span class="text-xs font-mono font-semibold uppercase tracking-widest text-acid">Starter Pack</span>
+          </div>
+          <p class="text-sm leading-relaxed text-dark-lo">Zero external dependencies. Instant value.</p>
+        </div>
+
+        <ul class="flex flex-col gap-2">
+          <li class="flex flex-col gap-0.5">
+            <span class="font-mono text-sm font-semibold text-dark-hi">herald</span>
+            <span class="text-xs text-dark-lo">News intelligence with story clustering — zero API keys, fully local.</span>
+          </li>
+          <li class="flex flex-col gap-0.5">
+            <span class="font-mono text-sm font-semibold text-dark-hi">anvil</span>
+            <span class="text-xs text-dark-lo">Plugin dev/test toolkit — scaffold, validate, test, review.</span>
+          </li>
+          <li class="flex flex-col gap-0.5">
+            <span class="font-mono text-sm font-semibold text-dark-hi">reporter</span>
+            <span class="text-xs text-dark-lo">Report bugs and request features for any heurema product.</span>
+          </li>
+        </ul>
+
+        <div class="flex flex-col gap-2">
+          <CopyButton text="claude plugin marketplace add heurema/emporium" />
+          <CopyButton text="claude plugin install herald@emporium" />
+          <CopyButton text="claude plugin install anvil@emporium" />
+          <CopyButton text="claude plugin install reporter@emporium" />
+        </div>
+
+        <div class="callout-tip text-xs">Try in 2 minutes — no accounts, no hosted login, no API keys required.</div>
+      </div>
+
+      <div class="card flex flex-col gap-5">
+        <div>
+          <div class="mb-1 flex items-center gap-2">
+            <span class="text-xs font-mono font-semibold uppercase tracking-widest text-cyan">Pro Pack</span>
+          </div>
+          <p class="text-sm leading-relaxed text-dark-lo">Risk-adaptive development, orchestration, and multi-model review.</p>
+        </div>
+
+        <ul class="flex flex-col gap-2">
+          <li class="flex flex-col gap-0.5">
+            <span class="font-mono text-sm font-semibold text-dark-hi">signum</span>
+            <span class="text-xs text-dark-lo">Contract-first development pipeline with holdouts and proofpacks.</span>
+          </li>
+          <li class="flex flex-col gap-0.5">
+            <span class="font-mono text-sm font-semibold text-dark-hi">arbiter</span>
+            <span class="text-xs text-dark-lo">Multi-AI orchestrator for Codex CLI, Gemini CLI, and Claude Code.</span>
+          </li>
+        </ul>
+
+        <div class="flex flex-col gap-2">
+          <CopyButton text="claude plugin install signum@emporium" />
+          <CopyButton text="claude plugin install arbiter@emporium" />
+        </div>
+
+        <div class="callout-info text-xs">
+          Requires Codex CLI and/or Gemini CLI to be available in your PATH.
+        </div>
+      </div>
+    </div>
+
+    <p class="mt-8 text-center text-xs text-dark-dim">
+      Questions about data usage?
+      <a href="/trust" class="text-dark-lo underline underline-offset-2 transition-colors hover:text-acid">
+        Trust &amp; Privacy
+      </a>
+    </p>
+  </section>
+
+  <section class="border-t border-dark-line py-16">
+    <div class="mb-8 flex items-center gap-3">
+      <h2 class="heading-section text-2xl">Categories</h2>
+    </div>
+    <div class="grid gap-4 sm:grid-cols-2">
+      {categories.map((cat) => (
+        <a href={`/${cat.name}`} class="card block group">
+          <h3 class="heading-section text-xl group-hover:text-acid transition-colors">{cat.displayName}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-dark-lo">{cat.description}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="border-t border-dark-line py-16">
+    <div class="mb-8 flex items-center gap-3">
+      <h2 class="heading-section text-2xl">All Plugins</h2>
+    </div>
+    <div class="grid gap-4 sm:grid-cols-2">
+      {allPlugins.map((plugin) => (
+        <PluginCard plugin={plugin} />
+      ))}
+    </div>
+  </section>
+</Base>
