@@ -3,6 +3,7 @@ export const SIFT_ZITADEL_CLIENT_ID = "363219421096902778";
 export const SIFT_ZITADEL_PROJECT_ID = "363219420929065082";
 export const SIFT_AUTH_REDIRECT_URI = "https://skill7.dev/auth/callback";
 export const SIFT_AUTH_DEFAULT_RETURN_TO = "/sift/app";
+export const SIFT_AUTH_EVENT_NAME = "skill7:sift-auth-changed";
 export const SIFT_AUTH_SCOPES = [
   "openid",
   "profile",
@@ -68,6 +69,11 @@ function saveAuthRequest(request: SiftAuthRequest): void {
   window.sessionStorage.setItem(REQUEST_STORAGE_KEY, JSON.stringify(request));
 }
 
+function emitAuthChange(): void {
+  ensureBrowser();
+  window.dispatchEvent(new CustomEvent(SIFT_AUTH_EVENT_NAME));
+}
+
 export function getAuthRequest(): SiftAuthRequest | null {
   ensureBrowser();
   const raw = window.sessionStorage.getItem(REQUEST_STORAGE_KEY);
@@ -88,6 +94,7 @@ export function clearAuthRequest(): void {
 export function storeSession(session: SiftAuthSession): void {
   ensureBrowser();
   window.localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(session));
+  emitAuthChange();
 }
 
 export function getSession(): SiftAuthSession | null {
@@ -105,6 +112,7 @@ export function getSession(): SiftAuthSession | null {
 export function clearSession(): void {
   ensureBrowser();
   window.localStorage.removeItem(SESSION_STORAGE_KEY);
+  emitAuthChange();
 }
 
 export function isSessionValid(session: SiftAuthSession | null): session is SiftAuthSession {
