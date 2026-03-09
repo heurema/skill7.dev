@@ -85,6 +85,26 @@ import Breadcrumb from "../../components/Breadcrumb.astro";
               </div>
             </div>
 
+            <div class="mt-5 rounded-xl border border-dark-line bg-dark-code px-4 py-4">
+              <p class="text-xs font-mono uppercase tracking-widest text-dark-dim">Digest range</p>
+              <div class="mt-3 inline-flex rounded-lg border border-dark-line bg-dark-base/60 p-1">
+                <button
+                  id="sift-window-24h"
+                  type="button"
+                  class="rounded-md px-3 py-1.5 text-xs font-mono uppercase tracking-widest text-dark-hi transition-colors"
+                >
+                  24h
+                </button>
+                <button
+                  id="sift-window-7d"
+                  type="button"
+                  class="rounded-md px-3 py-1.5 text-xs font-mono uppercase tracking-widest text-dark-lo transition-colors"
+                >
+                  7d
+                </button>
+              </div>
+            </div>
+
             <div id="sift-digest-error" class="mt-5 hidden rounded-xl border border-err/30 bg-err-bg px-4 py-3 text-sm text-dark-hi"></div>
 
             <div class="mt-6 flex flex-col gap-3 sm:flex-row">
@@ -129,7 +149,7 @@ import Breadcrumb from "../../components/Breadcrumb.astro";
 
             <div class="mt-6 flex flex-col gap-3 sm:flex-row">
               <a href="/sift" class="btn-ghost justify-center sm:w-auto">Back to Sift</a>
-              <button id="clear-sift-session" class="btn-secondary justify-center sm:w-auto">Clear local session</button>
+              <button id="clear-sift-session" class="btn-secondary justify-center sm:w-auto">Sign out</button>
             </div>
           </div>
         </div>
@@ -146,6 +166,33 @@ import Breadcrumb from "../../components/Breadcrumb.astro";
             <div class="rounded-xl border border-dark-line bg-dark-code px-4 py-3">
               <p class="text-xs font-mono uppercase tracking-widest text-dark-dim">Source</p>
               <p class="mt-2 text-sm text-dark-hi"><code>api.skill7.dev/v1/events</code></p>
+            </div>
+          </div>
+
+          <div class="mt-5 grid gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto]">
+            <label class="rounded-xl border border-dark-line bg-dark-code px-4 py-3">
+              <span class="text-xs font-mono uppercase tracking-widest text-dark-dim">Asset</span>
+              <input
+                id="sift-filter-asset"
+                type="text"
+                autocomplete="off"
+                placeholder="BTC"
+                class="mt-2 w-full border-0 bg-transparent text-sm text-dark-hi placeholder:text-dark-dim focus:outline-none"
+              />
+            </label>
+            <label class="rounded-xl border border-dark-line bg-dark-code px-4 py-3">
+              <span class="text-xs font-mono uppercase tracking-widest text-dark-dim">Topic</span>
+              <input
+                id="sift-filter-topic"
+                type="text"
+                autocomplete="off"
+                placeholder="etf"
+                class="mt-2 w-full border-0 bg-transparent text-sm text-dark-hi placeholder:text-dark-dim focus:outline-none"
+              />
+            </label>
+            <div class="flex items-end gap-2">
+              <button id="sift-apply-filters" type="button" class="btn-secondary justify-center">Apply</button>
+              <button id="sift-reset-filters" type="button" class="btn-ghost justify-center">Reset</button>
             </div>
           </div>
 
@@ -174,6 +221,16 @@ import Breadcrumb from "../../components/Breadcrumb.astro";
       resolveSiftAssetURL,
     } from "../../lib/sift-api";
 
+    type DigestWindow = "24h" | "7d";
+
+    interface WorkspaceFilters {
+      window: DigestWindow;
+      asset: string;
+      topic: string;
+      category: string;
+      limit: number;
+    }
+
     function mustHTMLElement(id: string): HTMLElement {
       const element = document.getElementById(id);
       if (!(element instanceof HTMLElement)) {
@@ -194,6 +251,14 @@ import Breadcrumb from "../../components/Breadcrumb.astro";
       const element = document.getElementById(id);
       if (!(element instanceof HTMLButtonElement)) {
         throw new Error(`missing button #${id}`);
+      }
+      return element;
+    }
+
+    function mustHTMLInputElement(id: string): HTMLInputElement {
+      const element = document.getElementById(id);
+      if (!(element instanceof HTMLInputElement)) {
+        throw new Error(`missing input #${id}`);
       }
       return element;
     }
@@ -220,6 +285,8 @@ import Breadcrumb from "../../components/Breadcrumb.astro";
     const digestGenerated = mustHTMLElement("sift-digest-generated");
     const digestError = mustHTMLElement("sift-digest-error");
     const digestLink = mustHTMLAnchorElement("sift-digest-link");
+    const window24Button = mustHTMLButtonElement("sift-window-24h");
+    const window7Button = mustHTMLButtonElement("sift-window-7d");
     const transportPill = mustHTMLElement("sift-transport-pill");
     const transportDot = mustHTMLElement("sift-transport-dot");
     const transportLabel = mustHTMLElement("sift-transport-label");
@@ -228,14 +295,26 @@ import Breadcrumb from "../../components/Breadcrumb.astro";
     const eventsError = mustHTMLElement("sift-events-error");
     const eventsEmpty = mustHTMLElement("sift-events-empty");
     const eventsList = mustHTMLOListElement("sift-events-list");
+    const assetInput = mustHTMLInputElement("sift-filter-asset");
+    const topicInput = mustHTMLInputElement("sift-filter-topic");
+    const applyFiltersButton = mustHTMLButtonElement("sift-apply-filters");
+    const resetFiltersButton = mustHTMLButtonElement("sift-reset-filters");
     const refreshButton = mustHTMLButtonElement("sift-refresh");
     const clearSessionButton = mustHTMLButtonElement("clear-sift-session");
 
     const apiHost = new URL(SIFT_API_BASE).host;
+    const filters: WorkspaceFilters = {
+      window: "24h",
+      asset: "",
+      topic: "",
+      category: "crypto",
+      limit: 8,
+    };
     let activeSession: SiftAuthSession | null = null;
     let socket: WebSocket | null = null;
     let reconnectTimer: number | null = null;
     let refreshTimer: number | null = null;
+    let sessionExpiryTimer: number | null = null;
     let latestRefreshToken = 0;
     let reconnectAttempts = 0;
     let stopped = false;
@@ -295,6 +374,59 @@ import Breadcrumb from "../../components/Breadcrumb.astro";
       setVisible(eventsError, false);
     }
 
+    function normalizeWindow(value: string | null): DigestWindow {
+      return value === "7d" ? "7d" : "24h";
+    }
+
+    function normalizeAsset(value: string): string {
+      return value.trim().toUpperCase();
+    }
+
+    function normalizeTopic(value: string): string {
+      return value.trim().toLowerCase();
+    }
+
+    function syncFiltersFromURL(): void {
+      const params = new URLSearchParams(window.location.search);
+      filters.window = normalizeWindow(params.get("window"));
+      filters.asset = normalizeAsset(params.get("asset") ?? "");
+      filters.topic = normalizeTopic(params.get("topic") ?? "");
+      assetInput.value = filters.asset;
+      topicInput.value = filters.topic;
+    }
+
+    function updateWindowButtons(): void {
+      const base = "rounded-md px-3 py-1.5 text-xs font-mono uppercase tracking-widest transition-colors";
+      const active = `${base} bg-acid-muted text-acid`;
+      const inactive = `${base} text-dark-lo`;
+
+      window24Button.className = filters.window === "24h" ? active : inactive;
+      window7Button.className = filters.window === "7d" ? active : inactive;
+    }
+
+    function activeFilterSummary(): string {
+      const parts: string[] = [`window=${filters.window}`];
+      if (filters.asset) {
+        parts.push(`asset=${filters.asset}`);
+      }
+      if (filters.topic) {
+        parts.push(`topic=${filters.topic}`);
+      }
+      return parts.join(", ");
+    }
+
+    function applyFilterInputs(): void {
+      filters.asset = normalizeAsset(assetInput.value);
+      filters.topic = normalizeTopic(topicInput.value);
+      assetInput.value = filters.asset;
+      topicInput.value = filters.topic;
+    }
+
+    function setDigestWindow(window: DigestWindow): void {
+      filters.window = window;
+      updateWindowButtons();
+    }
+
     function nextReconnectDelay(): number {
       const cappedAttempt = Math.min(reconnectAttempts, 4);
       return Math.min(2000 * 2 ** cappedAttempt, 30000);
@@ -309,6 +441,26 @@ import Breadcrumb from "../../components/Breadcrumb.astro";
         "Browser registration and sign-in start here, through Zitadel hosted auth. Marketplace registration does not apply to Sift.";
     }
 
+    function clearSessionExpiryTimer(): void {
+      if (sessionExpiryTimer !== null) {
+        window.clearTimeout(sessionExpiryTimer);
+        sessionExpiryTimer = null;
+      }
+    }
+
+    function scheduleSessionExpiry(session: SiftAuthSession): void {
+      clearSessionExpiryTimer();
+      const remainingMs = session.expiresAt - Date.now();
+      if (remainingMs <= 0) {
+        handleAuthFailure("Your Sift browser session expired. Sign in again to reopen the workspace.");
+        return;
+      }
+      sessionExpiryTimer = window.setTimeout(() => {
+        sessionExpiryTimer = null;
+        handleAuthFailure("Your Sift browser session expired. Sign in again to reopen the workspace.");
+      }, remainingMs + 500);
+    }
+
     function showDashboard(session: SiftAuthSession): void {
       setVisible(loadingSection, false);
       setVisible(signedOutSection, false);
@@ -317,8 +469,9 @@ import Breadcrumb from "../../components/Breadcrumb.astro";
       const identity = getDisplayIdentity(session);
       sessionLabel.textContent = identity?.label ?? "Sift session ready";
       sessionEmail.textContent = identity?.email ?? "not present in token";
-      sessionExpires.textContent = formatDateTime(session.expiresAt);
+      sessionExpires.textContent = `${formatDateTime(session.expiresAt)} (${formatRelativeMoment(new Date(session.expiresAt).toISOString())})`;
       lastSignal.textContent = "Waiting for stream…";
+      scheduleSessionExpiry(session);
     }
 
     function setTransportState(
@@ -495,12 +648,17 @@ import Breadcrumb from "../../components/Breadcrumb.astro";
 
       const refreshToken = ++latestRefreshToken;
       resetErrors();
-      eventsCopy.textContent = `Refreshing event slice (${reason}) from ${apiHost}.`;
+      eventsCopy.textContent = `Refreshing event slice (${reason}) from ${apiHost} with ${activeFilterSummary()}.`;
 
       try {
         const [digest, events] = await Promise.all([
-          getSiftDigest(activeSession, "crypto", "24h"),
-          listSiftEvents(activeSession, { category: "crypto", limit: 8 }),
+          getSiftDigest(activeSession, filters.category, filters.window),
+          listSiftEvents(activeSession, {
+            category: filters.category,
+            limit: filters.limit,
+            asset: filters.asset || undefined,
+            topic: filters.topic || undefined,
+          }),
         ]);
 
         if (refreshToken !== latestRefreshToken) {
@@ -509,7 +667,7 @@ import Breadcrumb from "../../components/Breadcrumb.astro";
 
         renderDigest(digest);
         renderEvents(events);
-        eventsCopy.textContent = `Showing ${events.length} latest crypto events from ${apiHost}.`;
+        eventsCopy.textContent = `Showing ${events.length} latest crypto events from ${apiHost} with ${activeFilterSummary()}.`;
       } catch (error) {
         if (refreshToken !== latestRefreshToken) {
           return;
@@ -614,6 +772,7 @@ import Breadcrumb from "../../components/Breadcrumb.astro";
         window.clearTimeout(refreshTimer);
         refreshTimer = null;
       }
+      clearSessionExpiryTimer();
       reconnectAttempts = 0;
       if (socket) {
         closingSocket = true;
@@ -627,17 +786,59 @@ import Breadcrumb from "../../components/Breadcrumb.astro";
       void refreshWorkspace("manual refresh");
     });
 
+    window24Button.addEventListener("click", () => {
+      if (filters.window !== "24h") {
+        setDigestWindow("24h");
+        void refreshWorkspace("window switch");
+      }
+    });
+
+    window7Button.addEventListener("click", () => {
+      if (filters.window !== "7d") {
+        setDigestWindow("7d");
+        void refreshWorkspace("window switch");
+      }
+    });
+
+    applyFiltersButton.addEventListener("click", () => {
+      applyFilterInputs();
+      void refreshWorkspace("filter apply");
+    });
+
+    resetFiltersButton.addEventListener("click", () => {
+      assetInput.value = "";
+      topicInput.value = "";
+      applyFilterInputs();
+      void refreshWorkspace("filter reset");
+    });
+
+    assetInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        applyFilterInputs();
+        void refreshWorkspace("filter apply");
+      }
+    });
+
+    topicInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        applyFilterInputs();
+        void refreshWorkspace("filter apply");
+      }
+    });
+
     clearSessionButton.addEventListener("click", () => {
-      stopped = true;
-      cleanupRuntime();
-      clearSession();
-      window.location.reload();
+      handleAuthFailure("You signed out from this browser workspace.");
     });
 
     window.addEventListener("beforeunload", () => {
       stopped = true;
       cleanupRuntime();
     });
+
+    syncFiltersFromURL();
+    updateWindowButtons();
 
     const session = getSession();
 
