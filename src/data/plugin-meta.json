@@ -15,9 +15,31 @@
     "creative": {
       "displayName": "Creative",
       "description": "Ideation, brainstorming, and creative generation tools"
+    },
+    "research": {
+      "displayName": "Research",
+      "description": "Deep research, fact-checking, and knowledge synthesis tools"
     }
   },
   "plugins": {
+    "delve": {
+      "category": "research",
+      "description": "Autonomous deep research with claim-level verification. Delve runs a 5-stage pipeline (SCAN, DECOMPOSE, DIVE, VERIFY, SYNTHESIZE) that dispatches parallel research subagents, extracts atomic claims, then adversarially verifies each one before producing a synthesis report with quality labels and full source attribution.",
+      "version": "0.2.0",
+      "license": "MIT",
+      "status": "alpha",
+      "tags": [
+        "deep-research",
+        "verification",
+        "multi-agent",
+        "fact-checking",
+        "claim-verification",
+        "orchestrator",
+        "resume",
+        "web-research"
+      ],
+      "verified": true
+    },
     "content-ops": {
       "category": "publishing",
       "description": "Publish technical articles to dev.to, Hashnode, Twitter/X, and Hacker News without leaving your editor. Includes a deterministic linter that catches em-dashes, tag format errors, and description length before publishing — plus 10 skills for creating, QA-ing, and distributing content from your existing artifacts.",

@@ -21,6 +21,16 @@
       "homepage": "https://github.com/heurema/arbiter"
     },
     {
+      "name": "delve",
+      "description": "Autonomous deep research with claim-level verification. Delve runs a 5-stage pipeline (SCAN \u2192 DECOMPOSE \u2192 DIVE \u2192 VERIFY \u2192 SYNTHESIZE) that dispatches parallel research subagents, extracts atomic claims, then adversarially verifies each one before producing a synthesis report with quality labels and full source attribution.",
+      "category": "research",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/heurema/delve.git"
+      },
+      "homepage": "https://github.com/heurema/delve"
+    },
+    {
       "name": "content-ops",
       "description": "Publish technical articles to dev.to, Hashnode, Twitter/X, and Hacker News without leaving your editor. Includes a deterministic linter that catches em-dashes, tag format errors, and description length before publishing \u2014 plus 10 skills for creating, QA-ing, and distributing content from your existing artifacts.",
       "category": "publishing",
