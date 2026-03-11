@@ -95,6 +95,8 @@
       "verified": true
     },
     "forge": {
+      "category": "development",
+      "description": "Plugin lifecycle manager for heurema org. Scaffold, verify, register plugins.",
       "version": "0.3.0",
       "license": "MIT",
       "status": "alpha",
