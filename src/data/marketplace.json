@@ -101,6 +101,16 @@
       "homepage": "https://github.com/heurema/sentinel"
     },
     {
+      "name": "skillpulse",
+      "description": "Skill telemetry for Claude Code. A PostToolUse hook that logs every skill activation to local JSONL \u2014 which skills load, which get followed, how often. The only tool that tracks whether the model actually executed a skill's instructions. Foundation for automated skill quality evaluation and self-improvement pipelines.",
+      "category": "development",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/heurema/skillpulse.git"
+      },
+      "homepage": "https://github.com/heurema/skillpulse"
+    },
+    {
       "name": "signum",
       "description": "The code is the easy part. Signum is a contract-first AI development pipeline for Claude Code: spec quality gate (A\u2013F) that blocks weak specs before implementation starts, holdout scenarios the Engineer never sees for blind testing, multi-model audit (Claude + Codex + Gemini in parallel), execution policy enforcement, repo-level invariant contracts, and a self-contained tamper-evident proofpack artifact the AI couldn't game.",
       "category": "development",

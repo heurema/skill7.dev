@@ -191,6 +191,24 @@
       ],
       "verified": true
     },
+    "skillpulse": {
+      "category": "development",
+      "description": "Skill telemetry for Claude Code. A PostToolUse hook that logs every skill activation to local JSONL \u2014 which skills load, which get followed, how often. The only tool that tracks whether the model actually executed a skill's instructions. Foundation for automated skill quality evaluation and self-improvement pipelines.",
+      "version": "0.1.0",
+      "license": "MIT",
+      "status": "alpha",
+      "tags": [
+        "telemetry",
+        "skill-activation",
+        "logging",
+        "jsonl",
+        "local-first",
+        "evoskill",
+        "quality-evaluation",
+        "posttooluse-hook"
+      ],
+      "verified": true
+    },
     "signum": {
       "category": "development",
       "description": "The code is the easy part. Signum is a contract-first AI development pipeline for Claude Code: spec quality gate (A–F) that blocks weak specs before implementation starts, holdout scenarios the Engineer never sees for blind testing, multi-model audit (Claude + Codex + Gemini in parallel), execution policy enforcement, repo-level invariant contracts, and a self-contained tamper-evident proofpack artifact the AI couldn't game.",
