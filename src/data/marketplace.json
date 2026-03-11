@@ -2,7 +2,7 @@
   "plugins": [
     {
       "name": "anvil",
-      "description": "Scaffold, validate, and test Claude Code plugins in seconds. Three commands cover the full plugin lifecycle \u2014 from template generation to six deterministic validators that catch schema errors, unsafe hooks, and naming issues before publish.",
+      "description": "Scaffold, validate, and test Claude Code plugins in seconds. Three commands cover the full plugin lifecycle — from template generation to six deterministic validators that catch schema errors, unsafe hooks, and naming issues before publish.",
       "category": "development",
       "source": {
         "source": "url",
@@ -12,7 +12,7 @@
     },
     {
       "name": "arbiter",
-      "description": "Use multiple AI assistants from one interface. Arbiter orchestrates Codex CLI and Gemini CLI inside Claude Code \u2014 get parallel answers, take majority votes on decisions, cross-check code, or run 3 independent implementations in parallel and pick the best one.",
+      "description": "Use multiple AI assistants from one interface. Arbiter orchestrates Codex CLI and Gemini CLI inside Claude Code — get parallel answers, take majority votes on decisions, cross-check code, or run 3 independent implementations in parallel and pick the best one.",
       "category": "development",
       "source": {
         "source": "url",
@@ -21,18 +21,8 @@
       "homepage": "https://github.com/heurema/arbiter"
     },
     {
-      "name": "delve",
-      "description": "Autonomous deep research with claim-level verification. Delve runs a 5-stage pipeline (SCAN \u2192 DECOMPOSE \u2192 DIVE \u2192 VERIFY \u2192 SYNTHESIZE) that dispatches parallel research subagents, extracts atomic claims, then adversarially verifies each one before producing a synthesis report with quality labels and full source attribution.",
-      "category": "research",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/heurema/delve.git"
-      },
-      "homepage": "https://github.com/heurema/delve"
-    },
-    {
       "name": "content-ops",
-      "description": "Publish technical articles to dev.to, Hashnode, Twitter/X, and Hacker News without leaving your editor. Includes a deterministic linter that catches em-dashes, tag format errors, and description length before publishing \u2014 plus 10 skills for creating, QA-ing, and distributing content from your existing artifacts.",
+      "description": "Publish technical articles to dev.to, Hashnode, Twitter/X, and Hacker News without leaving your editor. Includes a deterministic linter that catches em-dashes, tag format errors, and description length before publishing — plus 10 skills for creating, QA-ing, and distributing content from your existing artifacts.",
       "category": "publishing",
       "source": {
         "source": "url",
@@ -41,8 +31,19 @@
       "homepage": "https://github.com/heurema/content-ops"
     },
     {
+      "name": "delve",
+      "description": "Autonomous deep research with claim-level verification. Delve runs a 5-stage pipeline (SCAN → DECOMPOSE → DIVE → VERIFY → SYNTHESIZE) that dispatches parallel research subagents, extracts atomic claims, then adversarially verifies each one before producing a synthesis report with quality labels and full source attribution.",
+      "category": "research",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/heurema/delve.git"
+      },
+      "homepage": "https://github.com/heurema/delve"
+    },
+    {
       "name": "forge",
-      "description": "Plugin lifecycle manager for heurema org. Scaffold, verify, register, and manage the full plugin lifecycle with automated quality gates.",
+      "description": "Plugin lifecycle manager for heurema org. Scaffold, verify, register plugins.",
+      "version": "0.3.0",
       "category": "development",
       "source": {
         "source": "url",
@@ -62,7 +63,7 @@
     },
     {
       "name": "glyph",
-      "description": "Generate polished terminal demo GIFs from a natural language description. Glyph synthesizes asciicast recordings with realistic typing, configurable themes, and built-in PII auditing \u2014 no real shell commands are executed.",
+      "description": "Generate polished terminal demo GIFs from a natural language description. Glyph synthesizes asciicast recordings with realistic typing, configurable themes, and built-in PII auditing — no real shell commands are executed.",
       "category": "development",
       "source": {
         "source": "url",
@@ -72,7 +73,7 @@
     },
     {
       "name": "herald",
-      "description": "Local-first news intelligence for AI agents. Herald collects RSS and Hacker News articles, clusters related stories by title similarity, scores by source weight and recency, and generates ranked Markdown briefs \u2014 all locally with zero API keys.",
+      "description": "Local-first news intelligence for AI agents. Herald collects RSS and Hacker News articles, clusters related stories by title similarity, scores by source weight and recency, and generates ranked Markdown briefs — all locally with zero API keys.",
       "category": "productivity",
       "source": {
         "source": "url",
@@ -82,7 +83,7 @@
     },
     {
       "name": "reporter",
-      "description": "Report bugs, request features, and ask questions for any heurema plugin \u2014 without leaving Claude Code. Auto-detects your repo from git remote, collects environment context, previews the issue, and submits via gh CLI with clipboard fallback.",
+      "description": "Report bugs, request features, and ask questions for any heurema plugin — without leaving Claude Code. Auto-detects your repo from git remote, collects environment context, previews the issue, and submits via gh CLI with clipboard fallback.",
       "category": "productivity",
       "source": {
         "source": "url",
@@ -92,7 +93,7 @@
     },
     {
       "name": "sentinel",
-      "description": "Automated security audit for your AI workstation. Sentinel runs 18 deterministic checks across secrets exposure, MCP trust, plugin permissions, hook coverage, trust boundaries, and configuration hygiene — then scores your security posture 0\u2013100 with guided remediation for every finding.",
+      "description": "Automated security audit for your AI workstation. Sentinel runs 18 deterministic checks across secrets exposure, MCP trust, plugin permissions, hook coverage, trust boundaries, and configuration hygiene — then scores your security posture 0–100 with guided remediation for every finding.",
       "category": "development",
       "source": {
         "source": "url",
@@ -101,24 +102,24 @@
       "homepage": "https://github.com/heurema/sentinel"
     },
     {
-      "name": "skillpulse",
-      "description": "Skill telemetry for Claude Code. A PostToolUse hook that logs every skill activation to local JSONL \u2014 which skills load, which get followed, how often. The only tool that tracks whether the model actually executed a skill's instructions. Foundation for automated skill quality evaluation and self-improvement pipelines.",
-      "category": "development",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/heurema/skillpulse.git"
-      },
-      "homepage": "https://github.com/heurema/skillpulse"
-    },
-    {
       "name": "signum",
-      "description": "The code is the easy part. Signum is a contract-first AI development pipeline for Claude Code: spec quality gate (A\u2013F) that blocks weak specs before implementation starts, holdout scenarios the Engineer never sees for blind testing, multi-model audit (Claude + Codex + Gemini in parallel), execution policy enforcement, repo-level invariant contracts, and a self-contained tamper-evident proofpack artifact the AI couldn't game.",
+      "description": "The code is the easy part. Signum is a contract-first AI development pipeline for Claude Code: spec quality gate (A–F) that blocks weak specs before implementation starts, holdout scenarios the Engineer never sees for blind testing, multi-model audit (Claude + Codex + Gemini in parallel), execution policy enforcement, repo-level invariant contracts, and a self-contained tamper-evident proofpack artifact the AI couldn't game.",
       "category": "development",
       "source": {
         "source": "url",
         "url": "https://github.com/heurema/signum.git"
       },
       "homepage": "https://github.com/heurema/signum"
+    },
+    {
+      "name": "skillpulse",
+      "description": "Skill telemetry for Claude Code. A PostToolUse hook that logs every skill activation to local JSONL — which skills load, which get followed, how often. The only tool that tracks whether the model actually executed a skill's instructions. Foundation for automated skill quality evaluation and self-improvement pipelines.",
+      "category": "development",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/heurema/skillpulse.git"
+      },
+      "homepage": "https://github.com/heurema/skillpulse"
     }
   ]
 }
