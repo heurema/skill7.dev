@@ -174,6 +174,23 @@
       ],
       "verified": true
     },
+    "sentinel": {
+      "category": "development",
+      "description": "Automated security audit for your AI workstation. Sentinel runs 18 deterministic checks across secrets exposure, MCP trust, plugin permissions, hook coverage, trust boundaries, and configuration hygiene — then scores your security posture 0\u2013100 with guided remediation for every finding.",
+      "version": "0.1.0",
+      "license": "MIT",
+      "status": "alpha",
+      "tags": [
+        "security-audit",
+        "secrets-detection",
+        "mcp-trust",
+        "hook-coverage",
+        "trust-boundaries",
+        "deterministic",
+        "remediation"
+      ],
+      "verified": true
+    },
     "signum": {
       "category": "development",
       "description": "The code is the easy part. Signum is a contract-first AI development pipeline for Claude Code: spec quality gate (A–F) that blocks weak specs before implementation starts, holdout scenarios the Engineer never sees for blind testing, multi-model audit (Claude + Codex + Gemini in parallel), execution policy enforcement, repo-level invariant contracts, and a self-contained tamper-evident proofpack artifact the AI couldn't game.",

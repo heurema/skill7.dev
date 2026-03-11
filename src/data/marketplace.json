@@ -91,6 +91,16 @@
       "homepage": "https://github.com/heurema/reporter"
     },
     {
+      "name": "sentinel",
+      "description": "Automated security audit for your AI workstation. Sentinel runs 18 deterministic checks across secrets exposure, MCP trust, plugin permissions, hook coverage, trust boundaries, and configuration hygiene — then scores your security posture 0\u2013100 with guided remediation for every finding.",
+      "category": "development",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/heurema/sentinel.git"
+      },
+      "homepage": "https://github.com/heurema/sentinel"
+    },
+    {
       "name": "signum",
       "description": "The code is the easy part. Signum is a contract-first AI development pipeline for Claude Code: spec quality gate (A\u2013F) that blocks weak specs before implementation starts, holdout scenarios the Engineer never sees for blind testing, multi-model audit (Claude + Codex + Gemini in parallel), execution policy enforcement, repo-level invariant contracts, and a self-contained tamper-evident proofpack artifact the AI couldn't game.",
       "category": "development",
