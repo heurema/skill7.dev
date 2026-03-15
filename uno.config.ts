@@ -317,8 +317,8 @@ export default defineConfig({
       "shadow-inset-code overflow-x-auto",
 
     "inline-code":
-      "rounded-sm px-1.5 py-0.5 font-mono text-xs " +
-      "bg-dark-raised text-acid border border-dark-line",
+      "rounded px-1.5 py-0.5 font-mono text-xs " +
+      "bg-[#e6e1da] text-[#1a1612] border border-[#d4cec6]",
 
     // ── Copy command block ────────────────────────────────────────────────────
     // Code blocks always use dark palette regardless of theme
