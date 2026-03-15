@@ -312,8 +312,8 @@ export default defineConfig({
 
     // ── Code / terminal ───────────────────────────────────────────────────────
     "code-block":
-      "rounded-lg bg-dark-code border border-dark-line " +
-      "px-4 py-3 font-mono text-sm text-dark-hi " +
+      "rounded-lg bg-[#2a2520] border border-[#3d3530] " +
+      "px-4 py-3 font-mono text-sm text-[#e8edf8] " +
       "shadow-inset-code overflow-x-auto",
 
     "inline-code":

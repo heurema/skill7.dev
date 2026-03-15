@@ -161,6 +161,27 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin)
     font-family: "JetBrains Mono", "Geist Mono", "Fira Code", monospace;
   }
 
+  /* ── Code on dark bg: always light text in light mode ─────────────────── */
+  [data-theme="light"] .bg-dark-code,
+  [data-theme="light"] [class*="bg-dark-code"] {
+    color: #e8edf8;
+  }
+  [data-theme="light"] .bg-dark-code code,
+  [data-theme="light"] .bg-dark-code span {
+    color: inherit;
+  }
+  /* Inline code on light page — visible tinted bg */
+  [data-theme="light"] p code,
+  [data-theme="light"] li code,
+  [data-theme="light"] td code {
+    background-color: #e6e1da;
+    color: #1a1612;
+    border: 1px solid #d4cec6;
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.25rem;
+    font-size: 0.85em;
+  }
+
   /* ── Selection ─────────────────────────────────────────────────────────── */
   ::selection {
     background: rgba(0, 229, 160, 0.2);
