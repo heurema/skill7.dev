@@ -101,16 +101,18 @@ export default defineConfig({
       // scales (100, 200…). Use semantic names instead.
       // dark-bg, dark-base, dark-raised, dark-line, dark-edge,
       // dark-hi, dark-lo, dark-dim, dark-code
+      // Theme-aware tokens: reference CSS variables from Base.astro
+      // Overridden by [data-theme="light"] in Base.astro global CSS
       dark: {
-        bg:    "#080c18",   // deepest background
-        base:  "#0f1629",   // card / panel
-        raised:"#161e38",   // elevated surface (hover, active)
-        line:  "#1e2a4a",   // subtle borders
-        edge:  "#2a3a5e",   // strong borders / emphasis
-        hi:    "#e8edf8",   // primary text (high contrast)
-        lo:    "#8b9cbf",   // secondary text
-        dim:   "#7a8faa",   // muted / placeholder / disabled (WCAG AA ≥4.5:1 on #060a14)
-        code:  "#060a14",   // code block background
+        bg:    "var(--color-bg)",
+        base:  "var(--color-surface)",
+        raised:"var(--color-surface-2)",
+        line:  "var(--color-border)",
+        edge:  "var(--color-border-2)",
+        hi:    "var(--color-text-1)",
+        lo:    "var(--color-text-2)",
+        dim:   "var(--color-text-muted)",
+        code:  "var(--color-code-bg)",
       },
 
       light: {
@@ -128,23 +130,21 @@ export default defineConfig({
       // ── Acid green — primary accent ───────────────────────────────────────
       // Dark mode: #00e5a0 (electric), light mode: #007a52 (forest)
       acid: {
-        DEFAULT: "#00e5a0",
-        glow:    "#00ffc2",
-        dim:     "#00b37a",
-        dark:    "#007a52",   // desaturated for light mode
-        muted:   "#003d28",   // subtle backgrounds in dark mode
-        mutedlt: "#e8f9f2",   // subtle backgrounds in light mode
+        DEFAULT: "var(--color-acid)",
+        glow:    "var(--color-acid-glow)",
+        dim:     "var(--color-acid-dim)",
+        dark:    "#007a52",
+        muted:   "var(--color-acid-muted)",
+        mutedlt: "#e8f9f2",
       },
 
-      // ── Electric cyan — secondary accent ─────────────────────────────────
-      // Dark mode: #00b4d8, light mode: #006b8a
       cyan: {
-        DEFAULT: "#00b4d8",
-        bright:  "#00d4ff",
+        DEFAULT: "var(--color-cyan)",
+        bright:  "var(--color-cyan-bright)",
         dim:     "#0090b0",
-        dark:    "#006b8a",   // desaturated for light mode
-        muted:   "#002d3d",   // subtle backgrounds in dark mode
-        mutedlt: "#e6f4f8",   // subtle backgrounds in light mode
+        dark:    "#006b8a",
+        muted:   "var(--color-cyan-muted)",
+        mutedlt: "#e6f4f8",
       },
 
       // ── Semantic status ───────────────────────────────────────────────────
@@ -321,19 +321,20 @@ export default defineConfig({
       "bg-dark-raised text-acid border border-dark-line",
 
     // ── Copy command block ────────────────────────────────────────────────────
+    // Code blocks always use dark palette regardless of theme
     "copy-block":
       "flex items-center gap-4 rounded-lg " +
-      "bg-dark-code border border-dark-line " +
-      "px-4 py-3.5 font-mono text-sm text-dark-hi " +
+      "bg-[#060a14] border border-[#1e2a4a] " +
+      "px-4 py-3.5 font-mono text-sm text-[#e8edf8] " +
       "shadow-inset-code",
 
     "copy-btn":
       "shrink-0 rounded-sm px-3 py-2 text-xs font-medium " +
       "min-w-16 text-center " +
-      "text-dark-lo bg-dark-raised border border-dark-line " +
-      "hover:text-acid hover:border-acid " +
+      "text-[#8b9cbf] bg-[#161e38] border border-[#1e2a4a] " +
+      "hover:text-[#00e5a0] hover:border-[#00e5a0] " +
       "transition-all duration-150 " +
-      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-acid " +
+      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00e5a0] " +
       "disabled:opacity-60 disabled:cursor-wait",
 
     // ── Navigation ────────────────────────────────────────────────────────────
