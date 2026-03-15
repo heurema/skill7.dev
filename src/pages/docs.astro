@@ -1,0 +1,294 @@
+---
+import Base from "../layouts/Base.astro";
+import Breadcrumb from "../components/Breadcrumb.astro";
+---
+
+<Base
+  title="CLI Reference"
+  description="skill7 CLI command reference — install, uninstall, list, check, update, publish, dev, init, convert."
+>
+  <div class="max-w-3xl">
+    <Breadcrumb items={[
+      { label: "Home", href: "/" },
+      { label: "CLI Reference" },
+    ]} />
+
+    <h1 class="font-heading font-bold tracking-tight">CLI Reference</h1>
+    <p class="mt-3 text-lg text-dark-lo leading-relaxed">
+      Complete reference for the <code class="bg-dark-code px-1.5 py-0.5 rounded text-sm text-dark-hi">skill7</code> command-line tool.
+    </p>
+
+    <div class="mt-4 rounded border border-dark-line bg-dark-code px-4 py-3 font-mono text-sm text-dark-lo">
+      <span class="text-acid">Usage:</span> skill7 &lt;command&gt; [args] [flags]
+    </div>
+
+    <div class="mt-12 space-y-14">
+
+      <!-- install -->
+      <section>
+        <div class="flex items-baseline gap-3 border-b border-dark-line pb-3">
+          <h2 class="font-heading text-xl font-semibold text-dark-hi font-mono">install</h2>
+          <span class="text-sm text-dark-dim">Install a plugin from the registry</span>
+        </div>
+        <div class="mt-4 rounded border border-dark-line bg-dark-code px-4 py-3 font-mono text-sm text-dark-hi">
+          skill7 install &lt;name&gt; [flags]
+        </div>
+        <p class="mt-4 text-sm text-dark-lo leading-relaxed">
+          Fetches the named plugin from the registry and installs it for all detected AI CLIs.
+          Auto-detects Claude Code, Codex CLI, and Gemini CLI in your PATH.
+        </p>
+        <table class="mt-4 w-full text-sm border-collapse">
+          <thead>
+            <tr class="border-b border-dark-line">
+              <th class="py-2 pr-6 text-left font-mono text-xs text-dark-dim font-semibold tracking-widest uppercase">Flag</th>
+              <th class="py-2 text-left font-mono text-xs text-dark-dim font-semibold tracking-widest uppercase">Description</th>
+            </tr>
+          </thead>
+          <tbody class="text-dark-lo">
+            <tr class="border-b border-dark-line">
+              <td class="py-2 pr-6 font-mono text-xs text-dark-hi">--claude-code</td>
+              <td class="py-2 text-xs">Install only for Claude Code</td>
+            </tr>
+            <tr class="border-b border-dark-line">
+              <td class="py-2 pr-6 font-mono text-xs text-dark-hi">--codex</td>
+              <td class="py-2 text-xs">Install only for Codex CLI</td>
+            </tr>
+            <tr class="border-b border-dark-line">
+              <td class="py-2 pr-6 font-mono text-xs text-dark-hi">--gemini</td>
+              <td class="py-2 text-xs">Install only for Gemini CLI</td>
+            </tr>
+            <tr>
+              <td class="py-2 pr-6 font-mono text-xs text-dark-hi">--version &lt;ver&gt;</td>
+              <td class="py-2 text-xs">Pin to a specific version (default: latest)</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="mt-4 rounded border border-dark-line bg-dark-code px-4 py-3 font-mono text-sm space-y-1">
+          <div><span class="text-acid">$</span> <span class="text-dark-hi">skill7 install herald</span></div>
+          <div><span class="text-acid">$</span> <span class="text-dark-hi">skill7 install signum --claude-code</span></div>
+          <div><span class="text-acid">$</span> <span class="text-dark-hi">skill7 install arbiter --version 1.2.0</span></div>
+        </div>
+      </section>
+
+      <!-- uninstall -->
+      <section>
+        <div class="flex items-baseline gap-3 border-b border-dark-line pb-3">
+          <h2 class="font-heading text-xl font-semibold text-dark-hi font-mono">uninstall</h2>
+          <span class="text-sm text-dark-dim">Remove an installed plugin</span>
+        </div>
+        <div class="mt-4 rounded border border-dark-line bg-dark-code px-4 py-3 font-mono text-sm text-dark-hi">
+          skill7 uninstall &lt;name&gt;
+        </div>
+        <p class="mt-4 text-sm text-dark-lo leading-relaxed">
+          Removes the plugin from all CLIs it was installed for.
+        </p>
+        <div class="mt-4 rounded border border-dark-line bg-dark-code px-4 py-3 font-mono text-sm">
+          <div><span class="text-acid">$</span> <span class="text-dark-hi">skill7 uninstall herald</span></div>
+        </div>
+      </section>
+
+      <!-- list -->
+      <section>
+        <div class="flex items-baseline gap-3 border-b border-dark-line pb-3">
+          <h2 class="font-heading text-xl font-semibold text-dark-hi font-mono">list</h2>
+          <span class="text-sm text-dark-dim">List installed plugins</span>
+        </div>
+        <div class="mt-4 rounded border border-dark-line bg-dark-code px-4 py-3 font-mono text-sm text-dark-hi">
+          skill7 list [flags]
+        </div>
+        <p class="mt-4 text-sm text-dark-lo leading-relaxed">
+          Shows all currently installed plugins, their versions, and which CLIs they are active for.
+        </p>
+        <table class="mt-4 w-full text-sm border-collapse">
+          <thead>
+            <tr class="border-b border-dark-line">
+              <th class="py-2 pr-6 text-left font-mono text-xs text-dark-dim font-semibold tracking-widest uppercase">Flag</th>
+              <th class="py-2 text-left font-mono text-xs text-dark-dim font-semibold tracking-widest uppercase">Description</th>
+            </tr>
+          </thead>
+          <tbody class="text-dark-lo">
+            <tr class="border-b border-dark-line">
+              <td class="py-2 pr-6 font-mono text-xs text-dark-hi">--json</td>
+              <td class="py-2 text-xs">Output as JSON (machine-readable)</td>
+            </tr>
+            <tr>
+              <td class="py-2 pr-6 font-mono text-xs text-dark-hi">--outdated</td>
+              <td class="py-2 text-xs">Show only plugins with available updates</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- check -->
+      <section>
+        <div class="flex items-baseline gap-3 border-b border-dark-line pb-3">
+          <h2 class="font-heading text-xl font-semibold text-dark-hi font-mono">check</h2>
+          <span class="text-sm text-dark-dim">Verify plugin integrity</span>
+        </div>
+        <div class="mt-4 rounded border border-dark-line bg-dark-code px-4 py-3 font-mono text-sm text-dark-hi">
+          skill7 check [&lt;name&gt;]
+        </div>
+        <p class="mt-4 text-sm text-dark-lo leading-relaxed">
+          Verifies SHA-256 checksums of installed plugin files against the registry manifest.
+          Checks all installed plugins if no name is given.
+        </p>
+      </section>
+
+      <!-- update -->
+      <section>
+        <div class="flex items-baseline gap-3 border-b border-dark-line pb-3">
+          <h2 class="font-heading text-xl font-semibold text-dark-hi font-mono">update</h2>
+          <span class="text-sm text-dark-dim">Update installed plugins</span>
+        </div>
+        <div class="mt-4 rounded border border-dark-line bg-dark-code px-4 py-3 font-mono text-sm text-dark-hi">
+          skill7 update [&lt;name&gt;] [flags]
+        </div>
+        <p class="mt-4 text-sm text-dark-lo leading-relaxed">
+          Fetches and installs the latest version of a plugin, or all installed plugins if no name is given.
+        </p>
+        <table class="mt-4 w-full text-sm border-collapse">
+          <thead>
+            <tr class="border-b border-dark-line">
+              <th class="py-2 pr-6 text-left font-mono text-xs text-dark-dim font-semibold tracking-widest uppercase">Flag</th>
+              <th class="py-2 text-left font-mono text-xs text-dark-dim font-semibold tracking-widest uppercase">Description</th>
+            </tr>
+          </thead>
+          <tbody class="text-dark-lo">
+            <tr>
+              <td class="py-2 pr-6 font-mono text-xs text-dark-hi">--dry-run</td>
+              <td class="py-2 text-xs">Show what would be updated without applying</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="mt-4 rounded border border-dark-line bg-dark-code px-4 py-3 font-mono text-sm space-y-1">
+          <div><span class="text-acid">$</span> <span class="text-dark-hi">skill7 update</span></div>
+          <div><span class="text-acid">$</span> <span class="text-dark-hi">skill7 update herald</span></div>
+        </div>
+      </section>
+
+      <!-- publish -->
+      <section>
+        <div class="flex items-baseline gap-3 border-b border-dark-line pb-3">
+          <h2 class="font-heading text-xl font-semibold text-dark-hi font-mono">publish</h2>
+          <span class="text-sm text-dark-dim">Publish a plugin to the registry</span>
+        </div>
+        <div class="mt-4 rounded border border-dark-line bg-dark-code px-4 py-3 font-mono text-sm text-dark-hi">
+          skill7 publish [flags]
+        </div>
+        <p class="mt-4 text-sm text-dark-lo leading-relaxed">
+          Packages and submits the plugin in the current directory to the skill7 registry.
+          Requires a valid <code class="bg-dark-code px-1 rounded text-dark-hi">plugin.json</code> and a <code class="bg-dark-code px-1 rounded text-dark-hi">skills/</code> directory.
+        </p>
+        <table class="mt-4 w-full text-sm border-collapse">
+          <thead>
+            <tr class="border-b border-dark-line">
+              <th class="py-2 pr-6 text-left font-mono text-xs text-dark-dim font-semibold tracking-widest uppercase">Flag</th>
+              <th class="py-2 text-left font-mono text-xs text-dark-dim font-semibold tracking-widest uppercase">Description</th>
+            </tr>
+          </thead>
+          <tbody class="text-dark-lo">
+            <tr class="border-b border-dark-line">
+              <td class="py-2 pr-6 font-mono text-xs text-dark-hi">--tag &lt;ver&gt;</td>
+              <td class="py-2 text-xs">Version tag to publish (default: from plugin.json)</td>
+            </tr>
+            <tr>
+              <td class="py-2 pr-6 font-mono text-xs text-dark-hi">--dry-run</td>
+              <td class="py-2 text-xs">Validate and package without submitting</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- dev link / unlink -->
+      <section>
+        <div class="flex items-baseline gap-3 border-b border-dark-line pb-3">
+          <h2 class="font-heading text-xl font-semibold text-dark-hi font-mono">dev link / unlink</h2>
+          <span class="text-sm text-dark-dim">Link a local plugin for development</span>
+        </div>
+        <div class="mt-4 rounded border border-dark-line bg-dark-code px-4 py-3 font-mono text-sm space-y-1">
+          <div class="text-dark-hi">skill7 dev link [&lt;path&gt;]</div>
+          <div class="text-dark-hi">skill7 dev unlink [&lt;name&gt;]</div>
+        </div>
+        <p class="mt-4 text-sm text-dark-lo leading-relaxed">
+          <code class="bg-dark-code px-1 rounded text-dark-hi">dev link</code> installs the plugin from a local path into your AI CLIs for testing.
+          Changes to the source directory are reflected immediately (no reinstall required).
+          <code class="bg-dark-code px-1 rounded text-dark-hi">dev unlink</code> removes the local link.
+        </p>
+        <div class="mt-4 rounded border border-dark-line bg-dark-code px-4 py-3 font-mono text-sm space-y-1">
+          <div><span class="text-acid">$</span> <span class="text-dark-hi">skill7 dev link ./my-plugin</span></div>
+          <div><span class="text-acid">$</span> <span class="text-dark-hi">skill7 dev unlink my-plugin</span></div>
+        </div>
+      </section>
+
+      <!-- init -->
+      <section>
+        <div class="flex items-baseline gap-3 border-b border-dark-line pb-3">
+          <h2 class="font-heading text-xl font-semibold text-dark-hi font-mono">init</h2>
+          <span class="text-sm text-dark-dim">Scaffold a new plugin</span>
+        </div>
+        <div class="mt-4 rounded border border-dark-line bg-dark-code px-4 py-3 font-mono text-sm text-dark-hi">
+          skill7 init &lt;name&gt; [flags]
+        </div>
+        <p class="mt-4 text-sm text-dark-lo leading-relaxed">
+          Creates a new plugin directory with <code class="bg-dark-code px-1 rounded text-dark-hi">plugin.json</code>,
+          a <code class="bg-dark-code px-1 rounded text-dark-hi">skills/</code> directory, and a starter skill file.
+        </p>
+        <table class="mt-4 w-full text-sm border-collapse">
+          <thead>
+            <tr class="border-b border-dark-line">
+              <th class="py-2 pr-6 text-left font-mono text-xs text-dark-dim font-semibold tracking-widest uppercase">Flag</th>
+              <th class="py-2 text-left font-mono text-xs text-dark-dim font-semibold tracking-widest uppercase">Description</th>
+            </tr>
+          </thead>
+          <tbody class="text-dark-lo">
+            <tr>
+              <td class="py-2 pr-6 font-mono text-xs text-dark-hi">--template &lt;name&gt;</td>
+              <td class="py-2 text-xs">Scaffold from a named template (default: minimal)</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="mt-4 rounded border border-dark-line bg-dark-code px-4 py-3 font-mono text-sm">
+          <div><span class="text-acid">$</span> <span class="text-dark-hi">skill7 init my-plugin</span></div>
+        </div>
+      </section>
+
+      <!-- convert -->
+      <section>
+        <div class="flex items-baseline gap-3 border-b border-dark-line pb-3">
+          <h2 class="font-heading text-xl font-semibold text-dark-hi font-mono">convert</h2>
+          <span class="text-sm text-dark-dim">Convert a plugin from another format</span>
+        </div>
+        <div class="mt-4 rounded border border-dark-line bg-dark-code px-4 py-3 font-mono text-sm text-dark-hi">
+          skill7 convert &lt;source&gt; [flags]
+        </div>
+        <p class="mt-4 text-sm text-dark-lo leading-relaxed">
+          Converts a plugin from an existing format (e.g., a Claude Code plugin installed via
+          <code class="bg-dark-code px-1 rounded text-dark-hi">claude plugin</code>) into the skill7 registry format.
+        </p>
+        <table class="mt-4 w-full text-sm border-collapse">
+          <thead>
+            <tr class="border-b border-dark-line">
+              <th class="py-2 pr-6 text-left font-mono text-xs text-dark-dim font-semibold tracking-widest uppercase">Flag</th>
+              <th class="py-2 text-left font-mono text-xs text-dark-dim font-semibold tracking-widest uppercase">Description</th>
+            </tr>
+          </thead>
+          <tbody class="text-dark-lo">
+            <tr>
+              <td class="py-2 pr-6 font-mono text-xs text-dark-hi">--out &lt;dir&gt;</td>
+              <td class="py-2 text-xs">Output directory (default: ./<name>)</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+    </div>
+
+    <div class="mt-14 pt-6 border-t border-dark-line">
+      <div class="flex flex-col gap-3 sm:flex-row">
+        <a href="/marketplace" class="btn-primary justify-center sm:w-auto">Browse registry</a>
+        <a href="/getting-started" class="btn-secondary justify-center sm:w-auto">Getting Started</a>
+      </div>
+    </div>
+  </div>
+
+</Base>

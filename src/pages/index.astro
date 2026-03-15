@@ -1,118 +1,82 @@
 ---
 import Base from "../layouts/Base.astro";
-import GitHubIcon from "../components/icons/GitHubIcon.astro";
+import CopyButton from "../components/CopyButton.astro";
 ---
 
 <Base
   title="Home"
-  description="skill7 is the front door for hosted agent tools and the heurema plugin marketplace. Open Sift in the browser or browse the marketplace separately."
+  description="skill7 — cross-CLI plugin distribution for AI agents. Install plugins for Claude Code, Codex CLI, and Gemini CLI from one registry."
 >
-  <section class="relative overflow-hidden py-24 sm:py-28">
-    <div class="absolute inset-0 bg-dots opacity-60 pointer-events-none" />
-    <div
-      class="absolute top-0 right-0 h-80 w-80 rounded-full blur-3xl pointer-events-none"
-      style="background: radial-gradient(circle, rgba(0,229,160,0.10) 0%, transparent 70%);"
-    />
-    <div
-      class="absolute bottom-0 left-0 h-96 w-96 rounded-full blur-3xl pointer-events-none"
-      style="background: radial-gradient(circle, rgba(0,180,216,0.08) 0%, transparent 70%);"
-    />
+  <!-- Hero -->
+  <section class="relative overflow-hidden py-20 sm:py-28">
+    <div class="absolute inset-0 bg-dots opacity-40 pointer-events-none" />
 
-    <div class="relative mx-auto max-w-6xl">
-      <div class="grid gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
-        <div>
-          <div class="inline-flex items-center gap-2 rounded-full border border-acid/40 bg-acid-muted px-3 py-1">
-            <span class="h-1.5 w-1.5 rounded-full bg-acid animate-pulse"></span>
-            <span class="text-xs font-mono font-medium text-acid">Hosted products + plugin marketplace</span>
-          </div>
-          <h1 class="mt-8 font-heading text-5xl font-bold tracking-tight sm:text-6xl">
-            <span class="text-gradient-hero">skill7</span>
-            <br />
-            <span class="text-dark-hi">for products, not just plugins</span>
-          </h1>
-          <p class="mt-8 max-w-2xl text-lg leading-relaxed text-dark-lo">
-            Use <span class="text-dark-hi font-medium">Sift</span> as a browser product with account-based access,
-            or browse the <span class="text-dark-hi font-medium">Marketplace</span> for installable heurema plugins.
-            The public site is now split on purpose: hosted apps live on their own pages, and plugin install docs stay friction-free.
-          </p>
+    <div class="relative mx-auto max-w-3xl text-center">
+      <div class="inline-flex items-center gap-2 rounded-full border border-acid/40 bg-acid-muted px-3 py-1">
+        <span class="h-1.5 w-1.5 rounded-full bg-acid animate-pulse"></span>
+        <span class="text-xs font-mono font-medium text-acid">cross-CLI plugin distribution</span>
+      </div>
 
-          <div class="mt-10 flex flex-col gap-3 sm:flex-row">
-            <a href="/sift" class="btn-primary justify-center sm:w-auto">
-              Open Sift
-            </a>
-            <a href="/marketplace" class="btn-secondary justify-center sm:w-auto">
-              Browse Marketplace
-            </a>
-            <a href="/auth/login?return_to=%2Fsift%2Fapp" class="btn-ghost justify-center sm:w-auto">
-              Create account / sign in
-            </a>
-          </div>
-        </div>
+      <h1 class="mt-8 font-heading font-bold tracking-tight text-dark-hi">
+        skill7
+        <br />
+        <span class="text-dark-lo font-medium">cross-CLI plugin distribution</span>
+      </h1>
 
-        <div class="grid gap-4">
-          <div class="card border-gradient-acid">
-            <div class="flex items-center justify-between gap-3">
-              <div>
-                <p class="text-xs font-mono font-semibold uppercase tracking-widest text-acid">Hosted product</p>
-                <h2 class="mt-2 font-heading text-2xl font-bold text-dark-hi">Sift</h2>
-              </div>
-              <span class="badge bg-acid-muted text-acid border-acid/40">new flow</span>
-            </div>
-            <p class="mt-4 text-sm leading-relaxed text-dark-lo">
-              Browser access, account entry, and a dedicated product page. No more hiding Sift inside plugin marketplace copy.
-            </p>
-            <ul class="mt-5 space-y-2 text-sm text-dark-lo">
-              <li>Hosted news intelligence for agents</li>
-              <li>Session-based browser access</li>
-              <li>Separate product navigation and onboarding</li>
-            </ul>
-            <a href="/sift" class="btn-primary mt-6 w-full justify-center">Go to Sift</a>
-          </div>
+      <p class="mt-6 text-lg leading-relaxed text-dark-lo max-w-xl mx-auto">
+        Install plugins for Claude Code, Codex CLI, and Gemini CLI from one registry.
+      </p>
 
-          <div class="card">
-            <div class="flex items-center justify-between gap-3">
-              <div>
-                <p class="text-xs font-mono font-semibold uppercase tracking-widest text-cyan">Registry</p>
-                <h2 class="mt-2 font-heading text-2xl font-bold text-dark-hi">Marketplace</h2>
-              </div>
-              <GitHubIcon />
-            </div>
-            <p class="mt-4 text-sm leading-relaxed text-dark-lo">
-              Same plugin catalog, same CLI install flow, but clearly separated from hosted product UX.
-            </p>
-            <div class="mt-5 rounded-xl border border-dark-line bg-dark-code px-4 py-3 font-mono text-sm text-dark-hi">
-              <span class="text-acid">$</span> claude plugin marketplace add heurema/emporium
-            </div>
-            <a href="/marketplace" class="btn-secondary mt-6 w-full justify-center">Open Marketplace</a>
-          </div>
-        </div>
+      <!-- Primary CTA: install command -->
+      <div class="mt-10 mx-auto max-w-md">
+        <CopyButton text="skill7 install signum" />
+      </div>
+
+      <!-- Secondary CTA -->
+      <div class="mt-6">
+        <a href="/marketplace" class="text-acid hover:text-acid-glow transition-colors font-medium text-sm">
+          Browse plugins →
+        </a>
+      </div>
+
+      <!-- Works with row -->
+      <div class="mt-12 flex items-center justify-center gap-6 text-xs font-mono text-dark-dim">
+        <span>Claude Code</span>
+        <span class="text-dark-border">·</span>
+        <span>Codex CLI</span>
+        <span class="text-dark-border">·</span>
+        <span>Gemini CLI</span>
       </div>
     </div>
   </section>
 
+  <!-- For users / For developers -->
   <section class="border-t border-dark-line py-16">
-    <div class="mx-auto grid max-w-6xl gap-6 lg:grid-cols-3">
-      <div class="card-sm">
-        <p class="text-xs font-mono uppercase tracking-widest text-acid">1</p>
-        <h2 class="mt-3 font-heading text-2xl font-semibold text-dark-hi">Pick the right mode</h2>
+    <div class="mx-auto max-w-6xl grid gap-6 sm:grid-cols-2">
+      <div class="card">
+        <p class="text-xs font-mono font-semibold uppercase tracking-widest text-acid">For users</p>
+        <h2 class="mt-3 font-heading text-xl font-semibold text-dark-hi">Install plugins</h2>
         <p class="mt-3 text-sm leading-relaxed text-dark-lo">
-          Use <a href="/sift" class="text-acid hover:text-acid-glow transition-colors">Sift</a> for hosted product access,
-          or <a href="/marketplace" class="text-acid hover:text-acid-glow transition-colors">Marketplace</a> for local plugin installs.
+          One command installs a plugin for all detected AI CLIs. skill7 auto-detects Claude Code, Codex CLI, and Gemini CLI.
         </p>
+        <div class="mt-5 space-y-2">
+          <CopyButton text="skill7 install herald" />
+          <CopyButton text="skill7 install signum" />
+        </div>
+        <a href="/marketplace" class="btn-secondary mt-5 w-full justify-center">Browse registry</a>
       </div>
-      <div class="card-sm">
-        <p class="text-xs font-mono uppercase tracking-widest text-acid">2</p>
-        <h2 class="mt-3 font-heading text-2xl font-semibold text-dark-hi">Authenticate only where it matters</h2>
+
+      <div class="card">
+        <p class="text-xs font-mono font-semibold uppercase tracking-widest text-cyan">For developers</p>
+        <h2 class="mt-3 font-heading text-xl font-semibold text-dark-hi">Publish plugins</h2>
         <p class="mt-3 text-sm leading-relaxed text-dark-lo">
-          Marketplace pages stay public. Account entry appears only on the hosted Sift path, so the plugin catalog keeps its zero-friction install flow.
+          Scaffold a plugin, test locally, then publish to the registry. Supports all three AI CLIs from a single plugin manifest.
         </p>
-      </div>
-      <div class="card-sm">
-        <p class="text-xs font-mono uppercase tracking-widest text-acid">3</p>
-        <h2 class="mt-3 font-heading text-2xl font-semibold text-dark-hi">Grow without mixing models</h2>
-        <p class="mt-3 text-sm leading-relaxed text-dark-lo">
-          Products can get their own landing pages and auth flows. Plugins stay installable docs. That split scales much better than making everything look like `emporium`.
-        </p>
+        <div class="mt-5 space-y-2">
+          <CopyButton text="skill7 init my-plugin" />
+          <CopyButton text="skill7 publish" />
+        </div>
+        <a href="/getting-started" class="btn-secondary mt-5 w-full justify-center">Get started</a>
       </div>
     </div>
   </section>

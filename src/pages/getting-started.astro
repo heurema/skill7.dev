@@ -6,57 +6,75 @@ import Breadcrumb from "../components/Breadcrumb.astro";
 
 <Base
   title="Getting Started"
-  description="Marketplace onboarding for skill7.dev. Add the heurema emporium registry, then install any plugin from the catalog."
+  description="Install skill7 and start using plugins for Claude Code, Codex CLI, and Gemini CLI in three steps."
 >
 
   <div class="max-w-2xl">
     <Breadcrumb items={[
       { label: "Home", href: "/" },
-      { label: "Marketplace", href: "/marketplace" },
       { label: "Getting Started" },
     ]} />
     <h1 class="font-heading font-bold tracking-tight">Getting Started</h1>
     <p class="mt-3 text-lg text-dark-lo leading-relaxed">
-      Add the marketplace once, then install plugins as needed.
+      Install skill7, then install any plugin from the registry — for all your AI CLIs at once.
     </p>
 
     <div class="callout-warn mt-8">
       <strong class="font-semibold">Prerequisite:</strong>{" "}
-      Claude Code CLI must be installed.{" "}
+      At least one AI CLI must be installed: Claude Code, Codex CLI, or Gemini CLI.{" "}
       <a
         href="https://docs.anthropic.com/en/docs/claude-code/overview"
         class="underline hover:text-warn transition-colors"
         target="_blank"
         rel="noopener"
       >
-        Install Claude Code
+        Claude Code
+      </a>
+      {" · "}
+      <a
+        href="https://github.com/openai/codex"
+        class="underline hover:text-warn transition-colors"
+        target="_blank"
+        rel="noopener"
+      >
+        Codex CLI
+      </a>
+      {" · "}
+      <a
+        href="https://github.com/google-gemini/gemini-cli"
+        class="underline hover:text-warn transition-colors"
+        target="_blank"
+        rel="noopener"
+      >
+        Gemini CLI
       </a>
     </div>
 
-    <div class="mt-12">
-      <section>
-        <h2 class="heading-section text-2xl mb-4">What lives in the Marketplace?</h2>
-        <p class="text-dark-lo leading-relaxed">
-          Marketplace entries are installable Claude Code plugins. Hosted products like
-          <a href="/sift" class="mx-1 text-acid hover:text-acid-glow transition-colors">Sift</a>
-          have their own product pages and browser auth flow.
-        </p>
-      </section>
-    </div>
-
-    <div class="mt-10 space-y-10">
+    <div class="mt-12 space-y-10">
       <section>
         <div class="flex items-center gap-3 mb-4">
           <span class="step-indicator">1</span>
-          <h2 class="heading-section text-2xl">Add the marketplace</h2>
+          <h2 class="heading-section text-2xl">Install skill7</h2>
         </div>
         <div class="pl-0 sm:pl-10">
           <p class="text-dark-lo leading-relaxed mb-4">
-            Add the heurema emporium marketplace:
+            Install the skill7 CLI with the one-liner:
           </p>
-          <CopyButton text="claude plugin marketplace add heurema/emporium" />
-          <p class="mt-3 text-sm text-dark-lo">
-            Run once. After that, all plugins in the catalog become installable.
+          <CopyButton text="curl -fsSL https://skill7.dev/install.sh | sh" />
+          <p class="mt-4 text-sm text-dark-lo">
+            Or via Homebrew (macOS / Linux):
+          </p>
+          <div class="mt-2">
+            <CopyButton text="brew install skill7" />
+          </div>
+          <p class="mt-4 text-sm text-dark-lo">
+            Or via cargo:
+          </p>
+          <div class="mt-2">
+            <CopyButton text="cargo install skill7" />
+          </div>
+          <p class="mt-4 text-sm text-dark-dim">
+            Prefer a binary? Download from the <a href="https://github.com/heurema/skill7/releases" class="text-dark-lo underline hover:text-acid transition-colors" target="_blank" rel="noopener">releases page</a>.
           </p>
         </div>
       </section>
@@ -68,11 +86,34 @@ import Breadcrumb from "../components/Breadcrumb.astro";
         </div>
         <div class="pl-0 sm:pl-10">
           <p class="text-dark-lo leading-relaxed mb-4">
-            Browse the catalog, pick a plugin, and install it:
+            Install a plugin from the registry. <code class="bg-dark-code px-1.5 py-0.5 rounded text-sm text-dark-hi">herald</code> is a good first pick — local news intelligence, no API keys required:
           </p>
-          <CopyButton text="claude plugin install sigil@emporium" />
+          <CopyButton text="skill7 install herald" />
+          <p class="mt-4 text-sm text-dark-lo">
+            skill7 detects which AI CLIs you have and installs the plugin for all of them automatically.
+          </p>
+          <div class="mt-5 rounded border border-dark-line bg-dark-code px-4 py-4 font-mono text-sm leading-relaxed">
+            <div><span class="text-acid">$</span> <span class="text-dark-hi">skill7 install herald</span></div>
+            <div class="mt-1 text-dark-lo">  Fetching registry...</div>
+            <div class="text-ok">  ✓ Detected: Claude Code v1.0.4</div>
+            <div class="text-dark-lo">  Installing herald v2.0.0 for Claude Code... done</div>
+            <div class="mt-1 text-ok">  herald is ready. Run /herald in Claude Code to start.</div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="flex items-center gap-3 mb-4">
+          <span class="step-indicator">3</span>
+          <h2 class="heading-section text-2xl">Verify</h2>
+        </div>
+        <div class="pl-0 sm:pl-10">
+          <p class="text-dark-lo leading-relaxed mb-4">
+            Check which plugins are installed:
+          </p>
+          <CopyButton text="skill7 list" />
           <p class="mt-3 text-sm text-dark-lo">
-            The plugin is now active in your Claude Code sessions.
+            Use <code class="bg-dark-code px-1.5 py-0.5 rounded text-sm text-dark-hi">skill7 check</code> to verify plugin integrity, or <code class="bg-dark-code px-1.5 py-0.5 rounded text-sm text-dark-hi">skill7 update</code> to pull the latest versions.
           </p>
         </div>
       </section>
@@ -80,8 +121,8 @@ import Breadcrumb from "../components/Breadcrumb.astro";
 
     <div class="mt-12 pt-6 border-t border-dark-line">
       <div class="flex flex-col gap-3 sm:flex-row">
-        <a href="/marketplace" class="btn-primary justify-center sm:w-auto">Browse Marketplace</a>
-        <a href="/sift" class="btn-secondary justify-center sm:w-auto">Open Sift</a>
+        <a href="/marketplace" class="btn-primary justify-center sm:w-auto">Browse registry</a>
+        <a href="/docs" class="btn-secondary justify-center sm:w-auto">CLI reference</a>
       </div>
     </div>
   </div>

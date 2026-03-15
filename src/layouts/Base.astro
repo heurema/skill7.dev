@@ -9,13 +9,13 @@ interface Props {
   description?: string;
 }
 
-const { title, description = "Curated open-source plugin marketplace for Claude Code" } = Astro.props;
-const fullTitle = `${title} — Claude Code Plugins | skill7`;
+const { title, description = "Cross-CLI plugin distribution for AI agents" } = Astro.props;
+const fullTitle = `${title} | skill7`;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).href;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -23,7 +23,7 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin)
     <title>{fullTitle}</title>
     <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="theme-color" content="#080c18" />
+    <meta name="theme-color" content="#f7f5f0" />
 
     <!-- Google Fonts: Geist (heading), Inter (body), Geist Mono (code) -->
     <!-- Note: Geist is available via Vercel's CDN or via npm @vercel/font  -->
@@ -192,24 +192,6 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin)
     background-size: 28px 28px;
   }
 
-  /* ── Aurora gradient for hero sections ────────────────────────────────── */
-  .bg-aurora {
-    background: linear-gradient(
-      135deg,
-      #080c18 0%,
-      #0d1a2e 30%,
-      #0a1f1a 60%,
-      #080c18 100%
-    );
-    background-size: 300% 300%;
-    animation: aurora 10s ease-in-out infinite;
-  }
-
-  @keyframes aurora {
-    0%, 100% { background-position: 0% 50%; }
-    50%       { background-position: 100% 50%; }
-  }
-
   /* ── Gradient border technique ────────────────────────────────────────── */
   /* Usage: <div class="border-gradient-acid"> */
   .border-gradient-acid {
@@ -233,10 +215,4 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin)
     background-clip: text;
   }
 
-  .text-gradient-hero {
-    background: linear-gradient(135deg, #e8edf8 20%, #00e5a0 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
 </style>
