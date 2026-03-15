@@ -57,26 +57,49 @@ import Breadcrumb from "../components/Breadcrumb.astro";
           <h2 class="heading-section text-2xl">Install skill7</h2>
         </div>
         <div class="pl-0 sm:pl-10">
-          <p class="text-dark-lo leading-relaxed mb-4">
-            Install the skill7 CLI with the one-liner:
-          </p>
-          <CopyButton text="curl -fsSL https://skill7.dev/install.sh | sh" />
-          <p class="mt-4 text-sm text-dark-lo">
-            Or via Homebrew (macOS / Linux):
-          </p>
-          <div class="mt-2">
+          <div class="flex gap-1 mb-4" id="install-tabs">
+            <button data-tab="curl" class="install-tab active text-xs font-mono px-3 py-1.5 rounded border transition-colors">curl</button>
+            <button data-tab="brew" class="install-tab text-xs font-mono px-3 py-1.5 rounded border transition-colors">brew</button>
+            <button data-tab="cargo" class="install-tab text-xs font-mono px-3 py-1.5 rounded border transition-colors">cargo</button>
+          </div>
+          <div data-panel="curl" class="install-panel">
+            <CopyButton text="curl -fsSL https://skill7.dev/install.sh | sh" />
+          </div>
+          <div data-panel="brew" class="install-panel hidden">
             <CopyButton text="brew install skill7" />
           </div>
-          <p class="mt-4 text-sm text-dark-lo">
-            Or via cargo:
-          </p>
-          <div class="mt-2">
+          <div data-panel="cargo" class="install-panel hidden">
             <CopyButton text="cargo install skill7" />
           </div>
           <p class="mt-4 text-sm text-dark-dim">
-            Prefer a binary? Download from the <a href="https://github.com/heurema/skill7/releases" class="text-dark-lo underline hover:text-acid transition-colors" target="_blank" rel="noopener">releases page</a>.
+            Or download a binary from the <a href="https://github.com/heurema/skill7/releases" class="text-dark-lo underline hover:text-acid transition-colors" target="_blank" rel="noopener">releases page</a>.
           </p>
         </div>
+
+        <script>
+          const tabs = document.querySelectorAll<HTMLButtonElement>('.install-tab');
+          const panels = document.querySelectorAll<HTMLElement>('.install-panel');
+          tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+              const target = tab.dataset.tab;
+              tabs.forEach(t => {
+                const isActive = t.dataset.tab === target;
+                t.classList.toggle('border-acid', isActive);
+                t.classList.toggle('text-acid', isActive);
+                t.classList.toggle('bg-acid-muted', isActive);
+                t.classList.toggle('border-dark-line', !isActive);
+                t.classList.toggle('text-dark-lo', !isActive);
+                t.classList.toggle('active', isActive);
+              });
+              panels.forEach(p => {
+                p.classList.toggle('hidden', p.dataset.panel !== target);
+              });
+            });
+          });
+          // Init first tab
+          const first = document.querySelector<HTMLButtonElement>('.install-tab.active');
+          if (first) first.click();
+        </script>
       </section>
 
       <section>
