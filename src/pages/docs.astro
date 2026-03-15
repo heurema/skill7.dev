@@ -18,16 +18,23 @@ import Breadcrumb from "../components/Breadcrumb.astro";
       Complete reference for the <code class="bg-dark-code px-1.5 py-0.5 rounded text-sm text-dark-hi">skill7</code> command-line tool.
     </p>
 
-    <div class="mt-4 rounded border border-dark-line bg-dark-code px-4 py-3 font-mono text-sm text-dark-lo">
+    <div class="mt-4 rounded border border-dark-line bg-dark-code px-4 py-3 font-mono text-sm text-[#e8edf8]">
       <span class="text-acid">Usage:</span> skill7 &lt;command&gt; [args] [flags]
     </div>
+
+    <!-- Command index -->
+    <nav class="mt-8 flex flex-wrap gap-2">
+      {["install","uninstall","list","check","update","publish","dev","init","convert"].map(cmd => (
+        <a href={`#${cmd}`} class="text-xs font-mono px-2 py-1 rounded border border-dark-line text-dark-lo hover:text-acid hover:border-acid transition-colors">{cmd}</a>
+      ))}
+    </nav>
 
     <div class="mt-12 space-y-14">
 
       <!-- install -->
       <section>
         <div class="flex items-baseline gap-3 border-b border-dark-line pb-3">
-          <h2 class="font-heading text-xl font-semibold text-dark-hi font-mono">install</h2>
+          <h2 id="install" class="font-heading text-xl font-semibold text-dark-hi font-mono">install</h2>
           <span class="text-sm text-dark-dim">Install a plugin from the registry</span>
         </div>
         <div class="mt-4 rounded border border-dark-line bg-dark-code px-4 py-3 font-mono text-sm text-dark-hi">
@@ -37,7 +44,7 @@ import Breadcrumb from "../components/Breadcrumb.astro";
           Fetches the named plugin from the registry and installs it for all detected AI CLIs.
           Auto-detects Claude Code, Codex CLI, and Gemini CLI in your PATH.
         </p>
-        <table class="mt-4 w-full text-sm border-collapse">
+        <div class="mt-4 overflow-x-auto"><table class="w-full text-sm border-collapse">
           <thead>
             <tr class="border-b border-dark-line">
               <th class="py-2 pr-6 text-left font-mono text-xs text-dark-dim font-semibold tracking-widest uppercase">Flag</th>
@@ -62,7 +69,7 @@ import Breadcrumb from "../components/Breadcrumb.astro";
               <td class="py-2 text-xs">Pin to a specific version (default: latest)</td>
             </tr>
           </tbody>
-        </table>
+        </table></div>
         <div class="mt-4 rounded border border-dark-line bg-dark-code px-4 py-3 font-mono text-sm space-y-1">
           <div><span class="text-acid">$</span> <span class="text-dark-hi">skill7 install herald</span></div>
           <div><span class="text-acid">$</span> <span class="text-dark-hi">skill7 install signum --claude-code</span></div>
@@ -73,7 +80,7 @@ import Breadcrumb from "../components/Breadcrumb.astro";
       <!-- uninstall -->
       <section>
         <div class="flex items-baseline gap-3 border-b border-dark-line pb-3">
-          <h2 class="font-heading text-xl font-semibold text-dark-hi font-mono">uninstall</h2>
+          <h2 id="uninstall" class="font-heading text-xl font-semibold text-dark-hi font-mono">uninstall</h2>
           <span class="text-sm text-dark-dim">Remove an installed plugin</span>
         </div>
         <div class="mt-4 rounded border border-dark-line bg-dark-code px-4 py-3 font-mono text-sm text-dark-hi">
@@ -90,7 +97,7 @@ import Breadcrumb from "../components/Breadcrumb.astro";
       <!-- list -->
       <section>
         <div class="flex items-baseline gap-3 border-b border-dark-line pb-3">
-          <h2 class="font-heading text-xl font-semibold text-dark-hi font-mono">list</h2>
+          <h2 id="list" class="font-heading text-xl font-semibold text-dark-hi font-mono">list</h2>
           <span class="text-sm text-dark-dim">List installed plugins</span>
         </div>
         <div class="mt-4 rounded border border-dark-line bg-dark-code px-4 py-3 font-mono text-sm text-dark-hi">
@@ -99,7 +106,7 @@ import Breadcrumb from "../components/Breadcrumb.astro";
         <p class="mt-4 text-sm text-dark-lo leading-relaxed">
           Shows all currently installed plugins, their versions, and which CLIs they are active for.
         </p>
-        <table class="mt-4 w-full text-sm border-collapse">
+        <div class="mt-4 overflow-x-auto"><table class="w-full text-sm border-collapse">
           <thead>
             <tr class="border-b border-dark-line">
               <th class="py-2 pr-6 text-left font-mono text-xs text-dark-dim font-semibold tracking-widest uppercase">Flag</th>
@@ -116,13 +123,13 @@ import Breadcrumb from "../components/Breadcrumb.astro";
               <td class="py-2 text-xs">Show only plugins with available updates</td>
             </tr>
           </tbody>
-        </table>
+        </table></div>
       </section>
 
       <!-- check -->
       <section>
         <div class="flex items-baseline gap-3 border-b border-dark-line pb-3">
-          <h2 class="font-heading text-xl font-semibold text-dark-hi font-mono">check</h2>
+          <h2 id="check" class="font-heading text-xl font-semibold text-dark-hi font-mono">check</h2>
           <span class="text-sm text-dark-dim">Verify plugin integrity</span>
         </div>
         <div class="mt-4 rounded border border-dark-line bg-dark-code px-4 py-3 font-mono text-sm text-dark-hi">
@@ -137,7 +144,7 @@ import Breadcrumb from "../components/Breadcrumb.astro";
       <!-- update -->
       <section>
         <div class="flex items-baseline gap-3 border-b border-dark-line pb-3">
-          <h2 class="font-heading text-xl font-semibold text-dark-hi font-mono">update</h2>
+          <h2 id="update" class="font-heading text-xl font-semibold text-dark-hi font-mono">update</h2>
           <span class="text-sm text-dark-dim">Update installed plugins</span>
         </div>
         <div class="mt-4 rounded border border-dark-line bg-dark-code px-4 py-3 font-mono text-sm text-dark-hi">
@@ -146,7 +153,7 @@ import Breadcrumb from "../components/Breadcrumb.astro";
         <p class="mt-4 text-sm text-dark-lo leading-relaxed">
           Fetches and installs the latest version of a plugin, or all installed plugins if no name is given.
         </p>
-        <table class="mt-4 w-full text-sm border-collapse">
+        <div class="mt-4 overflow-x-auto"><table class="w-full text-sm border-collapse">
           <thead>
             <tr class="border-b border-dark-line">
               <th class="py-2 pr-6 text-left font-mono text-xs text-dark-dim font-semibold tracking-widest uppercase">Flag</th>
@@ -159,7 +166,7 @@ import Breadcrumb from "../components/Breadcrumb.astro";
               <td class="py-2 text-xs">Show what would be updated without applying</td>
             </tr>
           </tbody>
-        </table>
+        </table></div>
         <div class="mt-4 rounded border border-dark-line bg-dark-code px-4 py-3 font-mono text-sm space-y-1">
           <div><span class="text-acid">$</span> <span class="text-dark-hi">skill7 update</span></div>
           <div><span class="text-acid">$</span> <span class="text-dark-hi">skill7 update herald</span></div>
@@ -169,7 +176,7 @@ import Breadcrumb from "../components/Breadcrumb.astro";
       <!-- publish -->
       <section>
         <div class="flex items-baseline gap-3 border-b border-dark-line pb-3">
-          <h2 class="font-heading text-xl font-semibold text-dark-hi font-mono">publish</h2>
+          <h2 id="publish" class="font-heading text-xl font-semibold text-dark-hi font-mono">publish</h2>
           <span class="text-sm text-dark-dim">Publish a plugin to the registry</span>
         </div>
         <div class="mt-4 rounded border border-dark-line bg-dark-code px-4 py-3 font-mono text-sm text-dark-hi">
@@ -179,7 +186,7 @@ import Breadcrumb from "../components/Breadcrumb.astro";
           Packages and submits the plugin in the current directory to the skill7 registry.
           Requires a valid <code class="bg-dark-code px-1 rounded text-dark-hi">plugin.json</code> and a <code class="bg-dark-code px-1 rounded text-dark-hi">skills/</code> directory.
         </p>
-        <table class="mt-4 w-full text-sm border-collapse">
+        <div class="mt-4 overflow-x-auto"><table class="w-full text-sm border-collapse">
           <thead>
             <tr class="border-b border-dark-line">
               <th class="py-2 pr-6 text-left font-mono text-xs text-dark-dim font-semibold tracking-widest uppercase">Flag</th>
@@ -196,7 +203,7 @@ import Breadcrumb from "../components/Breadcrumb.astro";
               <td class="py-2 text-xs">Validate and package without submitting</td>
             </tr>
           </tbody>
-        </table>
+        </table></div>
       </section>
 
       <!-- dev link / unlink -->
@@ -223,7 +230,7 @@ import Breadcrumb from "../components/Breadcrumb.astro";
       <!-- init -->
       <section>
         <div class="flex items-baseline gap-3 border-b border-dark-line pb-3">
-          <h2 class="font-heading text-xl font-semibold text-dark-hi font-mono">init</h2>
+          <h2 id="init" class="font-heading text-xl font-semibold text-dark-hi font-mono">init</h2>
           <span class="text-sm text-dark-dim">Scaffold a new plugin</span>
         </div>
         <div class="mt-4 rounded border border-dark-line bg-dark-code px-4 py-3 font-mono text-sm text-dark-hi">
@@ -233,7 +240,7 @@ import Breadcrumb from "../components/Breadcrumb.astro";
           Creates a new plugin directory with <code class="bg-dark-code px-1 rounded text-dark-hi">plugin.json</code>,
           a <code class="bg-dark-code px-1 rounded text-dark-hi">skills/</code> directory, and a starter skill file.
         </p>
-        <table class="mt-4 w-full text-sm border-collapse">
+        <div class="mt-4 overflow-x-auto"><table class="w-full text-sm border-collapse">
           <thead>
             <tr class="border-b border-dark-line">
               <th class="py-2 pr-6 text-left font-mono text-xs text-dark-dim font-semibold tracking-widest uppercase">Flag</th>
@@ -246,7 +253,7 @@ import Breadcrumb from "../components/Breadcrumb.astro";
               <td class="py-2 text-xs">Scaffold from a named template (default: minimal)</td>
             </tr>
           </tbody>
-        </table>
+        </table></div>
         <div class="mt-4 rounded border border-dark-line bg-dark-code px-4 py-3 font-mono text-sm">
           <div><span class="text-acid">$</span> <span class="text-dark-hi">skill7 init my-plugin</span></div>
         </div>
@@ -255,7 +262,7 @@ import Breadcrumb from "../components/Breadcrumb.astro";
       <!-- convert -->
       <section>
         <div class="flex items-baseline gap-3 border-b border-dark-line pb-3">
-          <h2 class="font-heading text-xl font-semibold text-dark-hi font-mono">convert</h2>
+          <h2 id="convert" class="font-heading text-xl font-semibold text-dark-hi font-mono">convert</h2>
           <span class="text-sm text-dark-dim">Convert a plugin from another format</span>
         </div>
         <div class="mt-4 rounded border border-dark-line bg-dark-code px-4 py-3 font-mono text-sm text-dark-hi">
@@ -265,7 +272,7 @@ import Breadcrumb from "../components/Breadcrumb.astro";
           Converts a plugin from an existing format (e.g., a Claude Code plugin installed via
           <code class="bg-dark-code px-1 rounded text-dark-hi">claude plugin</code>) into the skill7 registry format.
         </p>
-        <table class="mt-4 w-full text-sm border-collapse">
+        <div class="mt-4 overflow-x-auto"><table class="w-full text-sm border-collapse">
           <thead>
             <tr class="border-b border-dark-line">
               <th class="py-2 pr-6 text-left font-mono text-xs text-dark-dim font-semibold tracking-widest uppercase">Flag</th>
@@ -278,7 +285,7 @@ import Breadcrumb from "../components/Breadcrumb.astro";
               <td class="py-2 text-xs">Output directory (default: ./<name>)</td>
             </tr>
           </tbody>
-        </table>
+        </table></div>
       </section>
 
     </div>
