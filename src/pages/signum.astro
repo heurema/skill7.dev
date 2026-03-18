@@ -222,19 +222,29 @@ import CopyButton from "../components/CopyButton.astro";
         Approve the contract. Come back to a verdict and a proofpack.
       </p>
 
-      <div class="mt-8 overflow-hidden rounded-2xl border border-dark-line bg-dark-bg">
-        <div class="flex items-center gap-2 border-b border-dark-line px-4 py-2">
-          <span class="h-3 w-3 rounded-full bg-err/60"></span>
-          <span class="h-3 w-3 rounded-full bg-warn/60"></span>
-          <span class="h-3 w-3 rounded-full bg-ok/60"></span>
-          <span class="ml-2 text-xs font-mono text-dark-dim">signum pipeline</span>
+      <div class="mt-10 flex justify-center">
+        <div class="relative w-full rounded-2xl p-px shadow-glow-lg"
+             style="max-width: 883px;
+                    background: linear-gradient(var(--color-surface), var(--color-surface)) padding-box,
+                                linear-gradient(135deg, rgba(0,229,160,0.45), rgba(0,180,216,0.3)) border-box;
+                    border: 1px solid transparent;">
+          <div class="overflow-hidden rounded-2xl bg-dark-bg">
+            <div class="flex items-center gap-2 border-b border-dark-line px-4 py-2.5">
+              <span class="h-3 w-3 rounded-full bg-err/60"></span>
+              <span class="h-3 w-3 rounded-full bg-warn/60"></span>
+              <span class="h-3 w-3 rounded-full bg-ok/60"></span>
+              <span class="ml-2 text-xs font-mono text-dark-dim">signum pipeline</span>
+            </div>
+            <img
+              src="/signum-demo.gif"
+              alt="Signum pipeline demo: contract approval, multi-model audit, proofpack generation"
+              class="block w-full"
+              loading="lazy"
+              width="883"
+              height="406"
+            />
+          </div>
         </div>
-        <img
-          src="/signum-demo.gif"
-          alt="Signum pipeline demo: contract approval, multi-model audit, proofpack generation"
-          class="w-full"
-          loading="lazy"
-        />
       </div>
     </section>
 
