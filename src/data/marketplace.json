@@ -1,16 +1,6 @@
 {
   "plugins": [
     {
-      "name": "anvil",
-      "description": "Scaffold, validate, and test Claude Code plugins in seconds. Three commands cover the full plugin lifecycle — from template generation to six deterministic validators that catch schema errors, unsafe hooks, and naming issues before publish.",
-      "category": "development",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/heurema/anvil.git"
-      },
-      "homepage": "https://github.com/heurema/anvil"
-    },
-    {
       "name": "arbiter",
       "description": "Use multiple AI assistants from one interface. Arbiter orchestrates Codex CLI and Gemini CLI inside Claude Code — get parallel answers, take majority votes on decisions, cross-check code, or run 3 independent implementations in parallel and pick the best one.",
       "category": "development",
@@ -39,17 +29,6 @@
         "url": "https://github.com/heurema/delve.git"
       },
       "homepage": "https://github.com/heurema/delve"
-    },
-    {
-      "name": "forge",
-      "description": "Plugin lifecycle manager for heurema org. Scaffold, verify, register plugins.",
-      "version": "0.3.0",
-      "category": "development",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/heurema/forge.git"
-      },
-      "homepage": "https://github.com/heurema/forge"
     },
     {
       "name": "genesis",

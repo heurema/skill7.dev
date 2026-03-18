@@ -59,22 +59,6 @@
       ],
       "verified": true
     },
-    "anvil": {
-      "category": "development",
-      "description": "Scaffold, validate, and test Claude Code plugins in seconds. Three commands cover the full plugin lifecycle — from template generation to six deterministic validators that catch schema errors, unsafe hooks, and naming issues before publish.",
-      "version": "0.1.0",
-      "license": "MIT",
-      "status": "alpha",
-      "tags": [
-        "plugin-development",
-        "testing",
-        "validation",
-        "scaffold",
-        "quality-assurance",
-        "linting"
-      ],
-      "verified": true
-    },
     "arbiter": {
       "category": "development",
       "description": "Use multiple AI assistants from one interface. Arbiter orchestrates Codex CLI and Gemini CLI inside Claude Code — get parallel answers, take majority votes on decisions, cross-check code, or run 3 independent implementations in parallel and pick the best one.",
@@ -93,20 +77,6 @@
         "parallel-implementation"
       ],
       "verified": true
-    },
-    "forge": {
-      "category": "development",
-      "description": "Plugin lifecycle manager for heurema org. Scaffold, verify, register plugins.",
-      "version": "0.3.0",
-      "license": "MIT",
-      "status": "alpha",
-      "tags": [
-        "plugin-lifecycle",
-        "scaffold",
-        "registry",
-        "marketplace"
-      ],
-      "verified": false
     },
     "genesis": {
       "category": "creative",
