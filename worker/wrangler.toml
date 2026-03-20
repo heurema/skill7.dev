@@ -1,0 +1,8 @@
+name = "skill7-subscribe"
+main = "subscribe.js"
+compatibility_date = "2025-01-01"
+account_id = "7f733007c9c5fb9078c25bc6d81c0746"
+
+routes = [
+  { pattern = "skill7.dev/api/subscribe", zone_name = "skill7.dev" }
+]

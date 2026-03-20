@@ -393,9 +393,7 @@ import CopyButton from "../components/CopyButton.astro";
         </p>
 
         <form
-          action="https://buttondown.com/api/emails/embed-subscribe/signum"
-          method="post"
-          target="popupwindow"
+          id="subscribe-form"
           class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-center"
         >
           <input
@@ -409,8 +407,39 @@ import CopyButton from "../components/CopyButton.astro";
             Get updates
           </button>
         </form>
+        <p id="subscribe-msg" class="mt-3 text-xs text-dark-dim">No spam. Unsubscribe anytime.</p>
 
-        <p class="mt-3 text-xs text-dark-dim">No spam. Unsubscribe anytime.</p>
+        <script>
+          document.getElementById('subscribe-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = e.target.email.value;
+            const msg = document.getElementById('subscribe-msg');
+            const btn = e.target.querySelector('button');
+            btn.disabled = true;
+            btn.textContent = '...';
+            try {
+              const res = await fetch('/api/subscribe', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email }),
+              });
+              if (res.ok) {
+                msg.textContent = 'You\u2019re in! We\u2019ll notify you when new features ship.';
+                msg.classList.replace('text-dark-dim', 'text-acid');
+                e.target.email.value = '';
+              } else {
+                const data = await res.json().catch(() => ({}));
+                msg.textContent = data.error?.message || 'Something went wrong. Try again.';
+                msg.classList.replace('text-dark-dim', 'text-err');
+              }
+            } catch {
+              msg.textContent = 'Network error. Try again.';
+              msg.classList.replace('text-dark-dim', 'text-err');
+            }
+            btn.disabled = false;
+            btn.textContent = 'Get updates';
+          });
+        </script>
 
         <div class="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
           <a
