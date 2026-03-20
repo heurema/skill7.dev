@@ -22,9 +22,14 @@ import CopyButton from "../components/CopyButton.astro";
 
       <div class="relative grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
         <div>
-          <div class="inline-flex items-center gap-2 rounded-full border border-acid/40 bg-acid-muted px-3 py-1">
-            <span class="h-1.5 w-1.5 rounded-full bg-acid animate-pulse"></span>
-            <span class="text-xs font-mono font-medium text-acid">Claude Code plugin</span>
+          <div class="flex items-center gap-3 flex-wrap">
+            <div class="inline-flex items-center gap-2 rounded-full border border-acid/40 bg-acid-muted px-3 py-1">
+              <span class="h-1.5 w-1.5 rounded-full bg-acid animate-pulse"></span>
+              <span class="text-xs font-mono font-medium text-acid">Claude Code plugin</span>
+            </div>
+            <a href="https://github.com/heurema/signum" target="_blank" rel="noopener" class="opacity-80 hover:opacity-100 transition-opacity">
+              <img src="https://img.shields.io/github/stars/heurema/signum?style=flat&color=00e5a0&labelColor=1a1a2e" alt="GitHub stars" height="20" />
+            </a>
           </div>
 
           <h1 class="mt-6 font-heading text-4xl font-bold tracking-tight text-dark-hi sm:text-5xl lg:text-6xl">
@@ -347,11 +352,11 @@ import CopyButton from "../components/CopyButton.astro";
 
       <div class="mt-8 grid gap-6 lg:grid-cols-2">
         <div>
-          <p class="text-sm font-medium text-dark-hi mb-3">Via nex (recommended)</p>
-          <CopyButton text="nex install signum" />
-
-          <p class="text-sm font-medium text-dark-hi mt-6 mb-3">Via Claude Code CLI</p>
+          <p class="text-sm font-medium text-dark-hi mb-3">Via Claude Code CLI</p>
           <CopyButton text="claude plugin install signum@emporium" />
+
+          <p class="text-sm font-medium text-dark-hi mt-6 mb-3">Via nex</p>
+          <CopyButton text="nex install signum" />
 
           <p class="text-sm font-medium text-dark-hi mt-6 mb-3">Then run</p>
           <CopyButton text='/signum "Add a health check endpoint"' />
