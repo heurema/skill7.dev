@@ -6,7 +6,7 @@ import Breadcrumb from "../components/Breadcrumb.astro";
 
 <Base
   title="Getting Started"
-  description="Install skill7 and start using plugins for Claude Code, Codex CLI, and Gemini CLI in three steps."
+  description="Install nex and start using plugins for Claude Code, Codex CLI, and Gemini CLI in three steps."
 >
 
   <div class="max-w-2xl">
@@ -16,7 +16,7 @@ import Breadcrumb from "../components/Breadcrumb.astro";
     ]} />
     <h1 class="font-heading font-bold tracking-tight">Getting Started</h1>
     <p class="mt-3 text-lg text-dark-lo leading-relaxed">
-      Install skill7, then install any plugin from the registry — for all your AI CLIs at once.
+      Install <code class="inline-code">nex</code>, then install any plugin from the registry — for all your AI CLIs at once.
     </p>
 
     <div class="callout-warn mt-8">
@@ -54,25 +54,21 @@ import Breadcrumb from "../components/Breadcrumb.astro";
       <section>
         <div class="flex items-center gap-3 mb-4">
           <span class="step-indicator">1</span>
-          <h2 class="heading-section text-2xl">Install skill7</h2>
+          <h2 class="heading-section text-2xl">Install nex</h2>
         </div>
         <div class="pl-0 sm:pl-10">
           <div class="flex gap-1 mb-4" id="install-tabs">
             <button data-tab="curl" class="install-tab active text-xs font-mono px-3 py-1.5 rounded border transition-colors">curl</button>
-            <button data-tab="brew" class="install-tab text-xs font-mono px-3 py-1.5 rounded border transition-colors">brew</button>
             <button data-tab="cargo" class="install-tab text-xs font-mono px-3 py-1.5 rounded border transition-colors">cargo</button>
           </div>
           <div data-panel="curl" class="install-panel">
             <CopyButton text="curl -fsSL https://skill7.dev/install.sh | sh" />
           </div>
-          <div data-panel="brew" class="install-panel hidden">
-            <CopyButton text="brew install skill7" />
-          </div>
           <div data-panel="cargo" class="install-panel hidden">
-            <CopyButton text="cargo install skill7" />
+            <CopyButton text="cargo install --git https://github.com/heurema/nex --locked" />
           </div>
           <p class="mt-4 text-sm text-dark-dim">
-            Or download a binary from the <a href="https://github.com/heurema/skill7/releases" class="text-dark-lo underline hover:text-acid transition-colors" target="_blank" rel="noopener">releases page</a>.
+            Requires the <a href="https://rustup.rs" class="text-dark-lo underline hover:text-acid transition-colors" target="_blank" rel="noopener">Rust toolchain</a>. Or download a binary from the <a href="https://github.com/heurema/nex/releases" class="text-dark-lo underline hover:text-acid transition-colors" target="_blank" rel="noopener">releases page</a>.
           </p>
         </div>
 
@@ -111,15 +107,15 @@ import Breadcrumb from "../components/Breadcrumb.astro";
           <p class="text-dark-lo leading-relaxed mb-4">
             Install a plugin from the registry. <code class="inline-code">herald</code> is a good first pick — local news intelligence, no API keys required:
           </p>
-          <CopyButton text="skill7 install herald" />
+          <CopyButton text="nex install herald" />
           <p class="mt-4 text-sm text-dark-lo">
-            skill7 detects which AI CLIs you have and installs the plugin for all of them automatically.
+            nex detects which AI CLIs you have and installs the plugin for all of them automatically.
           </p>
           <div class="mt-5 rounded border border-[#3d3530] bg-[#2a2520] px-4 py-4 font-mono text-sm leading-relaxed">
-            <div><span class="text-[#00e5a0]">$</span> <span class="text-[#e8edf8]">skill7 install herald</span></div>
+            <div><span class="text-[#00e5a0]">$</span> <span class="text-[#e8edf8]">nex install herald</span></div>
             <div class="mt-1 text-[#8b9cbf]">  Fetching registry...</div>
-            <div class="text-[#00c97a]">  ✓ Detected: Claude Code v1.0.4</div>
-            <div class="text-[#8b9cbf]">  Installing herald v2.0.0 for Claude Code... done</div>
+            <div class="text-[#00c97a]">  ✓ Detected: Claude Code</div>
+            <div class="text-[#8b9cbf]">  Installing herald for Claude Code... done</div>
             <div class="mt-1 text-[#00c97a]">  herald is ready. Run /herald in Claude Code to start.</div>
           </div>
         </div>
@@ -134,9 +130,9 @@ import Breadcrumb from "../components/Breadcrumb.astro";
           <p class="text-dark-lo leading-relaxed mb-4">
             Check which plugins are installed:
           </p>
-          <CopyButton text="skill7 list" />
+          <CopyButton text="nex list" />
           <p class="mt-3 text-sm text-dark-lo">
-            Use <code class="inline-code">skill7 check</code> to verify plugin integrity, or <code class="inline-code">skill7 update</code> to pull the latest versions.
+            Use <code class="inline-code">nex check</code> to verify plugin integrity, or <code class="inline-code">nex update</code> to pull the latest versions.
           </p>
         </div>
       </section>
